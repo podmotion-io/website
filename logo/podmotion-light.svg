@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 560">
+  <!-- Background -->
+  <rect width="480" height="560" rx="20" fill="#EFF5FB"/>
+
+  <!-- Outer ring: eternity -->
+  <circle cx="240" cy="210" r="110" fill="none" stroke="#C8DCF0" stroke-width="2"/>
+
+  <!-- Mid ring: omnipresence -->
+  <circle cx="240" cy="210" r="82"  fill="none" stroke="#93C5FD" stroke-width="2"/>
+
+  <!-- Inner ring: quantum boundary -->
+  <circle cx="240" cy="210" r="54"  fill="#EFF5FB" stroke="#1E3A6E" stroke-width="3"/>
+
+  <!-- Core fill -->
+  <circle cx="240" cy="210" r="34"  fill="#1E3A6E"/>
+
+  <!-- Core glow -->
+  <circle cx="240" cy="210" r="18"  fill="#0D9488"/>
+
+  <!-- Core center -->
+  <circle cx="240" cy="210" r="7"   fill="#EEF6FF"/>
+
+  <!-- Cardinal connectors -->
+  <!-- North -->
+  <line x1="240" y1="138" x2="240" y2="156" stroke="#1E3A6E" stroke-width="1.5" opacity="0.5"/>
+  <!-- East -->
+  <line x1="312" y1="210" x2="296" y2="210" stroke="#1E3A6E" stroke-width="1.5" opacity="0.5"/>
+  <!-- South -->
+  <line x1="240" y1="282" x2="240" y2="264" stroke="#1E3A6E" stroke-width="1.5" opacity="0.5"/>
+  <!-- West -->
+  <line x1="168" y1="210" x2="184" y2="210" stroke="#1E3A6E" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Cardinal satellite nodes -->
+  <!-- North -->
+  <circle cx="240" cy="128" r="10" fill="#DBEAFE" stroke="#1E3A6E" stroke-width="2"/>
+  <circle cx="240" cy="128" r="4"  fill="#1E3A6E"/>
+  <!-- East -->
+  <circle cx="322" cy="210" r="10" fill="#DBEAFE" stroke="#1E3A6E" stroke-width="2"/>
+  <circle cx="322" cy="210" r="4"  fill="#1E3A6E"/>
+  <!-- South -->
+  <circle cx="240" cy="292" r="10" fill="#DBEAFE" stroke="#1E3A6E" stroke-width="2"/>
+  <circle cx="240" cy="292" r="4"  fill="#1E3A6E"/>
+  <!-- West -->
+  <circle cx="158" cy="210" r="10" fill="#DBEAFE" stroke="#1E3A6E" stroke-width="2"/>
+  <circle cx="158" cy="210" r="4"  fill="#1E3A6E"/>
+
+  <!-- Wordmark -->
+  <text text-anchor="middle" x="240" y="358" font-family="system-ui,-apple-system,sans-serif" font-size="38">
+    <tspan font-weight="700" fill="#1E3A6E">Pod</tspan><tspan font-weight="300" fill="#334155">Motion</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text text-anchor="middle" x="240" y="390"
+        font-family="system-ui,-apple-system,sans-serif"
+        font-size="13" fill="#1E3A6E" letter-spacing="0.3">Kubernetes Pods Made Immortal</text>
+</svg>

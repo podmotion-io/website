@@ -1,0 +1,11 @@
+﻿{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "logo-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "7823", "G:\\Other computers\\My Mac\\projects\\podmotion\\website\\logo"],
+      "port": 7823
+    }
+  ]
+}

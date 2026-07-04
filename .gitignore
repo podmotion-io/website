@@ -1,0 +1,5 @@
+node_modules
+
+# Build artifact — never committed (stale builds leak pre-coining vocabulary)
+/out/
+.next

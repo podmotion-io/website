@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* ─── PodMotion design-system tokens ─────────────────────────────────────── */
+@theme inline {
+  /* Backgrounds & surfaces */
+  --color-pm-navy-950: #040A14;
+  --color-pm-navy-900: #060C18;
+  --color-pm-navy-800: #08111F;
+  --color-pm-navy-700: #0B1527;
+  --color-pm-navy-600: #0D1F3A;
+
+  /* Blue scale */
+  --color-pm-blue-900: #1565C0;
+  --color-pm-blue-700: #2563EB;
+  --color-pm-blue-500: #3B82F6;
+  --color-pm-blue-300: #60A5FA;
+  --color-pm-blue-100: #93C5FD;
+
+  /* Cyan scale */
+  --color-pm-cyan-700: #0E7490;
+  --color-pm-cyan-500: #06B6D4;
+  --color-pm-cyan-400: #22D3EE;
+  --color-pm-cyan-300: #22D3EE;
+
+  /* Slate scale */
+  --color-pm-slate-300: #CBD5E1;
+  --color-pm-slate-400: #94A3B8;
+  --color-pm-slate-500: #64748B;
+  --color-pm-slate-600: #475569;
+
+  /* White/muted */
+  --color-pm-white: #EEF6FF;
+  --color-pm-white-muted: #93C5FD;
+  --color-pm-white-subtle: #64748B;
+
+  /* Font families */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ─── Design-system CSS custom properties ────────────────────────────────── */
+:root {
+  /* Navy (task-specified) */
+  --pm-navy-950: #040A14;
+  --pm-navy-900: #060C18;
+  --pm-navy-800: #08111F;
+  --pm-navy-700: #0B1527;
+  --pm-navy-600: #0D1F3A;
+
+  /* Cyan (task-specified) */
+  --pm-cyan-700: #0E7490;
+  --pm-cyan-500: #06B6D4;
+  --pm-cyan-300: #22D3EE;
+
+  /* Full design-system backgrounds & surfaces (Appendix A) */
+  --pm-bg-void: #05070F;
+  --pm-bg-abyss: #0A0E1A;
+  --pm-bg-horizon: #0F1525;
+  --pm-surface-1: #141B2E;
+  --pm-surface-2: #1B2438;
+  --pm-surface-3: #232E47;
+  --pm-border: #2A3550;
+  --pm-border-strong: #3A4866;
+
+  /* Brand & accent */
+  --pm-cyan: #22D3EE;
+  --pm-cyan-bright: #5EEAFF;
+  --pm-cyan-deep: #0E7490;
+  --pm-teal: #2DD4BF;
+  --pm-gradient-aurora: linear-gradient(90deg, #22D3EE 0%, #818CF8 100%);
+
+  /* Semantic */
+  --pm-success: #34D399;
+  --pm-warning: #FBBF24;
+  --pm-error: #F87171;
+  --pm-info: #818CF8;
+  --pm-success-tint: rgba(52, 211, 153, 0.12);
+  --pm-warning-tint: rgba(251, 191, 36, 0.12);
+  --pm-error-tint: rgba(248, 113, 113, 0.12);
+  --pm-info-tint: rgba(129, 140, 248, 0.12);
+  --pm-cyan-tint: rgba(34, 211, 238, 0.10);
+
+  /* Text */
+  --pm-text-primary: #F1F5F9;
+  --pm-text-secondary: #CBD5E1;
+  --pm-text-muted: #94A3B8;
+  --pm-text-subtle: #64748B;
+  --pm-text-link: #22D3EE;
+  --pm-text-on-accent: #05070F;
+
+  /* Spacing (4px base) */
+  --pm-space-1: 4px;
+  --pm-space-2: 8px;
+  --pm-space-3: 12px;
+  --pm-space-4: 16px;
+  --pm-space-5: 24px;
+  --pm-space-6: 32px;
+  --pm-space-7: 48px;
+  --pm-space-8: 64px;
+  --pm-space-9: 96px;
+  --pm-space-10: 128px;
+  --pm-space-11: 160px;
+
+  /* Radii */
+  --pm-radius-sm: 6px;
+  --pm-radius-md: 10px;
+  --pm-radius-lg: 16px;
+  --pm-radius-xl: 24px;
+  --pm-radius-full: 9999px;
+
+  /* Elevation */
+  --pm-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --pm-glow-cyan: 0 0 0 1px rgba(34, 211, 238, 0.4), 0 0 24px rgba(34, 211, 238, 0.25);
+
+  /* Motion */
+  --pm-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --pm-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --pm-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --pm-ease-flight: cubic-bezier(0.45, 0.05, 0.25, 1);
+  --pm-dur-fast: 120ms;
+  --pm-dur-base: 220ms;
+  --pm-dur-slow: 400ms;
+  --pm-dur-flight: 2400ms;
+  --pm-dur-ambient: 8000ms;
+
+  /* Page background */
+  --pm-page-bg: linear-gradient(
+    180deg,
+    var(--pm-bg-void) 0%,
+    var(--pm-bg-abyss) 45%,
+    var(--pm-bg-horizon) 100%
+  );
+}
+
+/* ─── Base resets ────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #040A14;
+  color: #EEF6FF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(34, 211, 238, 0.125);
+  color: #EEF6FF;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0E7490 #060C18;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060C18;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0E7490;
+  border-radius: var(--pm-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #22D3EE;
+}
+
+/* ─── Utility classes ────────────────────────────────────────────────────── */
+.font-mono {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}

@@ -1,0 +1,258 @@
+import type { FC } from "react";
+
+const About: FC = () => {
+  return (
+    <section
+      id="about"
+      className="bg-pm-navy-900 py-24 sm:py-32"
+      aria-labelledby="about-heading"
+    >
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-12">
+        {/* Section eyebrow */}
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-pm-cyan-300">
+          Open Source · Apache-2.0
+        </p>
+
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* LEFT — Project origin */}
+          <div className="flex flex-col gap-6">
+            <h2
+              id="about-heading"
+              className="text-3xl font-bold leading-tight tracking-tight text-pm-white sm:text-4xl"
+            >
+              About the project
+            </h2>
+            <p className="text-lg leading-relaxed text-pm-white-muted">
+              PodMotion was born from a gap in the Kubernetes ecosystem. When a
+              pod crashes or gets evicted, it takes its state with it — its
+              memory, its open files, and every TCP connection its clients were
+              holding. The scheduler starts a new replica somewhere else, and
+              those connections get a RST. Every retry, every reconnect, every
+              client-side timeout is a consequence of that assumption being baked
+              into the platform.
+            </p>
+            <p className="text-lg leading-relaxed text-pm-white-muted">
+              This project started as a proof of concept: could CRIU actually
+              move a running, stateful process across nodes and restore it
+              functional and reachable at its original pod IP? The answer —
+              proven end-to-end on stock upstream Kubernetes v1.32 in about 13
+              seconds, with an in-memory counter restored intact across nodes and
+              the source pod never deleted until traffic is verified (ADR-0012) —
+              is yes. Live TCP-connection survival —{" "}
+              <code className="rounded bg-pm-navy-700 px-1.5 py-0.5 font-mono text-sm text-pm-cyan-300">
+                seq_delta=0
+              </code>
+              , no RST, no reconnect — is our Feln goal, the milestone we
+              are proving next; it is not yet proven. No application changes
+              required.
+            </p>
+            <p className="text-lg leading-relaxed text-pm-white-muted">
+              What started as a proof of concept is now a production path: a
+              12-phase migration state machine, five CRDs, a scheduler plugin, a CNI
+              plugin, and a growing open-source project. Built in the open.
+              Apache-2.0. Founded and built by a team with deep roots in Kubernetes, federal systems, and enterprise transformation.
+            </p>
+          </div>
+
+          {/* RIGHT — Team cards (2×2 grid) */}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+            {/* Chad */}
+            <div className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.3)]">
+              <div className="mb-3 flex items-center gap-3">
+                <img
+                  src="/images/chad.jpg"
+                  alt="Chad N. Ingle"
+                  style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                />
+                <div>
+                  <p className="text-sm font-semibold leading-tight text-pm-white">Chad N. Ingle</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Founder &amp; Lead Maintainer</p>
+                  <p className="mt-0.5 text-xs text-pm-white-muted">Principal DevOps Architect, Effectual</p>
+                </div>
+              </div>
+              <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
+                26+ years spanning platform engineering, enterprise transformation, and cloud architecture.
+                Principal DevOps Architect at{" "}
+                <a href="https://effectual.ai/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">Effectual</a>
+                , co-founder of{" "}
+                <a href="https://bluebutterfly.ai/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">Blue Butterfly AI</a>
+                , and founder of{" "}
+                <a href="https://oanministries.org/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">OAN Ministries</a>
+                . PodMotion grew out of his hands-on platform engineering work — the steady hand that turns big ideas into things that actually ship and run.
+              </p>
+              <a href="https://www.linkedin.com/in/chadingle/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+                LinkedIn
+              </a>
+            </div>
+
+            {/* Salle */}
+            <div className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.3)]">
+              <div className="mb-3 flex items-center gap-3">
+                <img
+                  src="/images/salle.jpg"
+                  alt="Salle Ingle"
+                  style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                />
+                <div>
+                  <p className="text-sm font-semibold leading-tight text-pm-white">Salle Ingle</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Co-Founder</p>
+                  <p className="mt-0.5 text-xs text-pm-white-muted">Strategic AI &amp; Solution Architecture</p>
+                </div>
+              </div>
+              <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
+                25+ years in technology leadership. Former Principal Architect at McKinsey &amp; Company, leading generative-AI agentic-workflow teams for Fortune 500 enterprises. Founder of{" "}
+                <a href="https://bluebutterfly.ai/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">Blue Butterfly AI</a>
+                , UCCS Strategic AI advisory board member, Built In Top 100 Most Influential Women in Tech. Drives PodMotion's cloud-provider certification strategy, platform architecture, and enterprise go-to-market.
+              </p>
+              <a href="https://www.linkedin.com/in/salleingle/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+                LinkedIn
+              </a>
+            </div>
+
+            {/* Jonathan Baier */}
+            <div className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.3)]">
+              <div className="mb-3 flex items-center gap-3">
+                <img
+                  src="/images/jon.jpeg"
+                  alt="Jonathan Baier"
+                  style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                />
+                <div>
+                  <p className="text-sm font-semibold leading-tight text-pm-white">Jonathan Baier</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Principal Advisor, Cloud &amp; Kubernetes</p>
+                  <p className="mt-0.5 text-xs text-pm-white-muted">Active Contributor &amp; Agentic AI Lead</p>
+                </div>
+              </div>
+              <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
+                Jon and Chad have built together since 2012 — Moody's global public cloud offering, early AWS adoption for the US Dept. of the Interior, and financial services cloud security migrations. A published Kubernetes author (Packt Publishing), patent holder in distributed microservices transactions, CSA Zero Trust exam author, and AWS Certified Solutions Architect (Professional). At PodMotion he is an active contributor and agentic AI lead, coordinating with Chad and the team on architecture, development, and what gets built next.
+              </p>
+              <a href="https://www.linkedin.com/in/jonathanbaier/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+                LinkedIn
+              </a>
+            </div>
+
+            {/* David King */}
+            <div className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.3)]">
+              <div className="mb-3 flex items-center gap-3">
+                <img
+                  src="/images/david.jpeg"
+                  alt="David King"
+                  style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                />
+                <div>
+                  <p className="text-sm font-semibold leading-tight text-pm-white">David King</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Security &amp; Compliance Advisor</p>
+                  <p className="mt-0.5 text-xs text-pm-white-muted">NAVWAR Branch Lead, US Space Force</p>
+                </div>
+              </div>
+              <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
+                Decades of DoD high-security systems experience. NAVWAR Branch Lead at US Space Force, responsible for the next-generation GPS Command &amp; Control system (OCX) and serving as Subject Matter Expert to HQ Space Operations Command — evaluating configuration changes and risk posture across one of the most sensitive weapon systems in the US inventory. At PodMotion he is the adversarial skeptic: the voice that asks the compliance, classification, and security questions DoD and high-assurance enterprise customers will ask before any production commitment.
+              </p>
+              <a href="https://www.linkedin.com/in/david-king-98877517/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+                LinkedIn
+              </a>
+            </div>
+
+          </div>
+        </div>
+        {/* Known Limitations */}
+        <div className="mt-20">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-pm-cyan-300">
+            Engineering Transparency
+          </p>
+          <h3 className="mb-2 text-2xl font-bold leading-tight tracking-tight text-pm-white">
+            Known Limitations (v0.1.0-alpha)
+          </h3>
+          <p className="mb-8 text-base leading-relaxed text-pm-white-muted max-w-2xl">
+            These are the honest boundaries of what v0.1.0-alpha does and does not do. Naming them precisely is
+            engineering discipline — CNCF TAG reviewers treat explicit scope boundaries as a credibility signal,
+            not a weakness.
+          </p>
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
+              <p className="mb-1 text-sm font-semibold text-pm-white">Single declared substrate</p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                The authoritative current end-to-end proof ran on amd64 / Linux 6.17 /
+                containerd 1.7.24 / Kubernetes v1.32.0 / kindnet (host-routed, no VXLAN overlay) —
+                kind profile podmotion-s33-cold (Sprint 33 + 34). An earlier arm64/k3s PoC exists
+                but is historical, not the current proof. Live TCP preservation (Strict mode) is
+                not yet proven.
+              </p>
+            </li>
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
+              <p className="mb-1 text-sm font-semibold text-pm-white">Single-container pod only</p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                Multi-container consistent checkpoint (M22) is in progress. v0.1.0-alpha supports
+                pods with exactly one container; multi-container pods are out of scope until M22 lands.
+              </p>
+            </li>
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
+              <p className="mb-1 text-sm font-semibold text-pm-white">Single TCP flow only</p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                conntrack/NAT migration (M23) is not yet built. The eBPF relay preserves one
+                active TCP flow per migration. Multi-flow support is planned for a future milestone.
+              </p>
+            </li>
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
+              <p className="mb-1 text-sm font-semibold text-pm-white">CPU-feature portability</p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                CRIU checkpoints are not CPU-feature portable across microarchitecture generations.
+                A checkpoint taken on a node with AVX-512 (Skylake) will SIGILL on a node without
+                it (Haswell). Fix is targeted for Sprint 33+ (ADR-0153).
+              </p>
+            </li>
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
+              <p className="mb-1 text-sm font-semibold text-pm-white">No production deployments</p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                v0.1.0-alpha has not been run in a production environment. All proof runs are
+                on kind clusters. Production readiness is a future milestone, not a current claim.
+              </p>
+            </li>
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
+              <p className="mb-1 text-sm font-semibold text-pm-white">kindnet substrate only</p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                The current end-to-end proof ran on kindnet (host-routed, no VXLAN overlay).
+                Flannel VXLAN and other CNIs (Calico, Cilium, Weave) are on the roadmap, not proof.
+                No authoritative end-to-end proof file exists for any CNI other than kindnet.
+              </p>
+            </li>
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
+              <p className="mb-1 text-sm font-semibold text-pm-white">Storage migration deferred</p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                Persistent volume migration is deferred to v1.2. v0.1.0-alpha does not migrate
+                PVCs or storage state; workloads relying on local storage are out of scope.
+              </p>
+            </li>
+            <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 sm:col-span-2 lg:col-span-3">
+              <p className="mb-2 text-sm font-semibold text-pm-white">Alpha security posture</p>
+              <p className="mb-2 text-sm leading-relaxed text-pm-white-muted">
+                The node-agent DaemonSet runs <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">privileged: true</code> with <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">hostPID: true</code>, a read-write mount of the containerd Unix socket, and no seccomp profile. Required capabilities include SYS_PTRACE, SYS_ADMIN, NET_ADMIN, DAC_OVERRIDE, CHOWN, SETUID, SETGID, and CHECKPOINT_RESTORE. This is a node-root surface area necessary for live CRIU checkpoint-restore and eBPF relay in the current implementation.
+              </p>
+              <p className="mb-2 text-sm leading-relaxed text-pm-white-muted">
+                Checkpoints are written in plaintext to tmpfs at <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">/run/podmotion/checkpoints/&lt;ref&gt;/</code> (mode 0700, wiped on node reboot). AES-256-GCM checkpoint encryption is not implemented in v0.1.0-alpha. ADR-0029 (Accepted but never wired in — dead code) is superseded by ADR-0160 (Draft), which defines a CheckpointCrypto provider interface (none/aes-gcm/aws-kms/gcp-kms/azure-kms/vault). Checkpoints are plaintext today.
+              </p>
+              <p className="mb-2 text-sm leading-relaxed text-pm-white-muted">
+                mTLS between operator and node-agent is opt-in via Helm values. In v0.1.0-alpha the implementation fails open: enabling mTLS does not guarantee channel enforcement. The channel is plaintext by default.
+              </p>
+              <p className="mb-2 text-sm leading-relaxed text-pm-white-muted">
+                Structured audit logging is not implemented in v0.1.0-alpha. The <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">audit/</code> directory is a stub. PhaseTransition events are emitted; audit records are not.
+              </p>
+              <p className="text-sm leading-relaxed text-pm-white-muted">
+                ADR-0148 (Accepted, unimplemented) defines the post-1.0 hardening roadmap: capability drop to the minimum CRIU/eBPF set (drop ALL; add SYS_PTRACE, SYS_ADMIN, NET_ADMIN, BPF, PERFMON), read-only containerd socket steady-state, hostPID:false via NRI-supplied PID, a trace-derived deny-by-default seccomp profile, and readOnlyRootFilesystem. gRPC mTLS enforcement is a separate workstream (ADR-0159/ADR-0161-C4), not ADR-0148. The controller-manager is already hardened: <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">runAsNonRoot</code>, <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">seccomp: RuntimeDefault</code>, <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">readOnlyRootFilesystem</code>, <code className="rounded bg-pm-navy-700 px-1 py-0.5 font-mono text-xs text-pm-cyan-300">drop: ALL</code>.
+              </p>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default About;
