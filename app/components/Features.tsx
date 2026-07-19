@@ -127,7 +127,7 @@ const audienceCards: AudienceCardProps[] = [
     audience: 'Platform / SRE',
     question: 'What is actually proven today?',
     answer:
-      'A complete end-to-end live migration of a running, stateful pod across nodes on Kubernetes v1.32, restored reachable at its original pod IP in about 13 seconds, with in-memory state intact and 22/22 migration assertions passing.',
+      'A complete end-to-end live migration of a running, stateful pod across nodes on our two-node kind proof substrate (Kubernetes v1.32), restored reachable at its original pod IP in about 13 seconds, with in-memory state intact and 22/22 migration assertions passing.',
     ctaLabel: 'See the proof →',
     ctaHref: '/#ns4',
   },
@@ -135,7 +135,7 @@ const audienceCards: AudienceCardProps[] = [
     audience: 'App developer',
     question: 'Will my app break during a migration?',
     answer:
-      'You change nothing — PodMotion moves the pod and restores it reachable at its original IP. Live TCP-connection survival was first proven at Sprint 46 for a single held connection (seq_delta 0/0) on a real multi-node cluster; the full multi-flow guarantee is not yet proven.',
+      'You change nothing in your app. PodMotion restores the pod reachable at its original pod IP — that IP reachability is proven on our two-node kind proof substrate, not yet on production multi-node clusters. Whether a live connection survives the move is a separate question: connection survival was first proven at Sprint 46 for a single held connection (seq_delta 0/0) on a real multi-node cluster, with the multi-flow guarantee not yet proven.',
     ctaLabel: 'How it works →',
     ctaHref: '/#how-it-works',
   },

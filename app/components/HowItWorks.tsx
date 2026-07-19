@@ -202,7 +202,9 @@ const HowItWorks: FC = () => {
           condition before it acts — crash-safe and auditable. The 12 steps
           below trace the migration pipeline; TCP-preservation phases run when{" "}
           <code>tcpPreservationMode</code> is opted in (default <code>None</code>;
-          BestEffort or Strict). Strict mode is not yet proven.
+          BestEffort or Strict). Strict mode was first proven at Sprint 46 for a
+          single held connection (seq_delta 0/0) on a real multi-node cluster;
+          broader multi-flow validation is not yet proven.
         </p>
         <p className="mb-16 max-w-2xl text-lg leading-relaxed text-pm-white-muted">
           In plain terms: PodMotion picks up a running app from one machine and sets it down on another, restored and reachable at its original pod IP — no stop-and-restart.
@@ -474,8 +476,9 @@ const HowItWorks: FC = () => {
             The proof: end-to-end live migration of a running, stateful pod — restored reachable at its original pod IP
           </h2>
           <p className="mb-6 max-w-2xl text-lg leading-relaxed text-pm-white-muted">
-            We migrated a running, stateful pod across nodes on stock upstream
-            Kubernetes v1.32, restored it functional and reachable at the
+            We migrated a running, stateful pod across nodes on our two-node kind
+            proof substrate (stock upstream Kubernetes v1.32), restored it
+            functional and reachable at the
             original pod IP in about 13 seconds, with an in-memory counter
             (gcb7:counter=42) restored intact across nodes. Sprint 33 Phase A:
             22/22 migration assertions pass. Sprint 34 Phase B: 8/8 security gate

@@ -34,7 +34,7 @@ const About: FC = () => {
             This project started as a proof of concept: could CRIU actually
             move a running, stateful process across nodes and restore it
             functional and reachable at its original pod IP? The answer —
-            proven end-to-end on stock upstream Kubernetes v1.32 in about 13
+            proven end-to-end on our two-node kind proof substrate (stock upstream Kubernetes v1.32) in about 13
             seconds, with an in-memory counter restored intact across nodes and
             the source pod never deleted until traffic is verified (ADR-0012) —
             is yes. Live TCP-connection survival —{" "}

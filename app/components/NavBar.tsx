@@ -9,15 +9,14 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { label: 'How it works', href: '/#how-it-works' },
   { label: 'Features', href: '/#features' },
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'Economics', href: '/#economics' },
   { label: 'CLI', href: '/#cli' },
   { label: 'Roadmap', href: '/#roadmap' },
-  { label: 'Economics', href: '/#economics' },
+  { label: 'Community', href: '/#community' },
   { label: 'About', href: '/#about' },
   { label: 'Security', href: '/#security-posture' },
-  { label: 'AI Drex', href: '/#ai-drex' },
-  { label: 'Community', href: '/#community' },
   { label: 'Docs', href: 'https://docs.podmotion.io', external: true },
 ];
 
