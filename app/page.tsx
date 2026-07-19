@@ -8,7 +8,6 @@ import GettingStarted from "./components/GettingStarted";
 import CLIShowcase from "./components/CLIShowcase";
 import Community from "./components/Community";
 import About from './components/About';
-import SecurityPosture from './components/SecurityPosture';
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -25,7 +24,6 @@ export default function Home() {
         <CLIShowcase />
         <Community />
         <About />
-        <SecurityPosture />
       </main>
       <Footer />
     </div>

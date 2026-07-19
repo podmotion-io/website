@@ -232,8 +232,15 @@ export function ProofStrip() {
 
         {/* Security disclosure — node-root agent posture (SITE-ADR-001) */}
         <p className="text-pm-white-subtle text-xs text-center max-w-2xl border-t border-pm-navy-600 pt-4">
-          Security note: installing the node-agent grants node-root-equivalent privilege (privileged container + read-write containerd socket + SYS_ADMIN/SYS_PTRACE in the host PID namespace). This is a disclosed alpha trade-off required for CRIU checkpoint/restore &mdash; full posture and the ADR-0148 hardening plan at the{" "}
-          <a href="#security-posture" className="underline hover:text-pm-white transition-colors">Security section</a>.
+          Security note: installing the node-agent grants node-root-equivalent privilege (privileged container + read-write containerd socket + SYS_ADMIN/SYS_PTRACE in the host PID namespace). This is a disclosed alpha trade-off required for CRIU checkpoint/restore &mdash; full posture and the ADR-0148 hardening plan in the{" "}
+          <a
+            href="https://github.com/podmotion-io/podmotion/blob/main/SECURITY.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-pm-white transition-colors"
+          >
+            security policy
+          </a>.
         </p>
 
       </div>

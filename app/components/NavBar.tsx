@@ -15,7 +15,6 @@ const NAV_LINKS: NavLink[] = [
   { label: 'CLI', href: '/#cli' },
   { label: 'Community', href: '/#community' },
   { label: 'About', href: '/#about' },
-  { label: 'Security', href: '/#security-posture' },
   { label: 'Docs', href: 'https://docs.podmotion.io', external: true },
 ];
 
