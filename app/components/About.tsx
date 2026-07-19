@@ -13,50 +13,50 @@ const About: FC = () => {
           Open Source · Apache-2.0
         </p>
 
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* LEFT — Project origin */}
-          <div className="flex flex-col gap-6">
-            <h2
-              id="about-heading"
-              className="text-3xl font-bold leading-tight tracking-tight text-pm-white sm:text-4xl"
-            >
-              About the project
-            </h2>
-            <p className="text-lg leading-relaxed text-pm-white-muted">
-              PodMotion was born from a gap in the Kubernetes ecosystem. When a
-              pod crashes or gets evicted, it takes its state with it — its
-              memory, its open files, and every TCP connection its clients were
-              holding. The scheduler starts a new replica somewhere else, and
-              those connections get a RST. Every retry, every reconnect, every
-              client-side timeout is a consequence of that assumption being baked
-              into the platform.
-            </p>
-            <p className="text-lg leading-relaxed text-pm-white-muted">
-              This project started as a proof of concept: could CRIU actually
-              move a running, stateful process across nodes and restore it
-              functional and reachable at its original pod IP? The answer —
-              proven end-to-end on stock upstream Kubernetes v1.32 in about 13
-              seconds, with an in-memory counter restored intact across nodes and
-              the source pod never deleted until traffic is verified (ADR-0012) —
-              is yes. Live TCP-connection survival —{" "}
-              <code className="rounded bg-pm-navy-700 px-1.5 py-0.5 font-mono text-sm text-pm-cyan-300">
-                seq_delta=0
-              </code>
-              , no RST, no reconnect — is our next goal, the milestone we
-              are proving next; it is not yet proven. No application changes
-              required.
-            </p>
-            <p className="text-lg leading-relaxed text-pm-white-muted">
-              What started as a proof of concept is now a production path: a
-              12-phase migration state machine, five CRDs, a scheduler plugin, a CNI
-              plugin, and a growing open-source project. Built in the open.
-              Apache-2.0. Founded and built by a team with deep roots in Kubernetes, federal systems, and enterprise transformation.
-            </p>
-          </div>
+        {/* Project origin — full width */}
+        <div className="flex flex-col gap-6">
+          <h2
+            id="about-heading"
+            className="text-3xl font-bold leading-tight tracking-tight text-pm-white sm:text-4xl"
+          >
+            About the project
+          </h2>
+          <p className="text-lg leading-relaxed text-pm-white-muted">
+            PodMotion was born from a gap in the Kubernetes ecosystem. When a
+            pod crashes or gets evicted, it takes its state with it — its
+            memory, its open files, and every TCP connection its clients were
+            holding. The scheduler starts a new replica somewhere else, and
+            those connections get a RST. Every retry, every reconnect, every
+            client-side timeout is a consequence of that assumption being baked
+            into the platform.
+          </p>
+          <p className="text-lg leading-relaxed text-pm-white-muted">
+            This project started as a proof of concept: could CRIU actually
+            move a running, stateful process across nodes and restore it
+            functional and reachable at its original pod IP? The answer —
+            proven end-to-end on stock upstream Kubernetes v1.32 in about 13
+            seconds, with an in-memory counter restored intact across nodes and
+            the source pod never deleted until traffic is verified (ADR-0012) —
+            is yes. Live TCP-connection survival —{" "}
+            <code className="rounded bg-pm-navy-700 px-1.5 py-0.5 font-mono text-sm text-pm-cyan-300">
+              seq_delta=0
+            </code>
+            , no RST, no reconnect — was first proven at Sprint 46, where a single
+            held connection survived a migration byte-exact (seq_delta 0/0, Strict
+            mode) on a real multi-node cluster; the full guarantee across many
+            concurrent flows and declared CNIs is not yet proven. No application
+            changes required.
+          </p>
+          <p className="text-lg leading-relaxed text-pm-white-muted">
+            What started as a proof of concept is now a production path: a
+            12-phase migration state machine, five CRDs, a scheduler plugin, a CNI
+            plugin, and a growing open-source project. Built in the open.
+            Apache-2.0. Founded and built by a team with deep roots in Kubernetes, federal systems, and enterprise transformation.
+          </p>
+        </div>
 
-          {/* RIGHT — Team cards (2×2 grid) */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        {/* Team cards */}
+        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
             {/* Chad */}
             <div className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.3)]">
@@ -68,19 +68,19 @@ const About: FC = () => {
                 />
                 <div>
                   <p className="text-sm font-semibold leading-tight text-pm-white">Chad N. Ingle</p>
-                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Founder &amp; Lead Maintainer</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Founder &amp; CTO</p>
                   <p className="mt-0.5 text-xs text-pm-white-muted">Principal DevOps Architect, Effectual</p>
                 </div>
               </div>
               <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
-                26+ years spanning platform engineering, enterprise transformation, and cloud architecture.
+                28+ years in platform engineering, cloud architecture, and enterprise transformation.
                 Principal DevOps Architect at{" "}
                 <a href="https://effectual.ai/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">Effectual</a>
                 , co-founder of{" "}
                 <a href="https://bluebutterfly.ai/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">Blue Butterfly AI</a>
-                , and founder of{" "}
+                , founder of{" "}
                 <a href="https://oanministries.org/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">OAN Ministries</a>
-                . PodMotion grew out of his hands-on platform engineering work — the steady hand that turns big ideas into things that actually ship and run.
+                . Builds net-new products focused on rebuilding security from the ground up — the hands-on, people-first builder behind PodMotion.
               </p>
               <a href="https://www.linkedin.com/in/chadingle/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
@@ -98,14 +98,14 @@ const About: FC = () => {
                 />
                 <div>
                   <p className="text-sm font-semibold leading-tight text-pm-white">Salle Ingle</p>
-                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Co-Founder</p>
-                  <p className="mt-0.5 text-xs text-pm-white-muted">Strategic AI &amp; Solution Architecture</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Founder</p>
+                  <p className="mt-0.5 text-xs text-pm-white-muted">Chief AI Strategist</p>
                 </div>
               </div>
               <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
-                25+ years in technology leadership. Former Principal Architect at McKinsey &amp; Company, leading generative-AI agentic-workflow teams for Fortune 500 enterprises. Founder of{" "}
+                27+ years in technology leadership, including Principal Architect at McKinsey &amp; Company leading generative-AI workflow teams for Fortune 500s. Expert in enterprise multi-cloud and on-premise architecture across data centers, AWS, Azure, and GCP. Founder of{" "}
                 <a href="https://bluebutterfly.ai/" target="_blank" rel="noopener noreferrer" className="text-pm-cyan-300 underline hover:text-pm-cyan-500">Blue Butterfly AI</a>
-                , UCCS Strategic AI advisory board member, Built In Top 100 Most Influential Women in Tech. Drives PodMotion's cloud-provider certification strategy, platform architecture, and enterprise go-to-market.
+                ; drives PodMotion's cloud-certification strategy and enterprise go-to-market.
               </p>
               <a href="https://www.linkedin.com/in/salleingle/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
@@ -123,12 +123,12 @@ const About: FC = () => {
                 />
                 <div>
                   <p className="text-sm font-semibold leading-tight text-pm-white">Jonathan Baier</p>
-                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Principal Advisor, Cloud &amp; Kubernetes</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Co-Founder &amp; Chief AI Scientist</p>
                   <p className="mt-0.5 text-xs text-pm-white-muted">Active Contributor &amp; Agentic AI Lead</p>
                 </div>
               </div>
               <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
-                Jon and Chad have built together since 2012 — Moody's global public cloud offering, early AWS adoption for the US Dept. of the Interior, and financial services cloud security migrations. A published Kubernetes author (Packt Publishing), patent holder in distributed microservices transactions, CSA Zero Trust exam author, and AWS Certified Solutions Architect (Professional). At PodMotion he is an active contributor and agentic AI lead, coordinating with Chad and the team on architecture, development, and what gets built next.
+                20+ years leading AI, cloud, and engineering transformations — Moody's, ADP, and his firm Cyberify Services. Published Kubernetes/GenAI author with four US patents; PodMotion's agentic AI lead, working with Chad since 2012.
               </p>
               <a href="https://www.linkedin.com/in/jonathanbaier/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
@@ -146,12 +146,12 @@ const About: FC = () => {
                 />
                 <div>
                   <p className="text-sm font-semibold leading-tight text-pm-white">David King</p>
-                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Security &amp; Compliance Advisor</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Co-Founder &amp; CISO</p>
                   <p className="mt-0.5 text-xs text-pm-white-muted">NAVWAR Branch Lead, US Space Force</p>
                 </div>
               </div>
               <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
-                Decades of DoD high-security systems experience. NAVWAR Branch Lead at US Space Force, responsible for the next-generation GPS Command &amp; Control system (OCX) and serving as Subject Matter Expert to HQ Space Operations Command — evaluating configuration changes and risk posture across one of the most sensitive weapon systems in the US inventory. At PodMotion he is the adversarial skeptic: the voice that asks the compliance, classification, and security questions DoD and high-assurance enterprise customers will ask before any production commitment.
+                Decades of DoD high-security systems experience as NAVWAR Branch Lead, US Space Force, on the next-generation GPS Command &amp; Control system (OCX). At PodMotion he's the compliance and security skeptic DoD and high-assurance customers expect.
               </p>
               <a href="https://www.linkedin.com/in/david-king-98877517/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
@@ -159,7 +159,6 @@ const About: FC = () => {
               </a>
             </div>
 
-          </div>
         </div>
         {/* Known Limitations */}
         <div className="mt-20">
@@ -181,8 +180,9 @@ const About: FC = () => {
                 The authoritative current end-to-end proof ran on amd64 / Linux 6.17 /
                 containerd 1.7.24 / Kubernetes v1.32.0 / kindnet (host-routed, no VXLAN overlay) —
                 kind profile podmotion-s33-cold (Sprint 33 + 34). An earlier arm64/k3s PoC exists
-                but is historical, not the current proof. Live TCP preservation (Strict mode) is
-                not yet proven.
+                but is historical, not the current proof. Live TCP preservation (Strict mode) was
+                first proven separately at Sprint 46 for a single held connection (seq_delta 0/0) on
+                a real multi-node cluster; broader multi-flow, multi-CNI validation is not yet proven.
               </p>
             </li>
             <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">

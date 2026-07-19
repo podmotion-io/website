@@ -523,13 +523,16 @@ function TechPanel() {
             </div>
             <ul className="space-y-2 text-pm-slate-300 text-sm leading-relaxed list-disc list-inside">
               <li>
-                <code className="text-pm-cyan-400 font-mono">seq_delta=0</code> is the{' '}
-                <span className="font-semibold text-pm-slate-200">next goal</span> (Phase&nbsp;C
-                target), not an achieved result. The current proven path is cold-path
-                BestEffort checkpoint/restore; TCP connections are <span className="font-semibold text-pm-slate-200">not</span> preserved
-                by default. The historical NS#4 PoC run (10 pgbench migrations, -c&nbsp;8 -j&nbsp;8
-                -T&nbsp;600) reported zero sequence-number gaps, but that is a non-authoritative
-                Multipass k3s PoC (Sprint&nbsp;30), not a current measured production result
+                <code className="text-pm-cyan-400 font-mono">seq_delta=0</code> for a held TCP
+                connection was <span className="font-semibold text-pm-slate-200">first proven at
+                Sprint&nbsp;46</span>: a single held connection survived a pm-w1&nbsp;&rarr;&nbsp;pm-w2
+                migration byte-exact (seq_delta 0/0, Strict mode) on a real multi-node cluster (the
+                committed proof records no CNI, architecture, or run count). It is not the shipped
+                v0.1.0-alpha default &mdash; TCP connections are <span className="font-semibold text-pm-slate-200">not</span> preserved
+                by default, and the full multi-flow guarantee is not yet proven. The historical NS#4
+                PoC run (10 pgbench migrations, -c&nbsp;8 -j&nbsp;8 -T&nbsp;600) reported zero
+                sequence-number gaps, but that is a non-authoritative Multipass k3s PoC
+                (Sprint&nbsp;30), not a current measured production result
               </li>
               <li>
                 p99 freeze window 487&nbsp;ms (NS#4, 10 runs); pgbench sustained write workload,

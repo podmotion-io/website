@@ -47,13 +47,13 @@ export function ProofStrip() {
     <section
       id="proof-strip"
       className="bg-pm-navy-800 py-12 px-4"
-      aria-label="NS#4, Sprint 30, Sprint 31, Sprint 32, Sprint 33, and Sprint 34 proof results"
+      aria-label="NS#4, Sprint 30, Sprint 31, Sprint 32, Sprint 33, Sprint 34, and Sprint 46 proof results"
     >
       <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
 
         {/* Shared scope line — each badge carries its own platform caveat */}
         <p className="text-pm-white-subtle text-xs text-center font-mono tracking-wide uppercase">
-          All proofs: single-host two-node kind cluster (Docker containers) &mdash; historical arm64 / Ubuntu 24.04 / kernel 6.8 / Flannel VXLAN (NS#4, Sprint 30) &middot; amd64 / kernel 6.17 / kindnet host-routed, no VXLAN overlay (Sprint 31, Sprint 32, Sprint 33, Sprint 34)
+          kind-cluster proofs: single-host two-node kind cluster (Docker containers) &mdash; historical arm64 / Ubuntu 24.04 / kernel 6.8 / Flannel VXLAN (NS#4, Sprint 30) &middot; amd64 / kernel 6.17 / kindnet host-routed, no VXLAN overlay (Sprint 31, Sprint 32, Sprint 33, Sprint 34) &middot; Sprint 46: a real multi-node cluster (nodes pm-w1, pm-w2) &mdash; the committed proof doc records no CNI and no architecture
         </p>
 
         {/* NS#4 ProofBadge */}
@@ -72,9 +72,9 @@ export function ProofStrip() {
         {/* Metrics row */}
         <div className="flex flex-wrap justify-center gap-3">
           <MetricChip
-            title="Next goal (Phase C) — zero TCP sequence delta is NOT yet proven as a current end-to-end achievement. The earlier single-flow arm64 / Ubuntu 24.04 / kernel 6.8 / Flannel VXLAN / kind observation is a historical PoC measurement, not the current authoritative end-to-end proof (which is the Sprint 33 cold-path run on amd64/6.17/kindnet). Strict TCP preservation is the milestone we are proving next."
+            title="Strict-mode held-TCP survival with zero TCP sequence delta was first proven end-to-end at Sprint 46: a single held connection survived a pm-w1 -> pm-w2 migration byte-exact (1/1 connections byte-exact, seq_delta 0/0, freeze 602ms) on a real multi-node cluster. The committed proof doc records no CNI, no architecture, and no run count. The broader bar — many concurrent flows, multi-container, statistical repeatability across declared CNIs — is still ahead. See docs/proof/sprint46-proof.md."
           >
-            North&nbsp;Star&nbsp;goal&nbsp;(Phase&nbsp;C):&nbsp;seq_delta=0&nbsp;&mdash;&nbsp;not&nbsp;yet&nbsp;proven&nbsp;(historical&nbsp;single-flow&nbsp;PoC:&nbsp;arm64&nbsp;/&nbsp;kernel&nbsp;6.8&nbsp;/&nbsp;Flannel&nbsp;VXLAN)
+            seq_delta=0&nbsp;(held&nbsp;TCP):&nbsp;first&nbsp;proven&nbsp;Sprint&nbsp;46&nbsp;&mdash;&nbsp;single&nbsp;connection&nbsp;&middot;&nbsp;full&nbsp;multi-flow&nbsp;bar&nbsp;still&nbsp;ahead
           </MetricChip>
           <MetricChip>freeze p50 312&thinsp;ms&thinsp;/&thinsp;p99 487&thinsp;ms&thinsp;(n=10)</MetricChip>
           <MetricChip>0 RST</MetricChip>
@@ -146,6 +146,32 @@ export function ProofStrip() {
           Sprint 34 Phase B: operator&rarr;agent gRPC hardened with mutual TLS (fail-closed &mdash; no TLS material means the operator refuses to start, never falls back to plaintext), per-RPC SPIFFE-identity authorization, 512&nbsp;MiB gRPC size caps, signed checkpoint manifests verified before extraction, wire-hash transfer integrity, and migration_uid socket-state anti-replay. Full live-migration regression (GC-B7) ran to Phase=Complete with the complete security stack active and an in-memory counter restored intact; all 22/22 Phase A cold-path assertions continue to pass &mdash; zero regression. Same cluster as the Sprint 33 cold-path proof. ADR-SEC-A through ADR-SEC-D.
         </p>
 
+        {/* Sprint 46 — Redis held TCP connection survives migration ProofBadge */}
+        <div className="flex items-center justify-center text-center">
+          <CheckIcon />
+          <p className="text-xl sm:text-2xl font-semibold text-pm-white leading-snug">
+            Sprint 46 &mdash; Redis held TCP connection under load survived migration byte-exact:&nbsp;pm-w1&nbsp;&rarr;&nbsp;pm-w2 to phase=Complete&nbsp;&middot;&nbsp;1/1 connections byte-exact (seq_delta 0/0)&nbsp;&middot;&nbsp;freeze 602ms&nbsp;&middot;&nbsp;elapsed 33s
+          </p>
+        </div>
+
+        {/* Sprint 46 Redis scope caveat */}
+        <p className="text-pm-white-subtle text-xs text-center max-w-xl -mt-4">
+          Sprint 46 (Strict TCP preservation, single held connection under load): a Redis workload migrated pm-w1&nbsp;&rarr;&nbsp;pm-w2, PodMigration phase=Complete, and the established TCP connection survived with 1/1 connections verified byte-exact (seq_delta 0/0), freeze 602ms, elapsed 33s, OVERALL_RESULT=PASS. This is the first evidence a live TCP connection survives a PodMotion migration byte-exact. Scope: a real multi-node cluster (nodes pm-w1, pm-w2); the committed proof doc records no CNI, no architecture, and no run count &mdash; a single documented end-to-end run, not a statistical corpus. Source pod never deleted before TrafficVerified. See docs/proof/sprint46-proof.md.
+        </p>
+
+        {/* Sprint 46 — Postgres write-load ReadWriteMany re-attach ProofBadge */}
+        <div className="flex items-center justify-center text-center">
+          <CheckIcon />
+          <p className="text-xl sm:text-2xl font-semibold text-pm-white leading-snug">
+            Sprint 46 &mdash; Postgres under continuous write load migrated pm-w1&nbsp;&rarr;&nbsp;pm-w2 to phase=Complete&nbsp;&middot;&nbsp;0 post-migration write errors&nbsp;&middot;&nbsp;row counter 8&nbsp;&rarr;&nbsp;16&nbsp;&middot;&nbsp;freeze 766ms&nbsp;&middot;&nbsp;elapsed 43s
+          </p>
+        </div>
+
+        {/* Sprint 46 Postgres scope caveat */}
+        <p className="text-pm-white-subtle text-xs text-center max-w-xl -mt-4">
+          Sprint 46 (single migration): a Postgres workload under continuous write load on ReadWriteMany storage migrated pm-w1&nbsp;&rarr;&nbsp;pm-w2 to phase=Complete; the shared ReadWriteMany volume re-attached on the destination node, the row counter advanced 8&nbsp;&rarr;&nbsp;16 with 0 post-migration write errors, freeze 766ms, elapsed 43s, OVERALL_RESULT=PASS. This exercises ReadWriteMany re-attach only (tcpPreservationMode None) &mdash; it does not exercise or imply live block-storage migration, which remains deferred to v1.2. Same real multi-node cluster (pm-w1, pm-w2); no CNI, architecture, or run count recorded. See docs/proof/sprint46-proof.md.
+        </p>
+
         {/* Badge row */}
         <div className="flex flex-wrap justify-center gap-3">
           <BadgeChip>Apache-2.0</BadgeChip>
@@ -169,7 +195,7 @@ export function ProofStrip() {
 
         {/* Caveat */}
         <p className="text-pm-white-subtle text-sm text-center max-w-xl">
-          Pre-1.0. Single-cluster. arm64 validated (NS#4, Sprint 30). amd64 cold migration proven (Sprint 31, NP-AMD64-BASELINE; Sprint 32, cold-path CRIU restore baseline). TCP preservation (Strict mode) not yet proven on amd64 — see roadmap.
+          Pre-1.0. Single-cluster. arm64 validated (NS#4, Sprint 30). amd64 cold migration proven (Sprint 31, NP-AMD64-BASELINE; Sprint 32, cold-path CRIU restore baseline). Strict-mode TCP preservation first proven at Sprint 46 — a single held connection survived migration byte-exact (seq_delta 0/0) on a real multi-node cluster (no CNI or architecture recorded in the committed proof); broader multi-flow and per-CNI validation is still ahead — see roadmap.
         </p>
 
         {/* Security disclosure — node-root agent posture (SITE-ADR-001) */}

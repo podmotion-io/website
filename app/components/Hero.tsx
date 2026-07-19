@@ -173,7 +173,7 @@ const Hero: React.FC = () => {
           >
             Live-migrate running pods.{' '}
             <br />
-            Restored at the same pod IP.
+            Keep the TCP connection.
           </h1>
 
           {/* Beginner context */}
@@ -228,9 +228,11 @@ const Hero: React.FC = () => {
               seq_delta=0
             </code>
             , a live TCP connection surviving the move so containers and clients are both unaware the
-            pod moved — is the milestone we are proving next; it is not yet proven. Proof substrate
-            (exact): amd64 / Linux 6.17 / containerd 1.7.24 / Kubernetes v1.32.0 / kindnet (host-routed,
-            no VXLAN overlay).
+            pod moved — was first proven at Sprint 46, where a single held connection survived a
+            migration byte-exact (seq_delta 0/0, Strict mode) on a real multi-node cluster; the full
+            guarantee across many concurrent flows and declared CNIs is not yet proven. Cold-path
+            proof substrate (exact): amd64 / Linux 6.17 / containerd 1.7.24 / Kubernetes v1.32.0 /
+            kindnet (host-routed, no VXLAN overlay).
           </p>
 
           {/* CTA row */}
@@ -359,7 +361,7 @@ const Hero: React.FC = () => {
             Live migration, proven end-to-end
           </p>
           <p className="text-center text-pm-text-muted font-light tracking-[0.15em] uppercase text-xs mb-10 select-none">
-            Next goal: seq_delta=0 — not yet proven
+            seq_delta=0 — first proven at Sprint 46 (single held connection); full multi-flow bar ahead
           </p>
           {/* UndyingNodeMark — 280×280 quantum omnipresence / concentric rings */}
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

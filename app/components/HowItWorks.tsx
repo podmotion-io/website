@@ -491,9 +491,11 @@ const HowItWorks: FC = () => {
               kind profile podmotion-s33-cold / 2 nodes / amd64 / Linux 6.17 /
               containerd 1.7.24 / Kubernetes v1.32.0 / CNI kindnet (host-routed,
               no VXLAN overlay). BestEffort transfer mode (tcpPreservationMode
-              default None, opt-in to BestEffort or Strict). Live TCP-connection
-              survival / seq_delta=0 / Strict mode are the goal we are
-              proving next — not yet proven. Flannel VXLAN and cloud CNIs are on
+              default None, opt-in to BestEffort or Strict). On this substrate,
+              held-TCP survival was not exercised; a held TCP connection was first
+              proven to survive a migration byte-exact separately at Sprint 46
+              (seq_delta 0/0, Strict mode, single connection) on a real multi-node
+              cluster. Broader multi-flow coverage, Flannel VXLAN and cloud CNIs are on
               the roadmap, not proof.
             </p>
           </div>
@@ -573,11 +575,12 @@ const HowItWorks: FC = () => {
               ))}
             </div>
             <p className="mt-4 text-sm text-pm-white-muted">
-              The authoritative current end-to-end proof. Live TCP-connection
-              survival (seq_delta=0, Strict mode) is the goal we are
-              proving next — not yet proven; the current proof verifies L3/L4 IP
-              reachability after restore via an RST probe, not survival of an
-              established application TCP connection.
+              The authoritative current cold-path proof on this substrate. It
+              verifies L3/L4 IP reachability after restore via an RST probe, not
+              survival of an established application TCP connection. Held TCP-connection
+              survival (seq_delta=0, Strict mode) was first proven separately at
+              Sprint 46 for a single held connection on a real multi-node cluster;
+              the full multi-flow guarantee is not yet proven.
             </p>
           </div>
 
@@ -660,9 +663,11 @@ const HowItWorks: FC = () => {
           {/* Honesty footnote */}
           <p className="mt-8 border-t border-white/10 pt-6 text-sm italic text-pm-white-muted/70">
             What is proven today is end-to-end cold-path live migration on one
-            declared substrate. Live TCP-connection survival (seq_delta=0, Strict
-            mode), Flannel VXLAN and cloud CNIs, multi-container, and N-flow
-            Service-routed transparency are the goals on the roadmap —
+            declared substrate, plus — first at Sprint 46, on a separate real
+            multi-node cluster — a single held TCP connection surviving a
+            migration byte-exact (seq_delta=0, Strict mode). Broader coverage —
+            many concurrent flows, multi-container, N-flow Service-routed
+            transparency, Flannel VXLAN and cloud CNIs — remains on the roadmap,
             not yet proven.{" "}
             <a
               href="#roadmap"

@@ -196,9 +196,10 @@ export default function CLIShowcase() {
           <p className="text-pm-white-muted text-lg mt-4">
             Every migration is a <code className="text-pm-cyan-300">PodMigration</code> custom resource.
             Start with <code className="text-pm-cyan-300">dryRun: true</code> for a freeze-window estimate,
-            then apply without it to migrate — watch phases complete. Our next goal of{" "}
-            <code className="text-pm-cyan-300">seq_delta=0</code> (zero TCP sequence delta) is the
-            milestone we are proving next; it is not yet proven. No new tooling required.
+            then apply without it to migrate — watch phases complete.{" "}
+            <code className="text-pm-cyan-300">seq_delta=0</code> (zero TCP sequence delta) was first
+            proven at Sprint 46 for a single held connection on a real multi-node cluster; the full
+            multi-flow guarantee is not yet proven. No new tooling required.
           </p>
         </div>
 

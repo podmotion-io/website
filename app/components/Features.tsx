@@ -53,10 +53,12 @@ const availableFeatureCards: FeatureCardProps[] = [
         restore.
         <br />
         <span className="feature-card__scope">
-          Next goal (not yet proven): live TCP-connection survival with{' '}
+          Live TCP-connection survival with{' '}
           <code>seq_delta=0</code> — containers and clients both unaware the pod
-          moved. That guarantee is the milestone we are proving next; it is not
-          yet proven.
+          moved — was first proven at Sprint 46, where a single held connection
+          survived a migration byte-exact (seq_delta 0/0, Strict mode) on a real
+          multi-node cluster. The full guarantee — many concurrent flows,
+          multi-container, on declared CNIs — is not yet proven.
         </span>
         <br />
         <span className="feature-card__scope">
@@ -68,7 +70,7 @@ const availableFeatureCards: FeatureCardProps[] = [
         <span className="feature-card__scope">
           TCP preservation is opt-in via{' '}
           <code>tcpPreservationMode</code> (default: <code>None</code>;
-          BestEffort or Strict opt-in). Strict mode is not yet proven. Source pod
+          BestEffort or Strict opt-in). Strict mode was first proven at Sprint 46 for a single held connection (seq_delta 0/0) on a real multi-node cluster; broader multi-flow validation is not yet proven. Source pod
           is never deleted before TrafficVerified (ADR-0012).
         </span>
       </>
@@ -133,7 +135,7 @@ const audienceCards: AudienceCardProps[] = [
     audience: 'App developer',
     question: 'Will my app break during a migration?',
     answer:
-      'You change nothing — PodMotion moves the pod and restores it reachable at its original IP. Live TCP-connection survival is the goal we are proving next; it is not yet proven.',
+      'You change nothing — PodMotion moves the pod and restores it reachable at its original IP. Live TCP-connection survival was first proven at Sprint 46 for a single held connection (seq_delta 0/0) on a real multi-node cluster; the full multi-flow guarantee is not yet proven.',
     ctaLabel: 'How it works →',
     ctaHref: '/#how-it-works',
   },

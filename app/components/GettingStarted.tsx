@@ -231,9 +231,10 @@ kubectl describe podmigration migrate-my-pod`}</code>
 
           <p className="text-pm-white-muted text-sm mt-3">
             Confirm that the pod
-            now runs on the destination node. Our next goal of{" "}
+            now runs on the destination node.{" "}
             <code>seq_delta=0</code> (zero TCP sequence delta) with connection
-            parity is the milestone we are proving next — it is not yet proven.
+            parity was first proven at Sprint 46 for a single held connection on a
+            real multi-node cluster; the full multi-flow guarantee is not yet proven.
             The <code>describe</code> output
             shows the <code>status.conditions</code> relevant to the migration
             mode. In Strict mode the aggregate TCP result is{" "}

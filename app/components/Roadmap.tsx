@@ -68,7 +68,7 @@ const milestones: Milestone[] = [
     theme:
       'A running, stateful redis:7-alpine pod migrated across nodes on stock upstream Kubernetes v1.32, restored functional and reachable at its original pod IP in about 13 seconds, with an in-memory counter (gcb7:counter=42) restored intact. BestEffort transfer mode (tcpPreservationMode default None). Proof substrate of record: kind profile podmotion-s33-cold / 2 nodes / amd64 / Linux 6.17 / containerd 1.7.24 / Kubernetes v1.32.0 / CNI kindnet (host-routed, no VXLAN overlay).',
     gate: '22/22 Phase A migration assertions pass; TrafficVerified=True before source pod deletion (ADR-0012) — see docs/proof/sprint33-proof.md.',
-    flag: 'Live TCP-connection survival (seq_delta=0, Strict mode) is the goal we are proving next, not yet proven. The current proof verifies L3/L4 IP reachability after restore, not survival of an established TCP connection.',
+    flag: 'The Sprint 33 cold-path proof verifies L3/L4 IP reachability after restore, not survival of an established TCP connection. Live TCP-connection survival (seq_delta=0, Strict mode) was first proven separately at Sprint 46 (see S46) — for a single held connection on a real multi-node cluster; the full multi-flow guarantee is still ahead.',
   },
   {
     id: 'S34',
@@ -77,6 +77,15 @@ const milestones: Milestone[] = [
     theme:
       'Security hardening of the gRPC control plane on the same amd64 / Linux 6.17 / kindnet cluster: mTLS fail-closed, per-RPC SPIFFE authz, gRPC size caps (512 MiB) plus decompression cap (2 GiB), signed checkpoint manifests verified before extract, transfer-integrity wire-hash, and socket anti-replay bound to migration_uid.',
     gate: '8/8 security gate criteria (GC-B1–GC-B8) pass with all 22 Phase A migration assertions still passing — see docs/proof/sprint34-proof.md.',
+  },
+  {
+    id: 'S46',
+    tier: 'shipped',
+    title: 'Sprint 46 — a held TCP connection survives migration byte-exact (first Strict-mode proof)',
+    theme:
+      'On a real multi-node cluster (nodes pm-w1, pm-w2), a Redis workload holding a live TCP connection under load migrated pm-w1 → pm-w2 to PodMigration phase=Complete with the established connection preserved byte-exact — 1/1 connections verified byte-exact, seq_delta 0/0, freeze 602ms, elapsed 33s. A companion Postgres workload under continuous write load on ReadWriteMany storage migrated to phase=Complete with the shared volume re-attaching on the destination node, the row counter advancing 8 → 16, 0 post-migration write errors, freeze 766ms. This is the first evidence a live TCP connection survives a PodMotion migration byte-exact. The committed proof doc records no CNI, no architecture, and no run count — each result is a single documented end-to-end run, not a statistical corpus; the Postgres path exercises ReadWriteMany re-attach only and does not imply live block-storage migration (deferred to v1.2). Source pod never deleted before TrafficVerified (ADR-0012).',
+    gate: 'Redis held-connection (R7/R8) and Postgres write-load (R9) OVERALL_RESULT=PASS — see docs/proof/sprint46-proof.md.',
+    flag: 'Single documented run per workload on a cluster whose CNI/architecture the proof doc does not record — not yet the multi-flow, multi-container, statistically repeatable beta-gate bar. Sprints 47–50 have no committed proof at HEAD and are not shown as proven results.',
   },
 
   // ── IN PROGRESS ────────────────────────────────────────────
