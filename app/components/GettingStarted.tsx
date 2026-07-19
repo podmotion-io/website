@@ -30,7 +30,7 @@ export default function GettingStarted() {
           role="note"
           aria-label="Prerequisites"
         >
-          <strong>Prerequisites:</strong> Requires CRIU 4.2, Linux kernel 5.15+ (validated only on 6.8; 6.8 strongly recommended), Kubernetes 1.27+, and arm64 nodes (amd64 validation in progress). Single-cluster only in v0.x.
+          <strong>Prerequisites:</strong> Requires CRIU 4.2 and Linux kernel 5.15+ (migration runs validated on kernel 6.17). Validated on Kubernetes v1.32.0 and v1.35.x. Use amd64 nodes: amd64 is the primary validated substrate, while arm64 is the earlier baseline whose production validation is deferred to post-v1.0. Single-cluster only in v0.x.
         </div>
 
         {/* S1-1: Kernel capability prerequisites */}

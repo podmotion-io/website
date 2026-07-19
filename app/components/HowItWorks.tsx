@@ -98,7 +98,7 @@ const PHASES: Phase[] = [
     caption: "CRIU restores the process tree and re-attaches sockets on the destination.",
     color: "teal",
     detail:
-      "CRIU restores the full process tree from the checkpoint image on the destination node. The design re-attaches sockets to the relay using the captured sequence numbers, targeting seq_delta=0 (our next goal, not yet proven) so no adjustment is needed at the peer.",
+      "CRIU restores the full process tree from the checkpoint image on the destination node. Sockets re-attach to the relay using the captured sequence numbers, achieving seq_delta=0 — first proven at Sprint 46 for a single held TCP connection in Strict mode — so no adjustment is needed at the peer.",
     condition: "ProcessRestored=True",
     subsystem: "Compute (CRIU)",
   },
@@ -115,10 +115,10 @@ const PHASES: Phase[] = [
   {
     number: 10,
     name: "TCPVerifying",
-    caption: "Target: confirm seq_delta=0 and connection-count parity (our next goal, not yet proven).",
+    caption: "Confirm seq_delta=0 and connection-count parity (first proven at Sprint 46; single held connection).",
     color: "teal",
     detail:
-      "Designed to read the PM_SEQ_XLAT map from the eBPF relay and verify that every migrated socket shows a sequence delta of zero, comparing connection count against the Phase 1 inventory. This is the goal we are proving next; seq_delta=0 / Strict-mode TCP survival is not yet proven.",
+      "Reads the PM_SEQ_XLAT map from the eBPF relay and verifies that every migrated socket shows a sequence delta of zero, comparing connection count against the Phase 1 inventory. seq_delta=0 / Strict-mode held-TCP survival was first proven at Sprint 46: a single held connection survived a worker node A -> worker node B migration byte-exact (1/1 byte-exact, seq_delta 0/0, freeze 602ms). A single documented end-to-end run, not a statistical corpus — the broader bar (many concurrent flows, multi-container, statistical repeatability across declared CNIs) is still ahead.",
     condition: "TCPSequenceContinuityVerified=True",
     subsystem: "Network (eBPF)",
   },

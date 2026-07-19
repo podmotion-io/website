@@ -151,7 +151,7 @@ export default function Community() {
           {[
             'v0.1.0-alpha',
             'single-cluster',
-            'arm64 (amd64 in progress)',
+            'amd64 validated (arm64 post-v1.0)',
             'one maintainer',
             'pre-CNCF-sandbox',
           ].map((badge) => (

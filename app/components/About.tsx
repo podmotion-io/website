@@ -230,7 +230,12 @@ const About: FC = () => {
               <p className="mb-1 text-sm font-semibold text-pm-white">Storage migration deferred</p>
               <p className="text-sm leading-relaxed text-pm-white-muted">
                 Persistent volume migration is deferred to v1.2. v0.1.0-alpha does not migrate
-                PVCs or storage state; workloads relying on local storage are out of scope.
+                PVCs or storage state; workloads relying on local storage are out of scope. One
+                tier has been exercised past design in development — a Longhorn-backed Postgres
+                PVC reached a verified in-run migration (phase=Complete / TrafficVerified=True)
+                on the KVM cluster — but that is a single dev-cluster run, not a committed proof
+                and not part of the shipped alpha; the Ceph RBD and snapshot-rsync tiers remain
+                unexercised stubs.
               </p>
             </li>
             <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 sm:col-span-2 lg:col-span-3">

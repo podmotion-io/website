@@ -111,10 +111,20 @@ const roadmapFeatureCard: FeatureCardProps = {
       volume is RWX and re-attachable on the destination node — the admission
       webhook blocks configurations that would not transfer safely. A four-tier
       strategy (Longhorn dual-engine, Ceph RBD <code>rbd migrate</code>,
-      snapshot-clone-rsync, and RWX re-attach) is designed and scoped for
-      v1.2. Deferred to v1.2.{' '}
+      snapshot-clone-rsync, and RWX re-attach) is designed and scoped for v1.2.
+      One tier has moved past design in development: the Longhorn-backed path
+      reached a verified in-run migration on our KVM cluster — a Postgres pod on
+      a Longhorn PVC migrated to <code>phase=Complete</code> /{' '}
+      <code>TrafficVerified=True</code>, with the destination independently
+      confirmed accepting real writes at multiple checks roughly 45 seconds apart
+      after restore. That is a single verified dev-cluster run, not a committed
+      proof doc — it implies no GA or mainline availability, and it does not carry
+      to the Ceph RBD or snapshot-rsync tiers, which remain unexercised stubs.
+      Storage migration stays deferred to v1.2 and is not part of the shipped
+      alpha.{' '}
       <span className="feature-card__warning">
-        NOT available in current alpha — deferred to v1.2.
+        NOT available in current alpha — deferred to v1.2. Longhorn tier verified
+        in a development run only.
       </span>
     </>
   ),

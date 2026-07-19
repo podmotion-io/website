@@ -361,7 +361,13 @@ function TechPanel() {
                 via live migration is mechanically sound but not validated at production scale.
               </li>
               <li>
-                Storage migration (PVCs) is deferred to v1.2; it is not available in v0.1.0-alpha.
+                Storage migration (PVCs) is deferred to v1.2 and is not available
+                in v0.1.0-alpha. One path has been exercised live in development: a
+                Longhorn-backed Postgres PVC reached a verified in-run migration
+                (phase=Complete / TrafficVerified=True) on the KVM cluster — a
+                single dev-cluster run, not a committed proof doc, with no GA or
+                mainline availability, and it does not extend to the Ceph RBD or
+                snapshot-rsync tiers, which remain stubs.
               </li>
             </ul>
           </div>
