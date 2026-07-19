@@ -67,7 +67,7 @@ export function ProofStrip() {
         {/* Headline metrics */}
         <div className="flex flex-wrap justify-center gap-3">
           <MetricChip
-            title="Strict-mode held-TCP survival with zero TCP sequence delta was first proven end-to-end at Sprint 46: a single held connection survived a pm-w1 -> pm-w2 migration byte-exact (1/1 connections byte-exact, seq_delta 0/0, freeze 602ms) on a real multi-node cluster. The committed proof doc records no CNI, no architecture, and no run count. The broader bar — many concurrent flows, multi-container, statistical repeatability across declared CNIs — is still ahead. See docs/proof/sprint46-proof.md."
+            title="Strict-mode held-TCP survival with zero TCP sequence delta was first proven end-to-end at Sprint 46: a single held connection survived a worker node A -> worker node B migration byte-exact (1/1 connections byte-exact, seq_delta 0/0, freeze 602ms) on a real multi-node cluster. The committed proof doc records no CNI, no architecture, and no run count. The broader bar — many concurrent flows, multi-container, statistical repeatability across declared CNIs — is still ahead. See docs/proof/sprint46-proof.md."
           >
             seq_delta=0&nbsp;(held&nbsp;TCP):&nbsp;first&nbsp;proven&nbsp;Sprint&nbsp;46&nbsp;&mdash;&nbsp;single&nbsp;connection&nbsp;&middot;&nbsp;full&nbsp;multi-flow&nbsp;bar&nbsp;still&nbsp;ahead
           </MetricChip>
@@ -99,7 +99,7 @@ export function ProofStrip() {
                 </td>
               </tr>
               <tr className="border-b border-pm-navy-700">
-                <td className="px-3 py-3 text-pm-white-subtle">Multi-node cluster, pm-w1&nbsp;&rarr;&nbsp;pm-w2. The committed proof doc records no CNI and no architecture.</td>
+                <td className="px-3 py-3 text-pm-white-subtle">Multi-node cluster, worker node A&nbsp;&rarr;&nbsp;worker node B. The committed proof doc records no CNI and no architecture.</td>
                 <td className="px-3 py-3 text-pm-white-subtle">Redis &mdash; single held TCP connection under load</td>
                 <td className="px-3 py-3 text-pm-white font-mono">Strict</td>
                 <td className="px-3 py-3 text-pm-white-subtle">
@@ -107,7 +107,7 @@ export function ProofStrip() {
                 </td>
               </tr>
               <tr className="border-b border-pm-navy-700">
-                <td className="px-3 py-3 text-pm-white-subtle">Same multi-node cluster, pm-w1&nbsp;&rarr;&nbsp;pm-w2. No CNI, architecture, or run count recorded.</td>
+                <td className="px-3 py-3 text-pm-white-subtle">Same multi-node cluster, worker node A&nbsp;&rarr;&nbsp;worker node B. No CNI, architecture, or run count recorded.</td>
                 <td className="px-3 py-3 text-pm-white-subtle">Postgres &mdash; continuous write load, ReadWriteMany re-attach</td>
                 <td className="px-3 py-3 text-pm-white font-mono">None</td>
                 <td className="px-3 py-3 text-pm-white-subtle">
@@ -115,7 +115,7 @@ export function ProofStrip() {
                 </td>
               </tr>
               <tr className="border-b border-pm-navy-700">
-                <td className="px-3 py-3 text-pm-white-subtle">Flannel CNI &mdash; KVM/libvirt kubeadm cluster (Kubernetes v1.35.x, containerd runtime), pm-w1&nbsp;&rarr;&nbsp;pm-w2</td>
+                <td className="px-3 py-3 text-pm-white-subtle">Flannel CNI &mdash; KVM/libvirt kubeadm cluster (Kubernetes v1.35.x, containerd runtime), worker node A&nbsp;&rarr;&nbsp;worker node B</td>
                 <td className="px-3 py-3 text-pm-white-subtle">nginx</td>
                 <td className="px-3 py-3 text-pm-white font-mono">Cold</td>
                 <td className="px-3 py-3 text-pm-white-subtle">
