@@ -66,7 +66,7 @@ const milestones: Milestone[] = [
     tier: 'shipped',
     title: 'Sprint 33 — cold-path end-to-end live migration (authoritative proof)',
     theme:
-      'A running, stateful redis:7-alpine pod migrated across nodes on stock upstream Kubernetes v1.32, restored functional and reachable at its original pod IP in about 13 seconds, with an in-memory counter (gcb7:counter=42) restored intact. BestEffort transfer mode (tcpPreservationMode default None). Proof substrate of record: kind profile podmotion-s33-cold / 2 nodes / amd64 / Linux 6.17 / containerd 1.7.24 / Kubernetes v1.32.0 / CNI kindnet (host-routed, no VXLAN overlay).',
+      'A running, stateful redis:7-alpine pod migrated across nodes on stock upstream Kubernetes v1.32, restored functional and running in about 13 seconds, with an in-memory counter (gcb7:counter=42) restored intact. BestEffort transfer mode (tcpPreservationMode default None). Proof substrate of record: kind profile podmotion-s33-cold / 2 nodes / amd64 / Linux 6.17 / containerd 1.7.24 / Kubernetes v1.32.0 / CNI kindnet (host-routed, no VXLAN overlay).',
     gate: '22/22 Phase A migration assertions pass; TrafficVerified=True before source pod deletion (ADR-0012) — see docs/proof/sprint33-proof.md.',
     flag: 'The Sprint 33 cold-path proof verifies L3/L4 IP reachability after restore, not survival of an established TCP connection. Live TCP-connection survival (seq_delta=0, Strict mode) was first proven separately at Sprint 46 (see S46) — for a single held connection on a real multi-node cluster; the full multi-flow guarantee is still ahead.',
   },
