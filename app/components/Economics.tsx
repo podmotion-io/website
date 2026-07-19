@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { TrendingDown, Server, Shield, Wrench, Info, AlertTriangle } from 'lucide-react';
+import { TrendingDown, Info, AlertTriangle } from 'lucide-react';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -97,108 +97,24 @@ function ExecSavingsRow({ category, midsize, enterprise }: ExecSavingsRowProps) 
 
 function ExecPanel() {
   return (
-    <div className="space-y-16">
+    <div className="space-y-14">
 
-      {/* Historical anchor */}
+      {/* Prior art */}
       <div className="rounded-xl border border-pm-cyan-500/20 bg-pm-navy-900/60 p-8">
         <h3 className="text-lg font-semibold text-white mb-3">
-          This problem has been solved before — for a different generation of infrastructure
+          This problem was already solved once — for the previous generation of infrastructure
         </h3>
-        <p className="text-base text-pm-slate-300 leading-relaxed mb-4">
-          In the early 2000s, physical data centers ran at 5–15% server utilization for exactly
-          the same reason: moving a running server required shutting it down first. Once engineers
-          solved live server migration — the ability to move a running machine between physical
-          hosts with no downtime — the economics changed completely. Data center teams went from
-          one workload per server to ten or fifteen. Maintenance windows shrank from nights and
-          weekends to minutes. Infrastructure costs dropped dramatically without touching a single
-          line of application code.
-        </p>
         <p className="text-base text-pm-slate-300 leading-relaxed">
-          Container infrastructure is at the same inflection point today. The workloads are
-          different. The structural constraint is identical. PodMotion is the same capability
-          class, applied to the current generation.
+          In the early 2000s, physical data centers ran at 5–15% utilization for the same reason
+          Kubernetes clusters do today: moving a running workload meant shutting it down first. Once
+          live server migration arrived, teams went from one workload per server to ten or fifteen,
+          maintenance windows shrank from weekends to minutes, and infrastructure costs fell —
+          without touching application code. Container infrastructure is at the same inflection
+          point, and PodMotion applies the same capability class to the current generation. The
+          three cost mechanisms in the savings model below — compute, vendor licensing, and
+          maintenance — all follow from a single change: applications no longer have to restart to
+          move.
         </p>
-      </div>
-
-      {/* Mechanism cards */}
-      <div className="grid gap-6 md:grid-cols-3">
-
-        <div className="rounded-xl border border-pm-navy-700 bg-pm-navy-900 p-6">
-          <div className="mb-4 flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-pm-cyan-500/10 ring-1 ring-pm-cyan-500/30">
-              <Server className="h-5 w-5 text-pm-cyan-400" />
-            </span>
-            <h3 className="font-semibold text-white">Cloud compute bill</h3>
-          </div>
-          <p className="text-sm text-pm-slate-300 leading-relaxed mb-4">
-            When applications can move between servers without restarting, you need fewer servers
-            to run the same workloads. Industry research documents 20–40% server count reductions
-            from improved placement — a direct, proportional reduction in your compute bill.
-          </p>
-          <p className="text-sm text-pm-slate-300 leading-relaxed">
-            Cloud providers also sell spare capacity at 60–90% discounts depending on provider
-            and instance type. The catch: they can reclaim it on as little as 30 seconds'
-            notice (AWS gives about two minutes; Google Cloud and Azure about 30 seconds),
-            which currently means your application restarts. With live migration, the application
-            moves to a different server before reclamation happens — making that deeply discounted
-            capacity usable for production workloads.{' '}
-            <span className="text-pm-slate-400 italic">
-              Timing requires per-workload validation before production use.
-            </span>
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-pm-navy-700 bg-pm-navy-900 p-6">
-          <div className="mb-4 flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-pm-cyan-500/10 ring-1 ring-pm-cyan-500/30">
-              <Shield className="h-5 w-5 text-pm-cyan-400" />
-            </span>
-            <h3 className="font-semibold text-white">Vendor licensing fees</h3>
-          </div>
-          <p className="text-sm text-pm-slate-300 leading-relaxed mb-4">
-            Most monitoring and observability vendors charge by the server. Fewer servers means a
-            smaller bill — automatically, with no renegotiation required. At published rates, a
-            20–40% server reduction on a 100-server footprint projects to{' '}
-            <span className="text-pm-cyan-400 font-semibold">$38K–$116K per year</span> in
-            monitoring savings alone.
-          </p>
-          <p className="text-sm text-pm-slate-300 leading-relaxed">
-            For organizations with per-processor commercial database licensing, physically
-            decommissioning servers removes processors from the license count. Consult your
-            database vendor contract for how server reduction affects your specific license
-            obligations.
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-pm-navy-700 bg-pm-navy-900 p-6">
-          <div className="mb-4 flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-pm-cyan-500/10 ring-1 ring-pm-cyan-500/30">
-              <Wrench className="h-5 w-5 text-pm-cyan-400" />
-            </span>
-            <h3 className="font-semibold text-white">Maintenance and incident cost</h3>
-          </div>
-          <p className="text-sm text-pm-slate-300 leading-relaxed mb-4">
-            Every infrastructure maintenance event is a change event — and research puts 79% of
-            production incidents as originating from a recent change. Four maintenance cycles per
-            year consumes{' '}
-            <span className="text-pm-cyan-400 font-semibold">$54K–$135K</span> for a mid-size
-            team,{' '}
-            <span className="text-pm-cyan-400 font-semibold">$270K–$540K</span> at enterprise
-            scale (8+ person infra team at fully loaded SRE rates), before factoring in the
-            incidents those changes trigger.
-          </p>
-          <p className="text-sm text-pm-slate-300 leading-relaxed">
-            When servers can be taken out of rotation without stopping the applications on them,
-            maintenance windows shrink from multi-hour events to minutes. Fewer change events means
-            fewer incident triggers. The average incident costs{' '}
-            <span className="text-pm-cyan-400 font-semibold">$794K</span> (PagerDuty, 2024) — a
-            reduction in change-related incidents is the highest-leverage outcome in this model.
-            The table assumes one such incident avoided per year at enterprise scale (a fraction
-            of one for mid-size), held to $794K each — not a percentage applied to the full
-            incident count. Note: this is the same $794K figure shown in the metric cards above;
-            it is one input used in two places in the model, not two independent data sources.
-          </p>
-        </div>
       </div>
 
       {/* Savings table */}
@@ -278,61 +194,20 @@ function TechPanel() {
           The restart penalty is a structural constraint, not a config problem
         </h3>
         <p className="text-pm-slate-300 leading-relaxed">
-          Every Kubernetes cost optimization tool that exists today — Karpenter, CAST AI,
-          cluster-autoscaler — operates at one moment in the pod lifecycle: between workloads.
-          They can right-size a new node before scheduling. They cannot compact a running cluster
-          without restarting the pods that live on it.
-        </p>
-        <p className="text-pm-slate-300 leading-relaxed">
-          That constraint is the source of the over-provisioning floor you cannot breach. The
-          scheduler cannot move a running pod; it can only evict and reschedule. So operators
-          maintain headroom to absorb the restart storm — spare capacity that sits idle between
-          compaction events. The result is a cluster that runs at{' '}
+          Every Kubernetes cost tool today — Karpenter, CAST AI, cluster-autoscaler — operates at
+          one moment in the pod lifecycle: between workloads. They can right-size a new node before
+          scheduling, but they cannot compact a running cluster without restarting the pods on it.
+          That is the over-provisioning floor you cannot breach: operators keep headroom to absorb
+          the restart storm, so clusters run at{' '}
           <span className="text-pm-cyan-400 font-medium">8–13% average CPU utilization</span>{' '}
-          (CAST AI, 4,000-cluster dataset, 2025–2026) while the bill scales to the node ceiling,
-          not the workload floor.
+          (CAST AI, 4,000-cluster dataset, 2025–2026) while the bill scales to the node ceiling.
         </p>
         <p className="text-pm-slate-300 leading-relaxed">
           Live pod migration changes the unit of compaction from "restart event" to "in-flight
           transfer." PodMotion moves a running pod — memory state, open connections, in-flight
-          requests — from one node to another without terminating it. The node being drained
-          empties. The scheduler fills the remaining nodes. No restart. No headroom tax.
-        </p>
-        <p className="text-pm-slate-300 leading-relaxed">
-          This is incremental to what Karpenter and CAST AI already do. They handle bin-packing
-          at scheduling time. PodMotion handles runtime compaction — closing the gap between what
-          was optimal at pod start and what the cluster actually needs an hour later.
-        </p>
-
-        {/* Utilization callout */}
-        <div className="border border-pm-cyan-500/30 bg-pm-navy-800 rounded-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-1">
-            <div className="text-xs uppercase tracking-widest text-pm-slate-400 font-medium">
-              Typical K8s utilization
-            </div>
-            <div className="text-4xl font-bold text-white">8–13%</div>
-            <div className="text-sm text-pm-slate-400">
-              Average CPU across 4,000 clusters (CAST AI, 2025–2026)
-            </div>
-          </div>
-          <div className="space-y-1">
-            <div className="text-xs uppercase tracking-widest text-pm-slate-400 font-medium">
-              The structural gap
-            </div>
-            <div className="text-4xl font-bold text-pm-cyan-400">Runtime compaction</div>
-            <div className="text-sm text-pm-slate-400">
-              PodMotion closes the gap between scheduling-time optimization and runtime
-              compaction — the missing primitive in every existing K8s cost tool. Not a
-              K8s utilization projection; the 70–80% figure is from early-2000s VM-era
-              datacenter consolidation studies.
-            </div>
-          </div>
-        </div>
-        <p className="text-sm text-pm-slate-400 italic">
-          Historical VM utilization benchmarks from public datacenter operations literature
-          (IBM Research, 2003–2008). Kubernetes figures: CAST AI State of Kubernetes Cost
-          Optimization, 2025–2026. PodMotion utilization improvement is a modeled projection,
-          not a measured production outcome.
+          requests — to another node without terminating it. This is incremental to Karpenter and
+          CAST AI: they bin-pack at scheduling time; PodMotion handles runtime compaction, closing
+          the gap between what was optimal at pod start and what the cluster needs an hour later.
         </p>
       </div>
 
@@ -358,73 +233,20 @@ function TechPanel() {
                 range for typical clusters (incremental over existing Karpenter/CAST AI compaction).
               </p>
               <p className="text-pm-slate-300 leading-relaxed">
-                Spot/preemptible instances run at steep discounts to on-demand, but stateful
-                and latency-sensitive workloads cannot use them today: eviction means restart —
-                connection loss and potential data integrity risk. PodMotion intercepts the
-                eviction signal, migrates the pod to an on-demand node before reclamation, and
-                re-evaluates for spot placement on the next cycle. The workload never restarts.
-                The race PodMotion has to win is the eviction window — and that window differs
-                sharply by provider:
-              </p>
-
-              <div className="overflow-x-auto rounded-lg border border-pm-navy-700">
-                <table className="w-full min-w-[480px] text-sm">
-                  <thead>
-                    <tr className="border-b border-pm-navy-700 bg-pm-navy-900">
-                      <th className="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-slate-400">
-                        Provider
-                      </th>
-                      <th className="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-cyan-400">
-                        Typical discount
-                      </th>
-                      <th className="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-slate-400">
-                        Eviction window
-                      </th>
-                      <th className="py-3 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-slate-400 hidden md:table-cell">
-                        Signal mechanism
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-pm-navy-800 divide-y divide-pm-navy-700">
-                    <tr>
-                      <td className="px-4 py-3 text-pm-slate-300 font-medium">AWS Spot</td>
-                      <td className="px-4 py-3 text-pm-cyan-400 font-mono">60–72%</td>
-                      <td className="px-4 py-3 text-pm-slate-300 font-mono">~120 s</td>
-                      <td className="px-4 py-3 text-xs text-pm-slate-400 hidden md:table-cell">
-                        EC2 instance metadata interruption notice
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-pm-slate-300 font-medium">GCP Spot VMs</td>
-                      <td className="px-4 py-3 text-pm-cyan-400 font-mono">60–91%</td>
-                      <td className="px-4 py-3 text-pm-slate-300 font-mono">~30 s</td>
-                      <td className="px-4 py-3 text-xs text-pm-slate-400 hidden md:table-cell">
-                        ACPI G2 soft-off shutdown signal
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-3 text-pm-slate-300 font-medium">Azure Spot</td>
-                      <td className="px-4 py-3 text-pm-cyan-400 font-mono">60–90%</td>
-                      <td className="px-4 py-3 text-pm-slate-300 font-mono">~30 s</td>
-                      <td className="px-4 py-3 text-xs text-pm-slate-400 hidden md:table-cell">
-                        Scheduled Events API eviction notice
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p className="text-pm-slate-400 text-xs leading-relaxed">
-                Discounts vary by instance type, region, and market conditions; ranges reflect
-                published rates as of June 2026. The 30-second GCP/Azure window is the binding
-                constraint — migration must complete inside it, which requires per-workload
-                migration-vs-eviction-window profiling before production use.{' '}
+                Spot/preemptible instances run at steep discounts to on-demand — AWS ~60–72%, GCP
+                ~60–91%, Azure ~60–90% at published June 2026 rates — but stateful and
+                latency-sensitive workloads cannot use them today because eviction means restart.
+                PodMotion intercepts the eviction signal and migrates the pod to an on-demand node
+                before reclamation, so the workload never restarts. The race it must win is the
+                eviction window, and that window is the binding constraint: ~120 s on AWS but only
+                ~30 s on GCP and Azure. Migration must complete inside that window, which requires
+                per-workload profiling before production use.{' '}
                 <code className="text-pm-cyan-400 bg-pm-navy-900 px-1.5 py-0.5 rounded">
                   tcpPreservationMode=Strict
                 </code>{' '}
-                (opt-in) preserves long-lived TCP sessions; default (None) handles stateless
-                HTTP with no additional configuration. Stateful spot use via live migration is
-                mechanically sound but not yet validated at production scale.
+                (opt-in) preserves long-lived TCP sessions; the default (None) does not preserve
+                TCP connections. Stateful spot use via live migration is mechanically sound but not
+                yet validated at production scale.
               </p>
             </div>
           </div>
@@ -473,34 +295,6 @@ function TechPanel() {
         </div>
       </div>
 
-      {/* Historical analogy — trademark-clean */}
-      <div className="max-w-4xl">
-        <div className="border border-pm-cyan-500/20 bg-pm-navy-800/60 rounded-lg p-6 space-y-4">
-          <h4 className="text-pm-cyan-400 font-semibold text-sm uppercase tracking-widest">
-            Prior art: what live migration did to VM economics
-          </h4>
-          <p className="text-pm-slate-300 leading-relaxed">
-            Live VM migration — moving a running virtual machine between physical hosts without
-            downtime — transformed datacenter economics in the early 2000s. Before it existed,
-            infrastructure teams maintained large capacity buffers because workloads could not
-            move; hardware around them had to be available at all times. Utilization ratios of
-            10–15% were common because headroom was structural, not optional.
-          </p>
-          <p className="text-pm-slate-300 leading-relaxed">
-            Once live migration existed, operators consolidated running VMs onto fewer physical
-            hosts, reclaimed freed hardware, and performed maintenance without scheduling
-            downtime. Consolidation ratios moved from 1:1 toward 10:1 and beyond. Server
-            utilization at 70–80% became achievable. The hardware footprint for the same workload
-            set shrank by 60–80%.
-          </p>
-          <p className="text-pm-slate-300 leading-relaxed">
-            Kubernetes today is at that same inflection point. The scheduler is excellent at
-            placement decisions at pod-start time. It has no mechanism to compact a running
-            cluster. PodMotion is the missing runtime compaction primitive.
-          </p>
-        </div>
-      </div>
-
       {/* What validation shows */}
       <div className="max-w-4xl space-y-6">
         <h3 className="text-xl font-semibold text-white">What the validation actually shows</h3>
@@ -508,190 +302,71 @@ function TechPanel() {
         <div className="bg-pm-navy-800 border border-pm-navy-700 rounded-lg p-4 mb-4">
           <p className="text-xs text-pm-slate-400 leading-relaxed">
             <span className="font-semibold text-pm-slate-300">Proof scope:</span>{' '}
-            current authoritative end-to-end proof (Sprint&nbsp;33/34) ran on amd64 / Linux&nbsp;6.17 /
-            containerd&nbsp;1.7.24 / Kubernetes&nbsp;v1.32.0 / kindnet (host-routed, no VXLAN overlay),
-            kind profile <code className="text-pm-cyan-400 font-mono">podmotion-s33-cold</code>. The
-            earlier arm64 / Ubuntu&nbsp;24.04 / kernel&nbsp;6.8 / Flannel VXLAN run is a historical
-            Multipass k3s PoC (NS#4 / Sprint&nbsp;30), not the current substrate. No production deployments.
+            the current authoritative end-to-end proof runs on a standing 3-node KVM/kubeadm
+            cluster — amd64, Kubernetes&nbsp;v1.35.x (containerd), Cilium CNI&nbsp;v1.17.6 (geneve
+            tunnel), CRIU&nbsp;4.2. No production deployments exist.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-pm-navy-800 border border-green-700/40 rounded-lg p-5 space-y-3">
-            <div className="text-xs uppercase tracking-widest text-amber-400 font-medium">
-              Next goal — not proven in v0.1.0-alpha
+            <div className="text-xs uppercase tracking-widest text-green-400 font-medium">
+              Proven now — single held connection
             </div>
             <ul className="space-y-2 text-pm-slate-300 text-sm leading-relaxed list-disc list-inside">
               <li>
                 <code className="text-pm-cyan-400 font-mono">seq_delta=0</code> for a held TCP
-                connection was <span className="font-semibold text-pm-slate-200">first proven at
-                Sprint&nbsp;46</span>: a single held connection survived a pm-w1&nbsp;&rarr;&nbsp;pm-w2
-                migration byte-exact (seq_delta 0/0, Strict mode) on a real multi-node cluster (the
-                committed proof records no CNI, architecture, or run count). It is not the shipped
-                v0.1.0-alpha default &mdash; TCP connections are <span className="font-semibold text-pm-slate-200">not</span> preserved
-                by default, and the full multi-flow guarantee is not yet proven. The historical NS#4
-                PoC run (10 pgbench migrations, -c&nbsp;8 -j&nbsp;8 -T&nbsp;600) reported zero
-                sequence-number gaps, but that is a non-authoritative Multipass k3s PoC
-                (Sprint&nbsp;30), not a current measured production result
+                connection: a live redis connection under load migrated from one node to another in
+                Strict mode with a measured TCP sequence delta of 0/0 (snd=0, rcv=0), 1/1
+                connections verified byte-exact, reaching phase=Complete in 33&nbsp;s with a
+                602&nbsp;ms freeze. Measured, not hard-coded.
               </li>
               <li>
-                p99 freeze window 487&nbsp;ms (NS#4, 10 runs); pgbench sustained write workload,
-                earlier arm64/k3s PoC on kind bridge / Flannel VXLAN topology (historical, not the
-                current Sprint&nbsp;33/34 kindnet substrate)
-              </li>
-              <li>
-                TCP connection preservation with{' '}
+                Single-flow TCP preservation with{' '}
                 <code className="text-pm-cyan-400 font-mono">tcpPreservationMode=Strict</code>{' '}
-                (opt-in) — single-flow sessions survive without client-side reconnect logic;
-                proven on one TCP flow (Sprint&nbsp;30 Redis run).{' '}
-                <code className="text-pm-cyan-400 font-mono">tcpPreservationMode</code> defaults
-                to <code className="text-pm-cyan-400 font-mono">None</code>
+                (opt-in) — the session survives without client-side reconnect logic.{' '}
+                <code className="text-pm-cyan-400 font-mono">tcpPreservationMode</code> defaults to{' '}
+                <code className="text-pm-cyan-400 font-mono">None</code>; TCP connections are not
+                preserved by default.
               </li>
               <li>
-                Proven run counts: 10 (NS#4 pgbench) and 1 (Sprint&nbsp;30 Redis). The 80-run
-                figure is the M28 beta gate, which requires M22 (multi-container) and M23
-                (conntrack) to pass first and has not yet been executed
-              </li>
-              <li>
-                CRD-only interface — migration initiated via{' '}
-                <code className="text-pm-cyan-400 font-mono">PodMigration</code> CR; no kubectl
-                plugin in this release
+                CRD-only interface — migration is initiated via a{' '}
+                <code className="text-pm-cyan-400 font-mono">PodMigration</code> CR; there is no
+                kubectl plugin in v0.1.0-alpha.
               </li>
             </ul>
           </div>
 
           <div className="bg-pm-navy-800 border border-amber-700/40 rounded-lg p-5 space-y-3">
             <div className="text-xs uppercase tracking-widest text-amber-400 font-medium">
-              Modeled — not yet measured in production
+              Not yet proven / modeled
             </div>
             <ul className="space-y-2 text-pm-slate-300 text-sm leading-relaxed list-disc list-inside">
               <li>
-                20–40% node reduction — extrapolated from utilization data and migration
-                mechanics; no production cluster measurements yet
+                The full goal — every container unaware, every client unaware, seq_delta=0
+                end-to-end across multiple flows and containers — is not yet proven. This is a
+                single-connection result; it does not carry to all flows or all workloads.
               </li>
               <li>
-                Spot adoption economics — discount rates are published and real; stateful spot
-                use via live migration is mechanically sound but not validated at production scale
+                The 80-run figure is a planned beta certification — 8 workload types &times; 5 runs
+                &times; 2 environments (randomized AWS + local VM), targeting zero errors and zero
+                warnings. It is planned, not yet executed.
               </li>
               <li>
-                amd64 validation in progress; arm64 / k3s (Multipass) and kind is the only
-                validated runtime today
+                20–40% node reduction — extrapolated from utilization data and migration mechanics;
+                no production cluster measurements yet.
               </li>
               <li>
-                Storage migration (PVCs) deferred to v1.2; not available in v0.1.0-alpha
+                Spot adoption economics — discount rates are published and real; stateful spot use
+                via live migration is mechanically sound but not validated at production scale.
+              </li>
+              <li>
+                Storage migration (PVCs) is deferred to v1.2; it is not available in v0.1.0-alpha.
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Savings table — tech version with basis column */}
-        <div>
-          <h3 className="text-xl font-semibold text-white mb-2">Modeled savings by category</h3>
-          <p className="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">
-            Modeled projection — not a PodMotion-measured outcome
-          </p>
-          <p className="text-pm-slate-400 text-sm mb-6">
-            Figures are modeled projections from published utilization benchmarks and vendor
-            pricing (CAST AI 2025–2026, PagerDuty 2024, Komodor 2025, AWS/GCP/Azure published
-            pricing June 2026, Fairwinds 2026 upgrade ops data). Not measured production outcomes.
-            Actual savings depend on workload profile, current utilization baseline, cloud region,
-            and negotiated contract rates.
-          </p>
-          <div className="overflow-x-auto rounded-xl border border-pm-navy-700">
-            <table className="w-full min-w-[700px] text-sm">
-              <thead>
-                <tr className="border-b border-pm-navy-700 bg-pm-navy-800">
-                  <th className="py-4 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-slate-400">
-                    Category
-                  </th>
-                  <th className="py-4 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-cyan-400">
-                    Mid-size / yr<div className="text-pm-slate-500 font-normal normal-case">30–200 nodes</div>
-                  </th>
-                  <th className="py-4 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">
-                    Enterprise / yr<div className="text-pm-slate-500 font-normal normal-case">500–2,000 nodes</div>
-                  </th>
-                  <th className="py-4 px-4 text-left text-xs font-semibold uppercase tracking-wider text-pm-slate-400 hidden lg:table-cell">
-                    Technical basis
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-pm-navy-900 divide-y divide-pm-navy-700">
-                <tr>
-                  <td className="px-4 py-4 text-pm-slate-300">Compute (on-demand)</td>
-                  <td className="px-4 py-4 text-pm-cyan-400 font-mono font-semibold">$52K–$201K</td>
-                  <td className="px-4 py-4 text-pm-cyan-300 font-mono font-semibold">$525K–$2.1M</td>
-                  <td className="px-4 py-4 text-xs text-pm-slate-400 hidden lg:table-cell">
-                    20–40% node reduction (incremental over Karpenter/CAST AI); CAST AI/Sedai
-                    case studies; $300–600/node/mo AWS m6i.2xlarge on-demand
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-4 text-pm-slate-300">Compute (spot/preemptible)</td>
-                  <td className="px-4 py-4 text-pm-cyan-400 font-mono font-semibold">$84K–$168K</td>
-                  <td className="px-4 py-4 text-pm-cyan-300 font-mono font-semibold">$420K–$840K</td>
-                  <td className="px-4 py-4 text-xs text-pm-slate-400 hidden lg:table-cell">
-                    60–90% spot discount (provider/instance dependent); requires
-                    migration-vs-eviction-window profiling per workload (AWS ~120s,
-                    GCP/Azure ~30s) before production use
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-4 text-pm-slate-300">Observability licensing</td>
-                  <td className="px-4 py-4 text-pm-cyan-400 font-mono font-semibold">$38K–$116K</td>
-                  <td className="px-4 py-4 text-pm-cyan-300 font-mono font-semibold">$190K–$580K</td>
-                  <td className="px-4 py-4 text-xs text-pm-slate-400 hidden lg:table-cell">
-                    Per-node billing (Datadog, Dynatrace, Sysdig) at published rates; scales
-                    proportionally with node reduction
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-4 text-pm-slate-300">Database licensing (where applicable)</td>
-                  <td className="px-4 py-4 text-pm-cyan-400 font-mono font-semibold">$0–$340K</td>
-                  <td className="px-4 py-4 text-pm-cyan-300 font-mono font-semibold">$1.1M–$1.8M</td>
-                  <td className="px-4 py-4 text-xs text-pm-slate-400 hidden lg:table-cell">
-                    Requires physical node decommissioning, not density improvement alone;
-                    savings are zero unless nodes are actually removed from the fleet
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-4 text-pm-slate-300">SRE / maintenance window labor</td>
-                  <td className="px-4 py-4 text-pm-cyan-400 font-mono font-semibold">$54K–$135K</td>
-                  <td className="px-4 py-4 text-pm-cyan-300 font-mono font-semibold">$270K–$540K</td>
-                  <td className="px-4 py-4 text-xs text-pm-slate-400 hidden lg:table-cell">
-                    4–6 wk per minor upgrade × 4/yr × $109/hr loaded SRE rate; Fairwinds 2026
-                    upgrade ops data
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-4 text-pm-slate-300">Incident cost reduction</td>
-                  <td className="px-4 py-4 text-pm-cyan-400 font-mono font-semibold">$159K–$397K</td>
-                  <td className="px-4 py-4 text-pm-cyan-300 font-mono font-semibold">$794K–$1.98M</td>
-                  <td className="px-4 py-4 text-xs text-pm-slate-400 hidden lg:table-cell">
-                    $794K median incident (PagerDuty 2024) × change-related incidents
-                    avoided per yr: mid-size 0.2–0.5, enterprise 1.0–2.5. 79% of
-                    incidents trace to system changes (Komodor 2025). No PodMotion telemetry yet.
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr className="border-t-2 border-pm-cyan-500/40 bg-pm-navy-800">
-                  <td className="py-5 px-4 text-sm font-bold text-white">
-                    Projected total (non-cumulative categories)
-                  </td>
-                  <td className="py-5 px-4 text-base font-bold font-mono text-pm-cyan-400">
-                    $387K–$1.36M
-                  </td>
-                  <td className="py-5 px-4 text-base font-bold font-mono text-pm-cyan-300">
-                    $3.3M–$7.8M
-                  </td>
-                  <td className="py-5 px-4 text-xs text-pm-slate-400 hidden lg:table-cell">
-                    Database licensing is additive only if applicable; do not sum blindly
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
       </div>
 
     </div>
@@ -794,12 +469,12 @@ export default function Economics() {
           <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" />
           <p className="text-sm text-amber-200 leading-relaxed">
             <span className="font-semibold">Alpha software — single declared substrate.</span>{' '}
-            PodMotion v0.1.0-alpha is proven end-to-end on amd64 / Linux 6.17 / containerd 1.7.24 /
-            Kubernetes v1.32.0 / kindnet (host-routed, no VXLAN overlay), kind profile
-            podmotion-s33-cold (Sprint 33/34). The earlier arm64 / Ubuntu 24.04 / kernel 6.8 /
-            Flannel VXLAN run is a historical k3s PoC, not the current proof. Flannel VXLAN and
-            cloud CNIs are on the roadmap. No production PodMotion deployments exist; no measured
-            production savings data exists. Storage migration (PVCs) deferred to v1.2.
+            PodMotion v0.1.0-alpha's current end-to-end proof runs on a standing 3-node KVM/kubeadm
+            cluster: amd64, Kubernetes v1.35.x (containerd), Cilium CNI v1.17.6 (geneve tunnel),
+            CRIU 4.2. That proof covers a single held TCP connection; broad multi-flow,
+            multi-container coverage is not yet proven. Additional CNIs and cloud environments are
+            on the roadmap. No production PodMotion deployments exist; no measured production
+            savings data exists. Storage migration (PVCs) is deferred to v1.2.
           </p>
         </div>
 

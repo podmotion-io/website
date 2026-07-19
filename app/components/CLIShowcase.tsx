@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-type TabName = "dryrun" | "apply" | "watch" | "describe" | "cancel" | "gitops";
+type TabName = "dryrun" | "apply" | "describe";
 
 interface TabCard {
   name: TabName;
@@ -67,24 +67,6 @@ spec:
 podmigration.migration.podmotion.io/migrate-api-server-001 created`,
   },
   {
-    name: "watch",
-    label: "Watch",
-    description:
-      "Watch migration phases progress in real time. PodMotion drives the workload through phases from SocketInventory to Complete. The controller updates the PodMigration status block after each phase transition. The source pod is never deleted before TrafficVerified (ADR-0012).",
-    syntax: "kubectl get podmigration migrate-api-server-001 -w",
-    terminalLabel: "kubectl get podmigration -w",
-    output: `$ kubectl get podmigration migrate-api-server-001 -w
-NAME                      PHASE                      AGE
-migrate-api-server-001    SocketInventory             2s
-migrate-api-server-001    Validating                  4s
-migrate-api-server-001    PreCopyMemory               7s
-migrate-api-server-001    PreCopyMemory               12s
-migrate-api-server-001    PreCopyMemory               17s
-migrate-api-server-001    FinalFreezeStateCapture     21s
-migrate-api-server-001    CutoverComplete             21s
-migrate-api-server-001    Complete                    22s`,
-  },
-  {
     name: "describe",
     label: "Describe",
     description:
@@ -123,56 +105,6 @@ Status:
     ProcessResumedAfterSocketsLive   True
     TrafficVerified                  True     PhaseComplete`,
   },
-  {
-    name: "cancel",
-    label: "Cancel",
-    description:
-      "Cancel an in-progress migration by deleting the PodMigration CR. The finalizer ensures PodMotion initiates rollback before the object is removed: the source pod is restored to running, the destination pod is cleaned up, and existing TCP connections are preserved on the source node. The source pod is never deleted before TrafficVerified (ADR-0012) — cancellation before that phase leaves the source pod fully intact.",
-    syntax: "kubectl delete podmigration migrate-api-server-001",
-    terminalLabel: "kubectl delete podmigration",
-    output: `$ kubectl delete podmigration migrate-api-server-001
-podmigration.migration.podmotion.io "migrate-api-server-001" deleted
-
-$ kubectl get podmigration migrate-api-server-001 -w
-NAME                      PHASE          AGE
-migrate-api-server-001    Cancelling     8s
-migrate-api-server-001    RolledBack     10s
-# Object removed after finalizer releases
-
-# Source pod is still running on worker-node-1 — no disruption`,
-  },
-  {
-    name: "gitops",
-    label: "GitOps",
-    description:
-      "PodMigration CRs are plain Kubernetes manifests. Apply them through any GitOps pipeline — Argo CD, Flux, or plain CI. The controller reconciles the CR the moment it lands in the cluster regardless of how it was delivered.",
-    syntax: `# Argo CD Application (excerpt)
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: migrations
-  namespace: argocd
-spec:
-  source:
-    repoURL: https://git.example.com/ops/migrations
-    path: podmigrations/production
-    targetRevision: main
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: production
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: false   # migrations are one-shot; do not auto-recreate`,
-    terminalLabel: "argocd app sync",
-    output: `$ argocd app sync migrations
-TIMESTAMP  GROUP                  KIND            NAMESPACE   NAME                     STATUS   HEALTH
-...        migration.podmotion.io  PodMigration    production  migrate-api-server-001   Synced   Progressing
-
-$ kubectl get podmigration -n production
-NAME                      PHASE       AGE
-migrate-api-server-001    Complete    45s`,
-  },
 ];
 
 export default function CLIShowcase() {
@@ -196,7 +128,8 @@ export default function CLIShowcase() {
           <p className="text-pm-white-muted text-lg mt-4">
             Every migration is a <code className="text-pm-cyan-300">PodMigration</code> custom resource.
             Start with <code className="text-pm-cyan-300">dryRun: true</code> for a freeze-window estimate,
-            then apply without it to migrate — watch phases complete.{" "}
+            then apply without it to run the migration and describe the resource to see the
+            completed phase and status conditions.{" "}
             <code className="text-pm-cyan-300">seq_delta=0</code> (zero TCP sequence delta) was first
             proven at Sprint 46 for a single held connection on a real multi-node cluster; the full
             multi-flow guarantee is not yet proven. No new tooling required.

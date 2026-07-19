@@ -196,15 +196,14 @@ const HowItWorks: FC = () => {
           How a migration works
         </h2>
         <p className="mb-6 max-w-2xl text-lg leading-relaxed text-pm-white-muted">
-          Every PodMotion migration runs a 12-phase migration state machine,
-          validated by 22 end-to-end gate assertions (Sprint 33) and 8 security
-          gate criteria (Sprint 34). Each phase writes a Kubernetes status
-          condition before it acts — crash-safe and auditable. The 12 steps
-          below trace the migration pipeline; TCP-preservation phases run when{" "}
+          Every PodMotion migration runs a 12-phase migration state machine.
+          Each phase writes a Kubernetes status condition before it acts —
+          crash-safe and auditable. The 12 steps below trace the migration
+          pipeline; TCP-preservation phases run when{" "}
           <code>tcpPreservationMode</code> is opted in (default <code>None</code>;
-          BestEffort or Strict). Strict mode was first proven at Sprint 46 for a
-          single held connection (seq_delta 0/0) on a real multi-node cluster;
-          broader multi-flow validation is not yet proven.
+          BestEffort or Strict). For exactly what is proven, on which substrate,
+          in which mode, and how far the scope goes, see the compatibility matrix
+          at the top of the page.
         </p>
         <p className="mb-16 max-w-2xl text-lg leading-relaxed text-pm-white-muted">
           In plain terms: PodMotion picks up a running app from one machine and sets it down on another, restored and reachable at its original pod IP — no stop-and-restart.
@@ -473,205 +472,26 @@ const HowItWorks: FC = () => {
             Proof Results
           </p>
           <h2 className="mb-6 text-3xl font-bold leading-tight tracking-tight text-pm-white sm:text-4xl">
-            The proof: end-to-end live migration of a running, stateful pod — restored reachable at its original pod IP
+            The proof: a running, stateful pod moved across nodes and restored reachable at its original pod IP
           </h2>
-          <p className="mb-6 max-w-2xl text-lg leading-relaxed text-pm-white-muted">
-            We migrated a running, stateful pod across nodes on our two-node kind
-            proof substrate (stock upstream Kubernetes v1.32), restored it
-            functional and reachable at the
-            original pod IP in about 13 seconds, with an in-memory counter
-            (gcb7:counter=42) restored intact across nodes. Sprint 33 Phase A:
-            22/22 migration assertions pass. Sprint 34 Phase B: 8/8 security gate
-            criteria pass with all 22 Phase A assertions still passing.
-          </p>
-
-          {/* Scope qualifier — authoritative substrate of record per SITE-ADR-001 §1/§5 */}
-          <div className="mb-10 rounded-lg border border-pm-cyan-400/20 bg-pm-cyan-400/5 px-5 py-3">
-            <p className="text-sm font-semibold text-pm-cyan-300">
-              Proof substrate of record — authoritative current end-to-end proof
-            </p>
-            <p className="mt-1 text-sm text-pm-white-muted">
-              kind profile podmotion-s33-cold / 2 nodes / amd64 / Linux 6.17 /
-              containerd 1.7.24 / Kubernetes v1.32.0 / CNI kindnet (host-routed,
-              no VXLAN overlay). BestEffort transfer mode (tcpPreservationMode
-              default None, opt-in to BestEffort or Strict). On this substrate,
-              held-TCP survival was not exercised; a held TCP connection was first
-              proven to survive a migration byte-exact separately at Sprint 46
-              (seq_delta 0/0, Strict mode, single connection) on a real multi-node
-              cluster. Broader multi-flow coverage, Flannel VXLAN and cloud CNIs are on
-              the roadmap, not proof.
-            </p>
-          </div>
-
-          {/* Baseline comparison — prominent */}
-          <div className="mb-12 rounded-xl border border-white/10 bg-white/5 p-8">
-            <p className="mb-6 text-sm font-semibold uppercase tracking-widest text-pm-white-muted/60">
-              kubectl drain comparison
-            </p>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              {/* kubectl drain */}
-              <div>
-                <p className="mb-2 text-sm font-semibold text-pm-white-muted">
-                  kubectl drain (rolling restart)
-                </p>
-                <div className="flex items-end gap-3">
-                  <div
-                    className="rounded bg-red-600/80"
-                    style={{ width: "100%", height: 48 }}
-                    role="img"
-                    aria-label="Pod killed and restarted; state and pod IP lost"
-                  />
-                </div>
-                <p className="mt-2 text-2xl font-bold text-red-400">
-                  Pod killed &amp; restarted
-                </p>
-              </div>
-
-              {/* PodMotion */}
-              <div>
-                <p className="mb-2 text-sm font-semibold text-pm-white-muted">
-                  PodMotion live migration
-                </p>
-                <div className="flex items-end gap-3">
-                  <div
-                    className="rounded bg-teal-500/20"
-                    style={{ width: "100%", height: 48 }}
-                    role="img"
-                    aria-label="Pod restored at original IP with in-memory state intact"
-                  />
-                </div>
-                <p className="mt-2 text-2xl font-bold text-teal-400">
-                  Restored at original IP, state intact
-                </p>
-              </div>
-            </div>
-            <p className="mt-8 text-xl font-semibold leading-snug text-pm-white">
-              kubectl drain restarts your pod. PodMotion moves it.
-            </p>
-          </div>
-
-          {/* ---------------------------------------------------------------- */}
-          {/* Proof entry 1 — Sprint 33 cold-path E2E live migration          */}
-          {/* ---------------------------------------------------------------- */}
-          <div className="rounded-xl border border-teal-600/30 bg-teal-950/20 p-6">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-pm-white-muted/60">
-              Proof entry 1 — Sprint 33 · cold-path end-to-end live migration · BestEffort mode
-            </p>
-            <h3 className="mb-3 text-lg font-bold text-pm-white">
-              Running redis:7-alpine pod migrated across nodes, restored reachable at its original pod IP in about 13 seconds
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "restored at original pod IP",
-                "~13 s wall-clock (cold-path run)",
-                "22/22 Phase A migration assertions pass",
-                "TrafficVerified=True before source deletion (ADR-0012)",
-                "BestEffort mode (tcpPreservationMode default None)",
-                "in-memory counter gcb7:counter=42 restored intact",
-              ].map((chip) => (
-                <span
-                  key={chip}
-                  className="rounded-full border border-teal-600/40 bg-teal-950/30 px-3 py-1 text-xs font-medium text-teal-300"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
-            <p className="mt-4 text-sm text-pm-white-muted">
-              The authoritative current cold-path proof on this substrate. It
-              verifies L3/L4 IP reachability after restore via an RST probe, not
-              survival of an established application TCP connection. Held TCP-connection
-              survival (seq_delta=0, Strict mode) was first proven separately at
-              Sprint 46 for a single held connection on a real multi-node cluster;
-              the full multi-flow guarantee is not yet proven.
-            </p>
-          </div>
-
-          {/* ---------------------------------------------------------------- */}
-          {/* Proof entry 2 — Sprint 34 security hardening                    */}
-          {/* ---------------------------------------------------------------- */}
-          <div className="mt-12 rounded-xl border border-teal-600/30 bg-teal-950/20 p-6">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-pm-white-muted/60">
-              Proof entry 2 — Sprint 34 · gRPC control-plane security hardening · zero migration regression
-            </p>
-            <h3 className="mb-3 text-lg font-bold text-pm-white">
-              Security hardening of the control plane: 8/8 security gate criteria pass, all 22 Phase A assertions still passing
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "8/8 security gate criteria (GC-B1–GC-B8) pass",
-                "mTLS fail-closed",
-                "per-RPC SPIFFE authz",
-                "gRPC size cap 512 MiB",
-                "signed checkpoint manifests verified before extract",
-                "transfer-integrity wire-hash",
-              ].map((chip) => (
-                <span
-                  key={chip}
-                  className="rounded-full border border-teal-600/40 bg-teal-950/30 px-3 py-1 text-xs font-medium text-teal-300"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
-            <p className="mt-4 text-sm text-pm-white-muted">
-              Security proof on the same amd64 / Linux 6.17 / kindnet cluster as
-              Sprint 33, with zero migration regression.
-            </p>
-          </div>
-
-          {/* ---------------------------------------------------------------- */}
-          {/* Proof entry 3 — Cold migration baseline (2026-06-10)            */}
-          {/* ---------------------------------------------------------------- */}
-          <div className="mt-6 rounded-xl border border-blue-600/30 bg-blue-950/30 p-6">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-pm-white-muted/60">
-              Proof entry 3 — Cold migration baseline · 2026-06-10
-            </p>
-            <h3 className="mb-3 text-lg font-bold text-pm-white">
-              Cold migration baseline: nginx HTTP 200, Redis key persistence, PostgreSQL row integrity — cross-node, data integrity verified
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "nginx: HTTP 200",
-                "Redis key persistence",
-                "PostgreSQL row integrity",
-                "cross-node",
-                "data integrity verified",
-              ].map((chip) => (
-                <span
-                  key={chip}
-                  className="rounded-full border border-blue-600/40 bg-blue-950/30 px-3 py-1 text-xs font-medium text-blue-300"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
-            <p className="mt-4 text-sm text-pm-white-muted">
-              Engineering baseline / PoC — cold mode is not a product posture
-              (ADR-0076) but demonstrates CRIU checkpoint/restore fidelity on the
-              proven substrate.
-            </p>
-          </div>
-
-          {/* Environment caption */}
-          <p className="mt-8 text-sm text-pm-white-muted/60">
-            Environment: standard upstream Kubernetes v1.32.0 with PodMotion&apos;s
-            node agent and CRIU runtime installed · kind profile
-            podmotion-s33-cold · 2 nodes · amd64 · Linux 6.17 · containerd 1.7.24
-            · CNI kindnet (host-routed, no VXLAN overlay). Node prerequisites:
-            CRIU runtime, containerd NRI plugin, and kernel checkpoint/restore
-            support.
+          <p className="max-w-2xl text-lg leading-relaxed text-pm-white-muted">
+            The full proof record — what was proven, on which substrate, in which
+            migration mode, and how far the scope goes — lives in the{" "}
+            <a
+              href="#proof-strip"
+              className="underline underline-offset-2 hover:text-pm-white"
+            >
+              compatibility matrix at the top of the page
+            </a>
+            . Each row states its own CNI, workload, mode, and the exact
+            conditions of the run, with a link to the committed proof doc.
           </p>
 
           {/* Honesty footnote */}
           <p className="mt-8 border-t border-white/10 pt-6 text-sm italic text-pm-white-muted/70">
-            What is proven today is end-to-end cold-path live migration on one
-            declared substrate, plus — first at Sprint 46, on a separate real
-            multi-node cluster — a single held TCP connection surviving a
-            migration byte-exact (seq_delta=0, Strict mode). Broader coverage —
-            many concurrent flows, multi-container, N-flow Service-routed
-            transparency, Flannel VXLAN and cloud CNIs — remains on the roadmap,
-            not yet proven.{" "}
+            Broader coverage — many concurrent flows, multi-container, N-flow
+            Service-routed transparency, and additional CNIs — remains on the
+            roadmap, not yet proven.{" "}
             <a
               href="#roadmap"
               className="underline underline-offset-2 hover:text-pm-white"

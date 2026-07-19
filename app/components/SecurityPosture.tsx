@@ -119,26 +119,23 @@ const POSTURE_ROWS: PostureRow[] = [
   {
     surface: 'RBAC',
     currentState:
-      'NO default least-privilege ClusterRoles ship in v0.1.0-alpha. Operators provision bindings manually.',
-    remediationAdr: 'ADR-0078',
-    adrStatus: 'accepted-unimpl',
+      'Default least-privilege ClusterRoles ship in the v0.1.0-alpha Helm chart: podmotion-manager-role and podmotion-agent-role, each with scoped verb/resource rules. Both bind automatically — podmotion-manager-role to the podmotion-operator service account and podmotion-agent-role to the podmotion-agent service account. Operators do not hand-provision RBAC.',
+    remediationAdr: 'ADR-0078 (chart templates)',
+    adrStatus: 'implemented',
     adrStatusLabel:
-      'ADR-0078 Accepted (boundary defined, default chart roles unimplemented)',
-    targetMilestone: 'Pre-GA (Sprint 33-35, ADR-0161 C2)',
-    flagText: 'No default RBAC ships today — manual operator provisioning required.',
+      'Implemented — proof artifact: clusterrole.yaml + clusterrolebinding.yaml in the Helm chart',
+    targetMilestone: 'Shipped (v0.1.0-alpha)',
   },
   {
-    surface: 'Node-agent privilege model',
+    surface: 'Agent privilege model',
     currentState:
-      'Ships privileged: true, hostPID: true, RW containerd socket, no seccomp profile (Unconfined), tolerates all taints incl. control-plane. Capabilities in use: SYS_PTRACE, SYS_ADMIN, NET_ADMIN, DAC_OVERRIDE, CHOWN, SETUID, SETGID, CHECKPOINT_RESTORE.',
+      'The main agent container runs privileged: false (ADR-0148 D2/D3 SD-1, shipped in the v0.1.0-alpha Helm chart daemonset). It drops ALL capabilities and adds only the trace-derived minimum set CRIU + eBPF need: SYS_PTRACE, SYS_ADMIN, CHECKPOINT_RESTORE, DAC_READ_SEARCH, SYS_RESOURCE, NET_ADMIN, NET_RAW, KILL — plus BPF and PERFMON on kernels >= 5.8.',
     note:
-      'ADR-0148 supersedes the REJECTED ADR-0106. Target: privileged:false; drop ALL; add [SYS_PTRACE, SYS_ADMIN, NET_ADMIN, BPF, PERFMON] (k>=5.8); allowPrivilegeEscalation:true (CRIU parasite/ptrace, kernel-justified); hostPID:false via NRI-supplied PID; readOnlyRootFilesystem:true; trace-derived SCMP_ACT_ERRNO deny-by-default Localhost seccomp; RO containerd socket steady-state; migration-node taint/nodeSelector isolation.',
-    remediationAdr: 'ADR-0148',
-    adrStatus: 'accepted-unimpl',
-    adrStatusLabel: 'ADR-0148 Accepted (2026-06-14), unimplemented',
-    targetMilestone: 'M-SEC-1',
-    flagText:
-      'Node-agent runs privileged:true + hostPID:true today — ADR-0148 hardening NOT yet implemented.',
+      'privileged: true is confined to one long-lived sidecar (the netns-broker) plus short-lived init containers (init-checkpoint-tmpfs, and the AppArmor-profile installer when a profile is set) — not the main agent. Residual risk, stated plainly: the agent pod still runs hostPID: true and hostNetwork: true, the main agent still holds SYS_ADMIN + SYS_PTRACE (plus DAC_READ_SEARCH) and mounts the containerd socket read-write, and seccomp is Unconfined by default (seccompProfile.enabled: false). A compromised agent therefore remains effectively node-root (read-write containerd socket + SYS_ADMIN + SYS_PTRACE in the host PID namespace). SD-1 capability minimization is the first hardening step, not the last. ADR-0148 supersedes the REJECTED ADR-0106; the remaining hardening (deny-by-default seccomp, hostPID reduction, read-only containerd socket) is accepted but not yet implemented and is not claimed here.',
+    remediationAdr: 'ADR-0148 D2/D3 SD-1 (chart daemonset)',
+    adrStatus: 'implemented',
+    adrStatusLabel: 'ADR-0148 SD-1 Implemented — proof artifact: charts/podmotion/templates/daemonset.yaml',
+    targetMilestone: 'Shipped (v0.1.0-alpha)',
   },
   {
     surface: 'Supply chain',
@@ -262,12 +259,12 @@ interface RoadmapItem {
 
 const ROADMAP_ITEMS: RoadmapItem[] = [
   {
-    gap: 'Agent privilege containment: node-agent runs privileged:true with 8 capabilities and no seccomp. Must be reduced to the minimal CRIU/eBPF set with a deny-by-default seccomp profile.',
+    gap: 'Agent runtime confinement: the main agent already runs privileged:false with capabilities dropped to a trace-derived minimum (ADR-0148 SD-1, shipped in v0.1.0-alpha). Remaining ADR-0148 work over that minimized surface: a deny-by-default seccomp profile (Unconfined today), hostPID reduction, and a read-only containerd socket.',
     adr: 'ADR-0148',
     adrStatus: 'accepted-unimpl',
     targetMilestone: 'M-SEC-1',
     doneWhen:
-      'Chart ships privileged:false with 5-capability set (SYS_PTRACE, SYS_ADMIN, NET_ADMIN, BPF, PERFMON) + trace-derived Localhost seccomp profile, validated across 8 beta workloads (ADR-0148 C6).',
+      'Chart ships a trace-derived Localhost seccomp profile over the already-minimized capability set, plus the remaining ADR-0148 host-namespace and containerd-socket reductions (hostPID:false, read-only socket), validated across the beta workload set (ADR-0148 C6).',
   },
   {
     gap: 'Checkpoint encryption at rest: checkpoints are plaintext on tmpfs today. ADR-0029 was dead code from acceptance; ADR-0160 is the authoritative forward plan.',
@@ -284,14 +281,6 @@ const ROADMAP_ITEMS: RoadmapItem[] = [
     targetMilestone: 'Sprint 33+',
     doneWhen:
       'cert-manager inject-ca-from auto-injects caBundle with no manual patch; gRPC mTLS fails CLOSED.',
-  },
-  {
-    gap: 'Default RBAC: no least-privilege ClusterRoles ship in the Helm chart. Operators provision bindings manually.',
-    adr: 'ADR-0078 / ADR-0161 C2',
-    adrStatus: 'accepted-unimpl',
-    targetMilestone: 'Pre-GA',
-    doneWhen:
-      'migration-operator and migration-reader ClusterRoles shipped in the chart with no manual provisioning required.',
   },
   {
     gap: 'Supply chain integrity: no signed images, no SBOM, no SLSA provenance for any released artifact.',
@@ -333,7 +322,7 @@ const SPRINT_LOG: SprintLogRow[] = [
     sprint: 'Sprint 34 (Phase B)',
     date: '2026-06-16',
     securityWork:
-      'gRPC control-plane security hardening PROVEN — 8/8 Phase B gate criteria (GC-B1 through GC-B8). mTLS enforced + fail-closed (operator CrashLoopBackOff with no TLS material, never falls back to plaintext); per-RPC SPIFFE-identity authorization (wrong-role caller rejected PermissionDenied); 512 MiB gRPC size caps + 2 GiB decompression cap (537 MB rejected ResourceExhausted); signed checkpoint manifests verified before extraction (bad signature rejected PermissionDenied); wire-hash transfer integrity (mismatch rejected DataLoss before decompression); migration_uid socket-state anti-replay (stale UID rejected PermissionDenied). Full live-migration regression (GC-B7) ran to Phase=Complete with the full security stack active, in-memory counter restored intact; all 22/22 Phase A cold-path assertions still pass — zero regression. TrafficVerified=True before source teardown and checkpoint tmpfs 0700 held throughout (GC-B8). These controls harden the operator↔agent gRPC channel on the gate cluster; cert lifecycle, checkpoint-at-rest encryption, SBOM, and default RBAC remain unimplemented.',
+      'gRPC control-plane security hardening PROVEN — 8/8 Phase B gate criteria (GC-B1 through GC-B8). mTLS enforced + fail-closed (operator CrashLoopBackOff with no TLS material, never falls back to plaintext); per-RPC SPIFFE-identity authorization (wrong-role caller rejected PermissionDenied); 512 MiB gRPC size caps + 2 GiB decompression cap (537 MB rejected ResourceExhausted); signed checkpoint manifests verified before extraction (bad signature rejected PermissionDenied); wire-hash transfer integrity (mismatch rejected DataLoss before decompression); migration_uid socket-state anti-replay (stale UID rejected PermissionDenied). Full live-migration regression (GC-B7) ran to Phase=Complete with the full security stack active, in-memory counter restored intact; all 22/22 Phase A cold-path assertions still pass — zero regression. TrafficVerified=True before source teardown and checkpoint tmpfs 0700 held throughout (GC-B8). These controls harden the operator↔agent gRPC channel on the gate cluster; as of this gate, cert lifecycle, checkpoint-at-rest encryption, SBOM, and default RBAC remained unimplemented. (Default least-privilege ClusterRoles have since shipped in the v0.1.0-alpha chart — see the RBAC row in Section 1.)',
     adrsAdvanced:
       'ADR-SEC-A (mTLS + per-RPC authz + size caps); ADR-SEC-B (signed checkpoint provenance + anti-replay); ADR-SEC-C (SPIFFE identity verification on operator dial); ADR-SEC-D (migration_uid CR-binding namespace resolution)',
   },
@@ -341,7 +330,7 @@ const SPRINT_LOG: SprintLogRow[] = [
     sprint: 'M-SEC-1',
     date: '2026-06-14',
     securityWork:
-      'ADR-0148 Agent Privilege Containment ACCEPTED; supersedes REJECTED ADR-0106; per-capability justification table + trace-derived seccomp strategy accepted. Decision advance only — no code shipped.',
+      'ADR-0148 Agent Privilege Containment ACCEPTED; supersedes REJECTED ADR-0106; per-capability justification table + trace-derived seccomp strategy accepted. Decision advance only at this milestone — no code shipped yet. (ADR-0148 SD-1 capability minimization — main agent privileged:false with a trace-derived minimum capability set — has since shipped in the v0.1.0-alpha chart daemonset; the remaining ADR-0148 items — deny-by-default seccomp, hostPID reduction, read-only containerd socket — are accepted but not yet implemented. See the privilege row in Section 1.)',
     adrsAdvanced: 'ADR-0148 Draft -> Accepted; ADR-0106 Rejected',
   },
   {
@@ -424,7 +413,7 @@ export default function SecurityPosture() {
           </p>
 
           <div className="mt-6 rounded-lg border border-amber-500/30 bg-amber-500/[0.06] px-4 py-4 text-sm leading-relaxed text-pm-slate-300">
-            Primary adoption blocker, stated plainly: the node-agent DaemonSet runs privileged:true with hostPID:true, a read-write containerd socket, and Unconfined seccomp on every node including control-plane nodes. A compromised agent is effectively node-root (RW containerd socket + SYS_ADMIN + SYS_PTRACE in the host PID namespace). This is a deliberate, disclosed alpha trade-off required for CRIU checkpoint/restore; ADR-0148 (Accepted, unimplemented) is the hardening plan to remove it. See the privilege row below.
+            Primary adoption blocker, stated plainly: ADR-0148 SD-1 shipped in the v0.1.0-alpha chart, so the main agent container now runs privileged:false with capabilities dropped to a trace-derived minimum, and privileged:true is confined to the netns-broker sidecar and short-lived init containers. But the main agent is still highly privileged: the pod runs hostPID:true and hostNetwork:true, the agent retains SYS_ADMIN + SYS_PTRACE and mounts the containerd socket read-write, and seccomp is Unconfined by default. A compromised agent is therefore still effectively node-root (RW containerd socket + SYS_ADMIN + SYS_PTRACE in the host PID namespace). This is a deliberate, disclosed alpha trade-off required for CRIU checkpoint/restore; SD-1 capability minimization is the first hardening step, and the remaining ADR-0148 items (deny-by-default seccomp, hostPID reduction, read-only containerd socket) are accepted but not yet implemented. See the privilege row below.
           </div>
 
           <div className="mt-8 flex flex-col gap-4">
@@ -517,8 +506,8 @@ export default function SecurityPosture() {
             Scope note: these controls are proven on the gate cluster (kind, kindnet, amd64,
             kernel 6.17) as the Sprint 34 Phase B deliverable. They harden the operator&harr;agent
             gRPC channel specifically. The shipping v0.1.0-alpha Helm chart posture, certificate
-            lifecycle (issuance/rotation), checkpoint encryption at rest, SBOM/signed-image supply
-            chain, and default RBAC remain as stated in the rows above and below — those are not yet
+            lifecycle (issuance/rotation), checkpoint encryption at rest, and SBOM/signed-image
+            supply chain remain as stated in the rows above and below — those are not yet
             implemented.
           </div>
 
@@ -665,7 +654,7 @@ export default function SecurityPosture() {
                 <tr className="align-top">
                   <td className="px-4 py-4 font-mono text-xs font-medium text-pm-cyan-300 whitespace-nowrap">SOC 2 Type II</td>
                   <td className="px-4 py-4 text-xs leading-relaxed text-pm-slate-300">audit log per migration op, checkpoint encryption, RBAC-controlled CRs, auditable operator</td>
-                  <td className="px-4 py-4 text-xs leading-relaxed text-pm-slate-300">no structured audit log, no default RBAC, checkpoints plaintext</td>
+                  <td className="px-4 py-4 text-xs leading-relaxed text-pm-slate-300">no structured audit log, RBAC not audit-mapped, checkpoints plaintext</td>
                   <td className="px-4 py-4 font-mono text-xs text-pm-slate-400">ADR-0161 C1/C2/C3, ADR-0078</td>
                   <td className="px-4 py-4"><Badge kind="draft" /></td>
                   <td className="px-4 py-4 font-mono text-xs text-pm-slate-400 whitespace-nowrap">GA+3mo readiness</td>
@@ -750,7 +739,7 @@ export default function SecurityPosture() {
                 <tr className="align-top">
                   <td className="px-4 py-4 font-mono text-xs font-medium text-pm-cyan-300">C2 RBAC-gated PodMigration CR ops</td>
                   <td className="px-4 py-4 font-mono text-xs leading-relaxed text-pm-slate-300">SOC 2 CC6, PCI DSS Req 7/8, FedRAMP AC-2/AC-3</td>
-                  <td className="px-4 py-4 text-xs text-amber-300/90">no default RBAC ships</td>
+                  <td className="px-4 py-4 text-xs text-amber-300/90">audit-mapped RBAC control not wired</td>
                 </tr>
                 <tr className="align-top">
                   <td className="px-4 py-4 font-mono text-xs font-medium text-pm-cyan-300">C3 Checkpoint encryption at rest+in transit (ADR-0160)</td>
