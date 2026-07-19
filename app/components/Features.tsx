@@ -46,11 +46,13 @@ const availableFeatureCards: FeatureCardProps[] = [
     body: (
       <>
         No application changes required. PodMotion moves the running pod and
-        restores it reachable at its original pod IP, with in-memory state
-        carried across the node boundary — the Sprint 34 regression run restored
-        an in-memory counter (<code>gcb7:counter=42</code>) intact on the
-        destination node. The current proof verifies L3/L4 IP reachability after
-        restore.
+        restores it on the destination node with in-memory state carried across
+        the node boundary — the Sprint 34 regression run restored an in-memory
+        counter (<code>gcb7:counter=42</code>) intact on a kind cluster
+        (Kubernetes v1.32.0). PodMotion does not depend on preserving the
+        original pod IP: the destination CNI may assign a different primary
+        address, and the pod stays reachable at whatever address the CNI
+        assigns.
         <br />
         <span className="feature-card__scope">
           Live TCP-connection survival with{' '}
@@ -127,7 +129,7 @@ const audienceCards: AudienceCardProps[] = [
     audience: 'Platform / SRE',
     question: 'What is actually proven today?',
     answer:
-      'A complete end-to-end live migration of a running, stateful pod across nodes on our two-node kind proof substrate (Kubernetes v1.32), restored reachable at its original pod IP in about 13 seconds, with in-memory state intact and 22/22 migration assertions passing.',
+      'On a real 3-node KVM cluster running Cilium (v1.17.6, cluster-pool IPAM): a live-held Redis TCP connection survived a node-to-node migration byte-exact (seq_delta 0/0, Strict mode — one held connection; multi-flow not yet proven), and, in a separate workload, a Postgres pod under continuous write load re-attached to its shared ReadWriteMany volume on the destination node and migrated cleanly in None mode (row counter advancing 8 to 16, zero post-migration write errors). Earlier, on a two-node kind cluster (Kubernetes v1.32.0), a full end-to-end migration completed in about 13 seconds with in-memory state intact and 22/22 assertions passing.',
     ctaLabel: 'See the proof →',
     ctaHref: '/#ns4',
   },
@@ -135,7 +137,7 @@ const audienceCards: AudienceCardProps[] = [
     audience: 'App developer',
     question: 'Will my app break during a migration?',
     answer:
-      'You change nothing in your app. PodMotion restores the pod reachable at its original pod IP — that IP reachability is proven on our two-node kind proof substrate, not yet on production multi-node clusters. Whether a live connection survives the move is a separate question: connection survival was first proven at Sprint 46 for a single held connection (seq_delta 0/0) on a real multi-node cluster, with the multi-flow guarantee not yet proven.',
+      'You change nothing in your app. PodMotion does not rely on keeping the original pod IP — the destination CNI may assign a different primary address, and the pod stays reachable at whatever address it assigns. Whether a live connection survives the move is a separate question: connection survival was first proven at Sprint 46 for a single held connection (seq_delta 0/0, Strict mode) on a real multi-node Cilium cluster, with the multi-flow guarantee not yet proven.',
     ctaLabel: 'How it works →',
     ctaHref: '/#how-it-works',
   },

@@ -206,7 +206,7 @@ const HowItWorks: FC = () => {
           at the top of the page.
         </p>
         <p className="mb-16 max-w-2xl text-lg leading-relaxed text-pm-white-muted">
-          In plain terms: PodMotion picks up a running app from one machine and sets it down on another, restored and reachable at its original pod IP — no stop-and-restart.
+          In plain terms: PodMotion picks up a running app from one machine and sets it down on another, restored on the destination node — no stop-and-restart. Keeping the same pod IP across that move depends on your CNI and cloud network, so it is not something every provider can support.
         </p>
 
         {/* ---------------------------------------------------------------- */}
@@ -472,7 +472,7 @@ const HowItWorks: FC = () => {
             Proof Results
           </p>
           <h2 className="mb-6 text-3xl font-bold leading-tight tracking-tight text-pm-white sm:text-4xl">
-            The proof: a running, stateful pod moved across nodes and restored reachable at its original pod IP
+            The proof: a running, stateful pod moved across nodes and restored on the destination node
           </h2>
           <p className="max-w-2xl text-lg leading-relaxed text-pm-white-muted">
             The full proof record — what was proven, on which substrate, in which

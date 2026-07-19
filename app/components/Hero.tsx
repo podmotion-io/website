@@ -78,8 +78,6 @@ const TerminalBlock: React.FC = () => (
         <span>
           <span style={{ color: 'var(--pm-text-primary, #F1F5F9)' }}>Migration complete</span>
           <span style={{ color: 'var(--pm-text-muted, #94A3B8)' }}> · </span>
-          <span style={{ color: 'var(--pm-success, #34D399)', fontWeight: 500 }}>restored at original pod IP</span>
-          <span style={{ color: 'var(--pm-text-muted, #94A3B8)' }}> · </span>
           <span style={{ color: 'var(--pm-text-secondary, #CBD5E1)' }}>~</span>
           <span style={{ color: 'var(--pm-warning, #FBBF24)', fontWeight: 500 }}>13</span>
           <span style={{ color: 'var(--pm-text-secondary, #CBD5E1)' }}> s (cold-path proof run)</span>
@@ -191,13 +189,13 @@ const Hero: React.FC = () => {
           >
             When Kubernetes needs to move a running application to a different server, it normally kills
             it and restarts it. PodMotion checkpoints the running pod, moves it to another node, and
-            restores it — reachable at its original pod IP — on standard upstream Kubernetes with
-            PodMotion&apos;s node agent and CRIU runtime installed. Original-pod-IP reachability after
-            restore is proven on our two-node kind proof substrate (Kubernetes v1.32); we have not yet
-            proven it carries over to production multi-node clusters. Live TCP-connection survival is a
-            separate result — first proven at Sprint 46 for a single held connection on a real
-            multi-node cluster, with broader multi-flow coverage not yet proven. This is v0.1.0-alpha
-            (CRD-only, no kubectl plugin).
+            restores it on standard upstream Kubernetes with PodMotion&apos;s node agent and CRIU
+            runtime installed. We are deliberately not focusing on preserving the pod&apos;s original IP
+            address right now: not every cloud provider or CNI can hand a restored pod an address from
+            another node&apos;s pod-IP block, so PodMotion restores onto the destination node&apos;s
+            normal networking instead. Live TCP-connection survival is a separate result — first proven
+            at Sprint 46 for a single held connection on a real multi-node cluster, with broader
+            multi-flow coverage not yet proven. This is v0.1.0-alpha (CRD-only, no kubectl plugin).
           </p>
 
           {/* Subhead */}
@@ -214,7 +212,7 @@ const Hero: React.FC = () => {
             }}
           >
             PodMotion checkpoints a running, stateful pod, moves it to another node, and restores it —
-            reachable at its original pod IP, with an in-memory counter restored intact across nodes.
+            with an in-memory counter restored intact across nodes.
             Proven end-to-end on our two-node kind proof substrate (Kubernetes v1.32) in about 13 seconds in our cold-path proof run, with
             the source pod never deleted until traffic is verified (ADR-0012).{' '}
             Our next goal —{' '}

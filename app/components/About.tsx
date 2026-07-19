@@ -33,8 +33,11 @@ const About: FC = () => {
           <p className="text-lg leading-relaxed text-pm-white-muted">
             This project started as a proof of concept: could CRIU actually
             move a running, stateful process across nodes and restore it
-            functional and reachable at its original pod IP? The answer —
-            proven end-to-end on our two-node kind proof substrate (stock upstream Kubernetes v1.32) in about 13
+            functional? Preserving the original pod IP was a deliberate
+            non-goal — not every cloud provider or CNI can hand one node the
+            IP block that belongs to another. The answer —
+            proven end-to-end on our two-node kind (Kubernetes-in-Docker, a
+            local test-cluster tool) proof substrate (stock upstream Kubernetes v1.32) in about 13
             seconds, with an in-memory counter restored intact across nodes and
             the source pod never deleted until traffic is verified (ADR-0012) —
             is yes. Live TCP-connection survival —{" "}
@@ -210,8 +213,9 @@ const About: FC = () => {
             <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
               <p className="mb-1 text-sm font-semibold text-pm-white">No production deployments</p>
               <p className="text-sm leading-relaxed text-pm-white-muted">
-                v0.1.0-alpha has not been run in a production environment. All proof runs are
-                on kind clusters. Production readiness is a future milestone, not a current claim.
+                v0.1.0-alpha has not been run in a production environment. Most proof runs are
+                on kind clusters; the Sprint 46 live-TCP proof ran on a real multi-node cluster.
+                Production readiness is a future milestone, not a current claim.
               </p>
             </li>
             <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">
