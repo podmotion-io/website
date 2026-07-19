@@ -21,7 +21,6 @@ const columns: FooterColumn[] = [
       { label: 'Features', href: '/#features' },
       { label: 'CLI', href: '/#cli' },
       { label: 'Architecture', href: 'https://github.com/podmotion-io/podmotion#readme', external: true },
-      { label: 'Roadmap', href: '/#roadmap' },
     ],
   },
   {

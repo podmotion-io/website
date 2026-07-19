@@ -114,7 +114,7 @@ const roadmapFeatureCard: FeatureCardProps = {
       snapshot-clone-rsync, and RWX re-attach) is designed and scoped for
       v1.2. Deferred to v1.2.{' '}
       <span className="feature-card__warning">
-        NOT available in current alpha — see the roadmap.
+        NOT available in current alpha — deferred to v1.2.
       </span>
     </>
   ),

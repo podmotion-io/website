@@ -493,7 +493,9 @@ const HowItWorks: FC = () => {
             Service-routed transparency, and additional CNIs — remains on the
             roadmap, not yet proven.{" "}
             <a
-              href="#roadmap"
+              href="https://github.com/podmotion-io/podmotion/milestones"
+              target="_blank"
+              rel="noopener noreferrer"
               className="underline underline-offset-2 hover:text-pm-white"
             >
               We publish limits, not just wins.

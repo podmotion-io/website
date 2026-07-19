@@ -13,7 +13,6 @@ const NAV_LINKS: NavLink[] = [
   { label: 'How it works', href: '/#how-it-works' },
   { label: 'Economics', href: '/#economics' },
   { label: 'CLI', href: '/#cli' },
-  { label: 'Roadmap', href: '/#roadmap' },
   { label: 'Community', href: '/#community' },
   { label: 'About', href: '/#about' },
   { label: 'Security', href: '/#security-posture' },

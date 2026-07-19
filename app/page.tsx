@@ -7,7 +7,6 @@ import Economics from "./components/Economics";
 import GettingStarted from "./components/GettingStarted";
 import CLIShowcase from "./components/CLIShowcase";
 import Community from "./components/Community";
-import Roadmap from "./components/Roadmap";
 import About from './components/About';
 import SecurityPosture from './components/SecurityPosture';
 import Footer from "./components/Footer";
@@ -24,7 +23,6 @@ export default function Home() {
         <Economics />
         <GettingStarted />
         <CLIShowcase />
-        <Roadmap />
         <Community />
         <About />
         <SecurityPosture />

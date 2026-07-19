@@ -227,7 +227,7 @@ export function ProofStrip() {
 
         {/* Caveat */}
         <p className="text-pm-white-subtle text-sm text-center max-w-xl">
-          Pre-1.0. Single-cluster. arm64 validated (NS#4, Sprint 30). amd64 cold migration proven (Sprint 31, NP-AMD64-BASELINE; Sprint 32, cold-path CRIU restore baseline). Strict-mode TCP preservation first proven at Sprint 46 — a single held connection survived migration byte-exact (seq_delta 0/0) on a real multi-node cluster (no CNI or architecture recorded in the committed proof); broader multi-flow and per-CNI validation is still ahead — see roadmap.
+          Pre-1.0. Single-cluster. arm64 validated (NS#4, Sprint 30). amd64 cold migration proven (Sprint 31, NP-AMD64-BASELINE; Sprint 32, cold-path CRIU restore baseline). Strict-mode TCP preservation first proven at Sprint 46 — a single held connection survived migration byte-exact (seq_delta 0/0) on a real multi-node cluster (no CNI or architecture recorded in the committed proof); broader multi-flow and per-CNI validation is still ahead.
         </p>
 
         {/* Security disclosure — node-root agent posture (SITE-ADR-001) */}

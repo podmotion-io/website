@@ -185,10 +185,15 @@ export default function Community() {
           </div>
           <p className="mt-2 text-xs text-pm-slate-500">
             See the full{' '}
-            <a href="#roadmap" className="text-pm-cyan-400 hover:text-pm-cyan-300 underline underline-offset-2">
-              roadmap
+            <a
+              href="https://github.com/podmotion-io/podmotion/milestones"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pm-cyan-400 hover:text-pm-cyan-300 underline underline-offset-2"
+            >
+              milestones
             </a>{' '}
-            for milestone gate conditions and the validation footprint.
+            for gate conditions and the validation footprint.
           </p>
         </div>
 
