@@ -68,7 +68,7 @@ const milestones: Milestone[] = [
     theme:
       'A running, stateful redis:7-alpine pod migrated across nodes on stock upstream Kubernetes v1.32, restored functional and reachable at its original pod IP in about 13 seconds, with an in-memory counter (gcb7:counter=42) restored intact. BestEffort transfer mode (tcpPreservationMode default None). Proof substrate of record: kind profile podmotion-s33-cold / 2 nodes / amd64 / Linux 6.17 / containerd 1.7.24 / Kubernetes v1.32.0 / CNI kindnet (host-routed, no VXLAN overlay).',
     gate: '22/22 Phase A migration assertions pass; TrafficVerified=True before source pod deletion (ADR-0012) — see docs/proof/sprint33-proof.md.',
-    flag: 'Live TCP-connection survival (seq_delta=0, Strict mode) is the Feln goal, not yet proven. The current proof verifies L3/L4 IP reachability after restore, not survival of an established TCP connection.',
+    flag: 'Live TCP-connection survival (seq_delta=0, Strict mode) is the goal we are proving next, not yet proven. The current proof verifies L3/L4 IP reachability after restore, not survival of an established TCP connection.',
   },
   {
     id: 'S34',
@@ -89,7 +89,7 @@ const milestones: Milestone[] = [
     gate: 'Migration completes with Argo CD / Flux reconciliation paused for the freeze window only, then resumed — no drift alert.',
   },
 
-  // ── PLANNED (feln track, M20–M27) ────────────────────
+  // ── PLANNED (v1.0-gate track, M20–M27) ────────────────────
   {
     id: 'M18-OLM',
     tier: 'planned',
@@ -109,7 +109,7 @@ const milestones: Milestone[] = [
       'A 3-container pod with a real service-mesh sidecar migrates across nodes; every container reports zero internal disruption and seq_delta=0 on its own connections; reproduced 10× clean.',
     size: 'L',
     progress: '→ ~45%',
-    flag: 'Tier-0 prerequisite: the feln gate is INVALID unless M22 AND M23 have both landed.',
+    flag: 'Tier-0 prerequisite: the v1.0 gate is INVALID unless M22 AND M23 have both landed.',
   },
   {
     id: 'M23',
@@ -121,14 +121,14 @@ const milestones: Milestone[] = [
       'seq_delta=0, zero RST, zero reconnect for ≥100 concurrent Service-routed flows under load across a live migration, with storage fd/lock state preserved.',
     size: 'L',
     progress: '→ ~65%',
-    flag: 'Tier-0 prerequisite: pairs with M22 to gate every feln run.',
+    flag: 'Tier-0 prerequisite: pairs with M22 to gate every v1.0-gate run.',
   },
   {
     id: 'M24',
     tier: 'planned',
     title: 'CNI matrix to production + LB connection tracking',
     theme:
-      'Per-CNI transparency parity — each CNI independently re-proves N-flow seq preservation and conntrack migration (there is no CNI-generic transparency). Without Cilium the feln is false for a large share of production; this is realistically a multi-quarter epic.',
+      'Per-CNI transparency parity — each CNI independently re-proves N-flow seq preservation and conntrack migration (there is no CNI-generic transparency). Without Cilium the transparency guarantee is false for a large share of production; this is realistically a multi-quarter epic.',
     gate:
       'seq_delta=0 multi-container migration green on Calico VXLAN, Cilium eBPF, and Flannel VXLAN independently, plus one external-LB (ALB or NLB) north-south flow surviving migration.',
     size: 'XL',
@@ -143,7 +143,7 @@ const milestones: Milestone[] = [
     gate:
       'seq_delta=0 live migration proven for an IPv6 client AND for a WireGuard-encrypted overlay cluster. Gate status: FAILED — operator never deployed; runs timed out empty; seq_delta N/A.',
     size: 'XL',
-    flag: 'GATE FAILED: WireGuard/encrypted-overlay gate was not executed — operator never deployed into a WireGuard cluster; all runs timed out empty; seq_delta N/A. IPv6 and encrypted-overlay do not carry over from the Flannel VXLAN proof. Scope also unresolved: feln-blocking (architect) vs post-v1.0 epic (PM) — flagged for thrix.',
+    flag: 'GATE FAILED: WireGuard/encrypted-overlay gate was not executed — operator never deployed into a WireGuard cluster; all runs timed out empty; seq_delta N/A. IPv6 and encrypted-overlay do not carry over from the Flannel VXLAN proof. Scope also unresolved: v1.0-gate-blocking vs post-v1.0 epic — flagged for review.',
   },
   {
     id: 'M20',
@@ -158,7 +158,7 @@ const milestones: Milestone[] = [
     tier: 'planned',
     title: 'Automated certification matrix + agentic version validation',
     theme:
-      'A tiered certification-matrix config, a GitHub Actions version-watcher, and an agentic thrix testing pipeline (≥2/3 PASS thrix per matrix row) with cosign-signed signoff and a make beta-gate target.',
+      'A tiered certification-matrix config, a GitHub Actions version-watcher, and an automated testing pipeline (≥2/3 runs PASS per matrix row) with cosign-signed signoff and a make beta-gate target.',
     gate: 'make beta-gate passes; all Tier-1 matrix entries signed off within 30 days.',
   },
   {
@@ -175,7 +175,7 @@ const milestones: Milestone[] = [
   {
     id: 'M27',
     tier: 'planned',
-    title: 'First true-feln AWS gate run + chaos gate',
+    title: 'First true-v1.0-gate AWS run + chaos gate',
     theme:
       'First randomized AWS run (EKS + self-managed EC2) against the real workload set — multi-container + service-mesh sidecar + Service-routed + dual-stack — exercising all 8 beta-gate workload types with fault injection.',
     gate:
@@ -190,8 +190,8 @@ const milestones: Milestone[] = [
     tier: 'planned',
     title: 'Agent privilege containment',
     theme:
-      'CISOs evaluating the full security posture — including what is implemented today vs. what is ratified but not yet shipped — should see the #security-posture section for the complete honest snapshot. Trace-derived custom seccomp profile (SCMP_ACT_ERRNO deny-by-default), capability drop to the minimal CRIU set, read-only containerd socket in steady-state, and hostPID:false default flip gated on validation across 8 beta workloads. ADR-0148 Accepted (tier-14 thrix, 2026-06-14), unimplemented; supersedes the REJECTED ADR-0106.',
-    flag: 'Accepted (tier-14 thrix, 2026-06-14), not yet implemented (ADR-0148).',
+      'CISOs evaluating the full security posture — including what is implemented today vs. what is accepted but not yet shipped — should see the #security-posture section for the complete honest snapshot. Trace-derived custom seccomp profile (SCMP_ACT_ERRNO deny-by-default), capability drop to the minimal CRIU set, read-only containerd socket in steady-state, and hostPID:false default flip gated on validation across 8 beta workloads. ADR-0148 Accepted (2026-06-14), unimplemented; supersedes the REJECTED ADR-0106.',
+    flag: 'Accepted (2026-06-14), not yet implemented (ADR-0148).',
   },
   {
     id: 'SEC-2',
@@ -224,9 +224,9 @@ const milestones: Milestone[] = [
     tier: 'future',
     title: 'Beta gate — 80 runs, zero errors, zero warnings',
     theme:
-      'Converts "demonstrated" into a statistically defensible guarantee: 80 consecutive randomized runs against the full feln workload matrix on amd64, with zero errors and zero warnings.',
+      'Converts "demonstrated" into a statistically defensible guarantee: 80 consecutive randomized runs against the full workload matrix on amd64, with zero errors and zero warnings.',
     gate:
-      '80 consecutive randomized runs, zero errors, zero warnings, against the full feln workload matrix on amd64.',
+      '80 consecutive randomized runs, zero errors, zero warnings, against the full workload matrix on amd64.',
     size: 'L',
     progress: '→ ~95% (amd64)',
   },
@@ -248,7 +248,7 @@ const milestones: Milestone[] = [
     theme:
       'Freeze the API v1alpha1 → v1beta1 → v1 with a conversion webhook (ADR-0075); adopt a live-only posture (cold-mode admission rejection, ADR-0076); ship v0.2.0 → v0.3.0 → v1beta1 → v1.0.0; recruit a second maintainer and document 3+ public production adopters.',
     gate:
-      'v1.0.0 released with a frozen v1 API, the full feln matrix green in CI every release, a clean re-audit, and a proven conversion path from the earliest public release.',
+      'v1.0.0 released with a frozen v1 API, the full workload matrix green in CI every release, a clean re-audit, and a proven conversion path from the earliest public release.',
     size: 'L',
     progress: '100% (amd64 scope)',
     flag: 'The path to incubation is structurally non-solo — requires a second maintainer + documented adopters.',
@@ -274,7 +274,7 @@ const betaGate = {
   headlineStat: '80',
   headlineLabel: 'consecutive randomized runs · zero errors · zero warnings',
   subhead:
-    'A hard gate. No beta is cut until every run passes clean against the full feln workload matrix on amd64.',
+    'A hard gate. No beta is cut until every run passes clean against the full workload matrix on amd64.',
   workloadTypes: [
     'Stateless web (NGINX, Node.js/Go HTTP under wrk/k6)',
     'SQL database (PostgreSQL incl. replication; MySQL/MariaDB)',
@@ -307,7 +307,7 @@ const betaGate = {
     'IP families: IPv4 + IPv6 · ClusterIP/NodePort · ALB/NLB',
   ],
   validity:
-    'The gate is invalid if run before M22 and M23 land, or against the weaker single-flow / single-container definition instead of the true feln set (multi-container + Service-routed + dual-stack).',
+    'The gate is invalid if run before M22 and M23 land, or against the weaker single-flow / single-container definition instead of the true v1.0 set (multi-container + Service-routed + dual-stack).',
 };
 
 const versions = [
@@ -393,15 +393,15 @@ export default function Roadmap() {
             The path to v1.0
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-pm-slate-300">
-            One feln: live-migrate a running multi-container pod across nodes, and neither the
+            One goal: live-migrate a running multi-container pod across nodes, and neither the
             containers nor any client with an open TCP connection notices. Everything below is measured
             against that single, falsifiable bar — milestone by milestone, gate by gate.
           </p>
         </div>
 
-        {/* FELN CARD */}
+        {/* GOAL CARD */}
         <div className="mx-auto mt-12 max-w-4xl rounded-2xl border border-pm-cyan-500/25 bg-pm-cyan-500/[0.06] p-6 sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-pm-cyan-400">The v1.0 feln</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-pm-cyan-400">The v1.0 goal</p>
           <p className="mt-2 text-base font-medium text-pm-white">{primaryGoal.definition}</p>
           <ul className="mt-5 space-y-2.5">
             {primaryGoal.guarantees.map(g => (

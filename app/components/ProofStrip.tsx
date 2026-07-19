@@ -72,7 +72,7 @@ export function ProofStrip() {
         {/* Metrics row */}
         <div className="flex flex-wrap justify-center gap-3">
           <MetricChip
-            title="Feln goal (Phase C) — zero TCP sequence delta is NOT yet proven as a current end-to-end achievement. The earlier single-flow arm64 / Ubuntu 24.04 / kernel 6.8 / Flannel VXLAN / kind observation is a historical PoC measurement, not the current authoritative end-to-end proof (which is the Sprint 33 cold-path run on amd64/6.17/kindnet). Strict TCP preservation is the milestone we are proving next."
+            title="Next goal (Phase C) — zero TCP sequence delta is NOT yet proven as a current end-to-end achievement. The earlier single-flow arm64 / Ubuntu 24.04 / kernel 6.8 / Flannel VXLAN / kind observation is a historical PoC measurement, not the current authoritative end-to-end proof (which is the Sprint 33 cold-path run on amd64/6.17/kindnet). Strict TCP preservation is the milestone we are proving next."
           >
             North&nbsp;Star&nbsp;goal&nbsp;(Phase&nbsp;C):&nbsp;seq_delta=0&nbsp;&mdash;&nbsp;not&nbsp;yet&nbsp;proven&nbsp;(historical&nbsp;single-flow&nbsp;PoC:&nbsp;arm64&nbsp;/&nbsp;kernel&nbsp;6.8&nbsp;/&nbsp;Flannel&nbsp;VXLAN)
           </MetricChip>
@@ -85,7 +85,7 @@ export function ProofStrip() {
         <div className="flex items-center justify-center text-center">
           <CheckIcon />
           <p className="text-xl sm:text-2xl font-semibold text-pm-white leading-snug">
-            Sprint 30 &mdash; Redis active-write (historical arm64 PoC):&nbsp;18/18 ACs PASS&nbsp;&middot;&nbsp;Feln goal (Phase C) seq_delta=0 not yet proven end-to-end&nbsp;&middot;&nbsp;2026-06-13
+            Sprint 30 &mdash; Redis active-write (historical arm64 PoC):&nbsp;18/18 ACs PASS&nbsp;&middot;&nbsp;next goal (Phase C) seq_delta=0 not yet proven end-to-end&nbsp;&middot;&nbsp;2026-06-13
           </p>
         </div>
 
@@ -130,7 +130,7 @@ export function ProofStrip() {
 
         {/* Sprint 33 scope caveat */}
         <p className="text-pm-white-subtle text-xs text-center max-w-xl -mt-4">
-          Sprint 33: cold-path migration in BestEffort transfer mode, n=1, redis:7-alpine checkpointed on worker and restored on control-plane. Phase=Complete, TrafficVerified=True reached BEFORE the source pod was deleted; restored Redis answered PING with PONG. Partial Feln &mdash; the cold-path mechanism is proven end-to-end; zero-TCP-sequence-delta (seq_delta) is NOT claimed here. Topology: single-host two-node kind cluster, kindnet CNI (host-routed, no VXLAN overlay) / amd64 / kernel 6.17 / containerd 1.7.24 / Kubernetes v1.32.0.
+          Sprint 33: cold-path migration in BestEffort transfer mode, n=1, redis:7-alpine checkpointed on worker and restored on control-plane. Phase=Complete, TrafficVerified=True reached BEFORE the source pod was deleted; restored Redis answered PING with PONG. Cold-path scope only &mdash; the cold-path mechanism is proven end-to-end; zero-TCP-sequence-delta (seq_delta) is NOT claimed here. Topology: single-host two-node kind cluster, kindnet CNI (host-routed, no VXLAN overlay) / amd64 / kernel 6.17 / containerd 1.7.24 / Kubernetes v1.32.0.
         </p>
 
         {/* Sprint 34 — gRPC control-plane security hardening ProofBadge */}

@@ -196,7 +196,7 @@ export default function CLIShowcase() {
           <p className="text-pm-white-muted text-lg mt-4">
             Every migration is a <code className="text-pm-cyan-300">PodMigration</code> custom resource.
             Start with <code className="text-pm-cyan-300">dryRun: true</code> for a freeze-window estimate,
-            then apply without it to migrate — watch phases complete. Our Feln goal of{" "}
+            then apply without it to migrate — watch phases complete. Our next goal of{" "}
             <code className="text-pm-cyan-300">seq_delta=0</code> (zero TCP sequence delta) is the
             milestone we are proving next; it is not yet proven. No new tooling required.
           </p>

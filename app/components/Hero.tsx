@@ -193,7 +193,7 @@ const Hero: React.FC = () => {
             it and restarts it. PodMotion checkpoints the running pod, moves it to another node, and
             restores it — reachable at its original pod IP — on standard upstream Kubernetes with
             PodMotion&apos;s node agent and CRIU runtime installed. The current proof verifies the pod is
-            IP-reachable after restore; live TCP-connection survival is our Feln goal, not yet
+            IP-reachable after restore; live TCP-connection survival is our next goal, not yet
             proven. This is v0.1.0-alpha (CRD-only, no kubectl plugin).
           </p>
 
@@ -214,7 +214,7 @@ const Hero: React.FC = () => {
             reachable at its original pod IP, with an in-memory counter restored intact across nodes.
             Proven end-to-end on Kubernetes v1.32 in about 13 seconds in our cold-path proof run, with
             the source pod never deleted until traffic is verified (ADR-0012).{' '}
-            Our Feln goal —{' '}
+            Our next goal —{' '}
             <code
               style={{
                 fontFamily: "'JetBrains Mono', 'SF Mono', ui-monospace, Consolas, monospace",
@@ -359,7 +359,7 @@ const Hero: React.FC = () => {
             Live migration, proven end-to-end
           </p>
           <p className="text-center text-pm-text-muted font-light tracking-[0.15em] uppercase text-xs mb-10 select-none">
-            Feln goal: seq_delta=0 — not yet proven
+            Next goal: seq_delta=0 — not yet proven
           </p>
           {/* UndyingNodeMark — 280×280 quantum omnipresence / concentric rings */}
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

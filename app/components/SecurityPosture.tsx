@@ -135,7 +135,7 @@ const POSTURE_ROWS: PostureRow[] = [
       'ADR-0148 supersedes the REJECTED ADR-0106. Target: privileged:false; drop ALL; add [SYS_PTRACE, SYS_ADMIN, NET_ADMIN, BPF, PERFMON] (k>=5.8); allowPrivilegeEscalation:true (CRIU parasite/ptrace, kernel-justified); hostPID:false via NRI-supplied PID; readOnlyRootFilesystem:true; trace-derived SCMP_ACT_ERRNO deny-by-default Localhost seccomp; RO containerd socket steady-state; migration-node taint/nodeSelector isolation.',
     remediationAdr: 'ADR-0148',
     adrStatus: 'accepted-unimpl',
-    adrStatusLabel: 'ADR-0148 Accepted (tier-14 thrix 2026-06-14), unimplemented',
+    adrStatusLabel: 'ADR-0148 Accepted (2026-06-14), unimplemented',
     targetMilestone: 'M-SEC-1',
     flagText:
       'Node-agent runs privileged:true + hostPID:true today — ADR-0148 hardening NOT yet implemented.',
@@ -341,21 +341,21 @@ const SPRINT_LOG: SprintLogRow[] = [
     sprint: 'M-SEC-1',
     date: '2026-06-14',
     securityWork:
-      'ADR-0148 Agent Privilege Containment ACCEPTED via tier-14 thrix (2 Opus architects + 7 agents); supersedes REJECTED ADR-0106; per-capability justification table + trace-derived seccomp strategy ratified. Decision advance only — no code shipped.',
+      'ADR-0148 Agent Privilege Containment ACCEPTED; supersedes REJECTED ADR-0106; per-capability justification table + trace-derived seccomp strategy accepted. Decision advance only — no code shipped.',
     adrsAdvanced: 'ADR-0148 Draft -> Accepted; ADR-0106 Rejected',
   },
   {
     sprint: 'Sprint 32',
     date: '2026-06-16',
     securityWork:
-      'Sprint 32 GATE PASS 21/22 (GC-21 expected fail per ADR-0166 — kind substrate). Cold-path CRIU restore baseline proven on amd64. ADR-0183 r1 ACCEPTED: CRIU wrapper host install via DaemonSet init container to /opt/podmotion/bin with image-digest verification; Security hard block (r0) resolved in r1 after Security Reviewer DECLINE on initial proposal (missing digest verification). ADR-0166 scope exclusion confirmed by Security Reviewer: iptables-restore post-resume in kind netns is a substrate defect, not a PodMotion security surface. No additional security controls shipped; no privilege reduction in this sprint. Gate close commit: 8c16993.',
+      'Sprint 32 GATE PASS 21/22 (GC-21 expected fail per ADR-0166 — kind substrate). Cold-path CRIU restore baseline proven on amd64. ADR-0183 r1 ACCEPTED: CRIU wrapper host install via DaemonSet init container to /opt/podmotion/bin with image-digest verification; Security hard block (r0) resolved in r1 after the initial proposal was rejected for missing digest verification. ADR-0166 scope exclusion confirmed in security review: iptables-restore post-resume in kind netns is a substrate defect, not a PodMotion security surface. No additional security controls shipped; no privilege reduction in this sprint. Gate close commit: 8c16993.',
     adrsAdvanced: 'ADR-0183 r1 Accepted (image-digest verification); ADR-0184, ADR-0185 r1, ADR-0186, ADR-0187a, ADR-0188, ADR-0189, ADR-0190, ADR-0191 Accepted (correctness/restore path); ADR-0187 Superseded',
   },
   {
     sprint: 'Pre-Sprint 33 (Draft)',
     date: '2026-06',
     securityWork:
-      'ADR-0159 (cert-manager/ACME webhook TLS), ADR-0160 (checkpoint encryption), ADR-0161 (compliance planning C1-C5) drafted, feeding platform-readiness workstream. These are planning advances — no decisions ratified, no code shipped.',
+      'ADR-0159 (cert-manager/ACME webhook TLS), ADR-0160 (checkpoint encryption), ADR-0161 (compliance planning C1-C5) drafted, feeding platform-readiness workstream. These are planning advances — no decisions accepted, no code shipped.',
     adrsAdvanced: 'ADR-0159 Draft; ADR-0160 Draft; ADR-0161 Draft',
   },
 ];
@@ -398,7 +398,7 @@ export default function SecurityPosture() {
           </div>
           <div className="flex items-center gap-2">
             <Badge kind="accepted-unimpl" />
-            <span className="text-xs text-pm-slate-400">Ratified design, no shipped code</span>
+            <span className="text-xs text-pm-slate-400">Accepted design, no shipped code</span>
           </div>
           <div className="flex items-center gap-2">
             <Badge kind="dead-code" />
@@ -406,7 +406,7 @@ export default function SecurityPosture() {
           </div>
           <div className="flex items-center gap-2">
             <Badge kind="draft" />
-            <span className="text-xs text-pm-slate-400">ADR not yet ratified — plan, not a commitment</span>
+            <span className="text-xs text-pm-slate-400">ADR not yet accepted — plan, not a commitment</span>
           </div>
         </div>
 
@@ -792,8 +792,8 @@ export default function SecurityPosture() {
             Sprint-by-sprint security progress
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-pm-slate-400">
-            Records ADR decision advances only — thrix passage, status transitions, supersessions.
-            An entry here does not mean a control shipped; it means a decision was ratified.
+            Records security-design decision advances only — ADR status transitions and supersessions.
+            An entry here does not mean a control shipped; it means a design decision was accepted.
           </p>
 
           <div className="mt-8 overflow-x-auto rounded-xl border border-pm-navy-700">

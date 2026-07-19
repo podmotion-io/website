@@ -98,7 +98,7 @@ const PHASES: Phase[] = [
     caption: "CRIU restores the process tree and re-attaches sockets on the destination.",
     color: "teal",
     detail:
-      "CRIU restores the full process tree from the checkpoint image on the destination node. The design re-attaches sockets to the relay using the captured sequence numbers, targeting seq_delta=0 (Feln goal, not yet proven) so no adjustment is needed at the peer.",
+      "CRIU restores the full process tree from the checkpoint image on the destination node. The design re-attaches sockets to the relay using the captured sequence numbers, targeting seq_delta=0 (our next goal, not yet proven) so no adjustment is needed at the peer.",
     condition: "ProcessRestored=True",
     subsystem: "Compute (CRIU)",
   },
@@ -115,10 +115,10 @@ const PHASES: Phase[] = [
   {
     number: 10,
     name: "TCPVerifying",
-    caption: "Target: confirm seq_delta=0 and connection-count parity (Feln goal, not yet proven).",
+    caption: "Target: confirm seq_delta=0 and connection-count parity (our next goal, not yet proven).",
     color: "teal",
     detail:
-      "Designed to read the PM_SEQ_XLAT map from the eBPF relay and verify that every migrated socket shows a sequence delta of zero, comparing connection count against the Phase 1 inventory. This is the Feln goal we are proving next; seq_delta=0 / Strict-mode TCP survival is not yet proven.",
+      "Designed to read the PM_SEQ_XLAT map from the eBPF relay and verify that every migrated socket shows a sequence delta of zero, comparing connection count against the Phase 1 inventory. This is the goal we are proving next; seq_delta=0 / Strict-mode TCP survival is not yet proven.",
     condition: "TCPSequenceContinuityVerified=True",
     subsystem: "Network (eBPF)",
   },
@@ -492,7 +492,7 @@ const HowItWorks: FC = () => {
               containerd 1.7.24 / Kubernetes v1.32.0 / CNI kindnet (host-routed,
               no VXLAN overlay). BestEffort transfer mode (tcpPreservationMode
               default None, opt-in to BestEffort or Strict). Live TCP-connection
-              survival / seq_delta=0 / Strict mode are the Feln goal we are
+              survival / seq_delta=0 / Strict mode are the goal we are
               proving next — not yet proven. Flannel VXLAN and cloud CNIs are on
               the roadmap, not proof.
             </p>
@@ -574,7 +574,7 @@ const HowItWorks: FC = () => {
             </div>
             <p className="mt-4 text-sm text-pm-white-muted">
               The authoritative current end-to-end proof. Live TCP-connection
-              survival (seq_delta=0, Strict mode) is the Feln goal we are
+              survival (seq_delta=0, Strict mode) is the goal we are
               proving next — not yet proven; the current proof verifies L3/L4 IP
               reachability after restore via an RST probe, not survival of an
               established application TCP connection.
@@ -662,7 +662,7 @@ const HowItWorks: FC = () => {
             What is proven today is end-to-end cold-path live migration on one
             declared substrate. Live TCP-connection survival (seq_delta=0, Strict
             mode), Flannel VXLAN and cloud CNIs, multi-container, and N-flow
-            Service-routed transparency are the Feln goals on the roadmap —
+            Service-routed transparency are the goals on the roadmap —
             not yet proven.{" "}
             <a
               href="#roadmap"

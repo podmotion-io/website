@@ -519,12 +519,12 @@ function TechPanel() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-pm-navy-800 border border-green-700/40 rounded-lg p-5 space-y-3">
             <div className="text-xs uppercase tracking-widest text-amber-400 font-medium">
-              Feln goal — not proven in v0.1.0-alpha
+              Next goal — not proven in v0.1.0-alpha
             </div>
             <ul className="space-y-2 text-pm-slate-300 text-sm leading-relaxed list-disc list-inside">
               <li>
                 <code className="text-pm-cyan-400 font-mono">seq_delta=0</code> is the{' '}
-                <span className="font-semibold text-pm-slate-200">Feln goal</span> (Phase&nbsp;C
+                <span className="font-semibold text-pm-slate-200">next goal</span> (Phase&nbsp;C
                 target), not an achieved result. The current proven path is cold-path
                 BestEffort checkpoint/restore; TCP connections are <span className="font-semibold text-pm-slate-200">not</span> preserved
                 by default. The historical NS#4 PoC run (10 pgbench migrations, -c&nbsp;8 -j&nbsp;8

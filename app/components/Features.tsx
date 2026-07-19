@@ -53,7 +53,7 @@ const availableFeatureCards: FeatureCardProps[] = [
         restore.
         <br />
         <span className="feature-card__scope">
-          Feln goal (not yet proven): live TCP-connection survival with{' '}
+          Next goal (not yet proven): live TCP-connection survival with{' '}
           <code>seq_delta=0</code> — containers and clients both unaware the pod
           moved. That guarantee is the milestone we are proving next; it is not
           yet proven.
@@ -133,7 +133,7 @@ const audienceCards: AudienceCardProps[] = [
     audience: 'App developer',
     question: 'Will my app break during a migration?',
     answer:
-      'You change nothing — PodMotion moves the pod and restores it reachable at its original IP. Live TCP-connection survival is the Feln goal we are proving next; it is not yet proven.',
+      'You change nothing — PodMotion moves the pod and restores it reachable at its original IP. Live TCP-connection survival is the goal we are proving next; it is not yet proven.',
     ctaLabel: 'How it works →',
     ctaHref: '/#how-it-works',
   },

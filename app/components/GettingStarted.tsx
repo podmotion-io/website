@@ -231,7 +231,7 @@ kubectl describe podmigration migrate-my-pod`}</code>
 
           <p className="text-pm-white-muted text-sm mt-3">
             Confirm that the pod
-            now runs on the destination node. Our Feln goal of{" "}
+            now runs on the destination node. Our next goal of{" "}
             <code>seq_delta=0</code> (zero TCP sequence delta) with connection
             parity is the milestone we are proving next — it is not yet proven.
             The <code>describe</code> output

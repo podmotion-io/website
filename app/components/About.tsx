@@ -43,7 +43,7 @@ const About: FC = () => {
               <code className="rounded bg-pm-navy-700 px-1.5 py-0.5 font-mono text-sm text-pm-cyan-300">
                 seq_delta=0
               </code>
-              , no RST, no reconnect — is our Feln goal, the milestone we
+              , no RST, no reconnect — is our next goal, the milestone we
               are proving next; it is not yet proven. No application changes
               required.
             </p>
