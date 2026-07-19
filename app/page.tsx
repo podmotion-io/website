@@ -7,7 +7,6 @@ import Economics from "./components/Economics";
 import GettingStarted from "./components/GettingStarted";
 import CLIShowcase from "./components/CLIShowcase";
 import Community from "./components/Community";
-import Corveth from "./components/Corveth";
 import Roadmap from "./components/Roadmap";
 import About from './components/About';
 import SecurityPosture from './components/SecurityPosture';
@@ -29,7 +28,6 @@ export default function Home() {
         <Community />
         <About />
         <SecurityPosture />
-        <Corveth />
       </main>
       <Footer />
     </div>

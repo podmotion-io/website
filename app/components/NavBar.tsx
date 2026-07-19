@@ -106,6 +106,59 @@ export default function NavBar(): React.ReactElement {
             <span style={{ whiteSpace: 'nowrap' }}><span style={{ fontWeight: 700, color: '#22D3EE', letterSpacing: '-0.02em' }}>Pod</span><span style={{ fontWeight: 300, color: '#F1F5F9', letterSpacing: '-0.02em' }}>Motion</span></span>
           </a>
 
+          {/* ── Brand co-mark: "a Corveth project" pill badge — PodMotion stays primary; ── */}
+          {/* ── this reads as a distinct, unambiguous "powered by" mark, not nav text.  ── */}
+          <a
+            href="https://corveth.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pm-corveth-badge"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              marginLeft: '4px',
+              padding: '4px 10px 4px 8px',
+              borderRadius: '999px',
+              background: 'rgba(148,163,184,0.07)',
+              border: '1px solid rgba(148,163,184,0.16)',
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontSize: '11px',
+              fontWeight: 500,
+              letterSpacing: '0.02em',
+              color: '#94A3B8',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+              transition: 'color 120ms cubic-bezier(0.4,0,0.2,1), background-color 120ms cubic-bezier(0.4,0,0.2,1), border-color 120ms cubic-bezier(0.4,0,0.2,1)',
+            }}
+            aria-label="A Corveth project — corveth.ai"
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.color = '#F1F5F9';
+              el.style.background = 'rgba(148,163,184,0.13)';
+              el.style.borderColor = 'rgba(148,163,184,0.28)';
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.color = '#94A3B8';
+              el.style.background = 'rgba(148,163,184,0.07)';
+              el.style.borderColor = 'rgba(148,163,184,0.16)';
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                width: '5px',
+                height: '5px',
+                borderRadius: '50%',
+                background: '#22D3EE',
+                flexShrink: 0,
+              }}
+            />
+            a Corveth project
+          </a>
+
           {/* ── Desktop nav ── */}
           <nav
             aria-label="Primary"
@@ -443,6 +496,9 @@ export default function NavBar(): React.ReactElement {
         @media (max-width: 1023px) {
           .pm-desktop-nav { display: none !important; }
           .pm-hamburger { display: flex !important; align-items: center; justify-content: center; }
+        }
+        @media (max-width: 480px) {
+          .pm-corveth-badge { display: none !important; }
         }
       `}</style>
     </>

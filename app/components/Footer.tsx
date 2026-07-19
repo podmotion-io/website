@@ -156,7 +156,16 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             {/* Copyright */}
             <p className="text-sm text-pm-slate-500">
-              &copy; 2026 PodMotion Authors &middot; Apache-2.0
+              &copy; 2026 PodMotion Authors &middot; Apache-2.0 &middot; A{' '}
+              <a
+                href="https://corveth.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-pm-slate-400 underline hover:text-pm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pm-cyan-500 rounded"
+              >
+                Corveth LLC
+              </a>{' '}
+              project
             </p>
 
             {/* Version pill + CNCF disclaimer */}
