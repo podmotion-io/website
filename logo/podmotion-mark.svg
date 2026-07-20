@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <!-- Outer ring: eternity -->
+  <circle cx="120" cy="120" r="108" fill="none" stroke="#0D1F3A" stroke-width="2"/>
+
+  <!-- Mid ring: omnipresence -->
+  <circle cx="120" cy="120" r="80"  fill="none" stroke="#1A3A6E" stroke-width="2"/>
+
+  <!-- Inner ring: quantum boundary -->
+  <circle cx="120" cy="120" r="54"  fill="transparent" stroke="#3B82F6" stroke-width="3"/>
+
+  <!-- Core fill -->
+  <circle cx="120" cy="120" r="34"  fill="#1565C0"/>
+
+  <!-- Core glow -->
+  <circle cx="120" cy="120" r="18"  fill="#22D3EE"/>
+
+  <!-- Core center -->
+  <circle cx="120" cy="120" r="7"   fill="#EEF6FF"/>
+
+  <!-- Cardinal connectors (8px long, from satellite edge toward inner ring) -->
+  <!-- North: satellite center cy=40, edge at cy=49 -->
+  <line x1="120" y1="49"  x2="120" y2="57"  stroke="#3B82F6" stroke-width="1.5" opacity="0.7"/>
+  <!-- East: satellite center cx=200, edge at cx=191 -->
+  <line x1="191" y1="120" x2="183" y2="120" stroke="#3B82F6" stroke-width="1.5" opacity="0.7"/>
+  <!-- South: satellite center cy=200, edge at cy=191 -->
+  <line x1="120" y1="191" x2="120" y2="183" stroke="#3B82F6" stroke-width="1.5" opacity="0.7"/>
+  <!-- West: satellite center cx=40, edge at cx=49 -->
+  <line x1="49"  y1="120" x2="57"  y2="120" stroke="#3B82F6" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Cardinal satellite nodes -->
+  <!-- North: cy=120-80=40 -->
+  <circle cx="120" cy="40"  r="9" fill="#1E4A8A" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="120" cy="40"  r="3.5" fill="#60A5FA"/>
+  <!-- East: cx=120+80=200 -->
+  <circle cx="200" cy="120" r="9" fill="#1E4A8A" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="200" cy="120" r="3.5" fill="#60A5FA"/>
+  <!-- South: cy=120+80=200 -->
+  <circle cx="120" cy="200" r="9" fill="#1E4A8A" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="120" cy="200" r="3.5" fill="#60A5FA"/>
+  <!-- West: cx=120-80=40 -->
+  <circle cx="40"  cy="120" r="9" fill="#1E4A8A" stroke="#3B82F6" stroke-width="2"/>
+  <circle cx="40"  cy="120" r="3.5" fill="#60A5FA"/>
+</svg>
