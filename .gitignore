@@ -4,6 +4,9 @@ node_modules
 /out/
 .next
 
-# Internal strategy docs — live locally only, never committed or pushed
+# Internal strategy/governance docs and agent tooling — local only, never committed or pushed
 docs/AGENTIC_STRATEGY.md
 docs/AGENTIC_STRATEGY_*.md
+CLAUDE.md
+.claude/
+!.claude/launch.json
