@@ -71,7 +71,7 @@ export function ProofStrip() {
           >
             seq_delta=0&nbsp;(held&nbsp;TCP):&nbsp;first&nbsp;proven&nbsp;Sprint&nbsp;46&nbsp;&mdash;&nbsp;single&nbsp;connection&nbsp;&middot;&nbsp;full&nbsp;multi-flow&nbsp;bar&nbsp;still&nbsp;ahead
           </MetricChip>
-          <MetricChip>freeze p50 312&thinsp;ms&thinsp;/&thinsp;p99 487&thinsp;ms&thinsp;(n=10, NS#4)</MetricChip>
+          <MetricChip>freeze p50 312&thinsp;ms&thinsp;/&thinsp;p99 487&thinsp;ms&thinsp;(n=10, earlier PoC)</MetricChip>
           <MetricChip>0 RST</MetricChip>
           <MetricChip>kernel 6.8&nbsp;&middot;&nbsp;no patches</MetricChip>
         </div>
@@ -157,7 +157,7 @@ export function ProofStrip() {
                 <td className="px-3 py-3 text-pm-white-subtle">Live PostgreSQL (pgbench proof corpus)</td>
                 <td className="px-3 py-3 text-pm-white-subtle font-mono">&mdash;</td>
                 <td className="px-3 py-3 text-pm-white-subtle">
-                  <span className="text-pm-white font-semibold">NS#4.</span> 0 failed transactions observed &mdash; 10 proof runs, 8 pgbench connections, failed_transactions=0.
+                  <span className="text-pm-white font-semibold">Earlier arm64/kind PoC.</span> 0 failed transactions observed &mdash; 10 proof runs, 8 pgbench connections, failed_transactions=0.
                 </td>
               </tr>
               <tr className="border-b border-pm-navy-700">
@@ -165,7 +165,7 @@ export function ProofStrip() {
                 <td className="px-3 py-3 text-pm-white-subtle">Redis active-write (historical arm64 PoC)</td>
                 <td className="px-3 py-3 text-pm-white-subtle font-mono">&mdash;</td>
                 <td className="px-3 py-3 text-pm-white-subtle">
-                  <span className="text-pm-white font-semibold">Sprint 30 &middot; 2026-06-13.</span> 18/18 ACs PASS. n=1, single migration, single connection, client on host (not in pod); not weighted at parity with the NS#4 10-run statistical corpus. Next goal (Phase C) seq_delta=0 not yet proven end-to-end.
+                  <span className="text-pm-white font-semibold">Sprint 30 &middot; 2026-06-13.</span> 18/18 ACs PASS. n=1, single migration, single connection, client on host (not in pod); not weighted at parity with the earlier PoC's 10-run statistical corpus. Next goal (Phase C) seq_delta=0 not yet proven end-to-end.
                 </td>
               </tr>
               <tr className="border-b border-pm-navy-700">
@@ -173,7 +173,7 @@ export function ProofStrip() {
                 <td className="px-3 py-3 text-pm-white-subtle">Redis</td>
                 <td className="px-3 py-3 text-pm-white font-mono">Cold (None)</td>
                 <td className="px-3 py-3 text-pm-white-subtle">
-                  <span className="text-pm-white font-semibold">Sprint 31, NP-AMD64-BASELINE &middot; 2026-06-15.</span> amd64 cold migration proven (tcpPreservationMode=None). 22/22 gates, freeze=199ms, redis key pm-sprint31-key present in replacement pod, source pod deleted post-TrafficVerified, EndpointSliceCleanupVerified. Kernel 6.17 is correct for this host &mdash; NS#4 and Sprint 30 used a separate arm64 host at kernel 6.8 with Flannel VXLAN.
+                  <span className="text-pm-white font-semibold">Sprint 31, NP-AMD64-BASELINE &middot; 2026-06-15.</span> amd64 cold migration proven (tcpPreservationMode=None). 22/22 gates, freeze=199ms, redis key pm-sprint31-key present in replacement pod, source pod deleted post-TrafficVerified, EndpointSliceCleanupVerified. Kernel 6.17 is correct for this host &mdash; the earlier PoC and Sprint 30 used a separate arm64 host at kernel 6.8 with Flannel VXLAN.
                 </td>
               </tr>
               <tr className="border-b border-pm-navy-700">
@@ -227,7 +227,7 @@ export function ProofStrip() {
 
         {/* Caveat */}
         <p className="text-pm-white-subtle text-sm text-center max-w-xl">
-          Pre-1.0. Single-cluster. arm64 validated (NS#4, Sprint 30). amd64 cold migration proven (Sprint 31, NP-AMD64-BASELINE; Sprint 32, cold-path CRIU restore baseline). Strict-mode TCP preservation first proven at Sprint 46 — a single held connection survived migration byte-exact (seq_delta 0/0) on a real multi-node cluster (no CNI or architecture recorded in the committed proof); broader multi-flow and per-CNI validation is still ahead.
+          Pre-1.0. Single-cluster. arm64 validated (earlier PoC, Sprint 30). amd64 cold migration proven (Sprint 31, NP-AMD64-BASELINE; Sprint 32, cold-path CRIU restore baseline). Strict-mode TCP preservation first proven at Sprint 46 — a single held connection survived migration byte-exact (seq_delta 0/0) on a real multi-node cluster (no CNI or architecture recorded in the committed proof); broader multi-flow and per-CNI validation is still ahead.
         </p>
 
         {/* Security disclosure — node-root agent posture (SITE-ADR-001) */}

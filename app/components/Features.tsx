@@ -77,7 +77,7 @@ const availableFeatureCards: FeatureCardProps[] = [
         </span>
       </>
     ),
-    deepLinkHref: '/#ns4',
+    deepLinkHref: '/#proof',
     deepLinkLabel: 'See the proof →',
   },
   {
@@ -141,7 +141,7 @@ const audienceCards: AudienceCardProps[] = [
     answer:
       'On a real 3-node KVM cluster running Cilium (v1.17.6, cluster-pool IPAM): a live-held Redis TCP connection survived a node-to-node migration byte-exact (seq_delta 0/0, Strict mode — one held connection; multi-flow not yet proven), and, in a separate workload, a Postgres pod under continuous write load re-attached to its shared ReadWriteMany volume on the destination node and migrated cleanly in None mode (row counter advancing 8 to 16, zero post-migration write errors). Earlier, on a two-node kind cluster (Kubernetes v1.32.0), a full end-to-end migration completed in about 13 seconds with in-memory state intact and 22/22 assertions passing.',
     ctaLabel: 'See the proof →',
-    ctaHref: '/#ns4',
+    ctaHref: '/#proof',
   },
   {
     audience: 'App developer',

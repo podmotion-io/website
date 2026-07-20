@@ -465,9 +465,9 @@ const HowItWorks: FC = () => {
         </div>
 
         {/* ---------------------------------------------------------------- */}
-        {/* NS#4 Proof section (P6)                                          */}
+        {/* Proof section (P6)                                               */}
         {/* ---------------------------------------------------------------- */}
-        <div id="ns4" className="mt-24">
+        <div id="proof" className="mt-24">
           <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-pm-cyan-300">
             Proof Results
           </p>

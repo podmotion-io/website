@@ -36,7 +36,7 @@ const columns: FooterColumn[] = [
   {
     heading: 'Project',
     links: [
-      { label: 'NS#4 Proof', href: '/#ns4' },
+      { label: 'Proof', href: '/#proof' },
       { label: 'Milestones', href: 'https://github.com/podmotion-io/podmotion/milestones', external: true },
       { label: 'Security Policy', href: `${REPO_BASE}/blob/main/SECURITY.md`, external: true },
       { label: 'License (Apache-2.0)', href: `${REPO_BASE}/blob/main/LICENSE`, external: true },

@@ -281,7 +281,7 @@ const Hero: React.FC = () => {
 
             {/* Ghost CTA */}
             <a
-              href="#ns4"
+              href="#proof"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
