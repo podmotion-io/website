@@ -56,6 +56,11 @@ export function ProofStrip() {
           What is proven, on what substrate, and how far the scope goes. Each row states its own CNI, workload, migration mode, and the exact conditions of the run.
         </p>
 
+        {/* Honest top-level summary — workload coverage and long-term durability goal */}
+        <p className="text-pm-white-subtle text-sm text-center max-w-2xl">
+          Across proof runs so far, we&rsquo;ve achieved live migration on Postgres, Redis, and Nginx workloads in some cases — not yet consistently across all cases — and we&rsquo;re working toward a long-term goal of eight-nines (99.999999%) durability for live transfers. See the matrix below for exactly what&rsquo;s proven where.
+        </p>
+
         {/* At-a-glance headline */}
         <div className="flex items-center justify-center text-center">
           <CheckIcon />

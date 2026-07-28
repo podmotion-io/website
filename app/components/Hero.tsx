@@ -188,14 +188,15 @@ const Hero: React.FC = () => {
             }}
           >
             PodMotion runs on one checkpoint/restore engine built toward two co-equal goals. The
-            first: live-migrate a running pod between nodes with its TCP connections intact — the
-            vMotion moment for containers. The second: move containers between hosting platforms
-            and back — AWS ECS ↔ EC2/Docker, EKS ↔ EC2 — or restore a pod from a full backup, the
-            PlateSpin moment for containers. Only the first has real proof today: a single held
-            TCP connection survived a move byte-exact (seq_delta=0) on a real multi-node cluster
-            at Sprint 46; broader multi-flow coverage isn&apos;t proven yet. Cross-platform
-            portability and backup/restore share the same checkpoint/restore foundation but are
-            not yet implemented. This is v0.1.0-alpha, CRD-only.
+            first: live-migrate a running pod between nodes with its TCP connections intact —
+            bringing live migration to containers. The second: move containers between hosting
+            platforms and back — AWS ECS ↔ EC2/Docker, EKS ↔ EC2 — or restore a pod from a full
+            backup, bringing cross-platform portability and disaster recovery to containers. Only
+            the first has real proof today: a single held TCP connection survived a move
+            byte-exact (seq_delta=0) on a real multi-node cluster at Sprint 46; broader multi-flow
+            coverage isn&apos;t proven yet. Cross-platform portability and backup/restore share the
+            same checkpoint/restore foundation but are not yet implemented. This is v0.1.0-alpha,
+            CRD-only.
           </p>
 
           {/* Beginner context */}
