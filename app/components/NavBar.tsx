@@ -78,31 +78,49 @@ export default function NavBar(): React.ReactElement {
             justifyContent: 'space-between',
           }}
         >
-          {/* ── Left: wordmark ── */}
-          <a
-            href="/#top"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              textDecoration: 'none',
-              flexShrink: 0,
-            }}
-            aria-label="PodMotion — home"
-          >
-            {/* UndyingNodeMark — 32×32 pod-in-flight glyph */}
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Source pod — rounded rect */}
-              <rect x="2" y="10" width="12" height="12" rx="3" fill="#0B1527" stroke="#22D3EE" strokeWidth="1.5"/>
-              {/* Destination pod — rounded rect */}
-              <rect x="18" y="10" width="12" height="12" rx="3" fill="#0B1527" stroke="#22D3EE" strokeWidth="1.5" opacity="0.5"/>
-              {/* Migration path — dashed line */}
-              <line x1="14" y1="16" x2="18" y2="16" stroke="#22D3EE" strokeWidth="1.5" strokeDasharray="2 2"/>
-              {/* Live state indicator — cyan square */}
-              <rect x="14.5" y="14.5" width="3" height="3" rx="0.5" fill="#22D3EE"/>
-            </svg>
-            <span style={{ whiteSpace: 'nowrap' }}><span style={{ fontWeight: 700, color: '#22D3EE', letterSpacing: '-0.02em' }}>Pod</span><span style={{ fontWeight: 300, color: '#F1F5F9', letterSpacing: '-0.02em' }}>Motion</span></span>
-          </a>
+          {/* ── Left: wordmark + tagline ── */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+            <a
+              href="/#top"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                textDecoration: 'none',
+                flexShrink: 0,
+              }}
+              aria-label="PodMotion — home"
+            >
+              {/* UndyingNodeMark — 32×32 pod-in-flight glyph */}
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Source pod — rounded rect */}
+                <rect x="2" y="10" width="12" height="12" rx="3" fill="#0B1527" stroke="#22D3EE" strokeWidth="1.5"/>
+                {/* Destination pod — rounded rect */}
+                <rect x="18" y="10" width="12" height="12" rx="3" fill="#0B1527" stroke="#22D3EE" strokeWidth="1.5" opacity="0.5"/>
+                {/* Migration path — dashed line */}
+                <line x1="14" y1="16" x2="18" y2="16" stroke="#22D3EE" strokeWidth="1.5" strokeDasharray="2 2"/>
+                {/* Live state indicator — cyan square */}
+                <rect x="14.5" y="14.5" width="3" height="3" rx="0.5" fill="#22D3EE"/>
+              </svg>
+              <span style={{ whiteSpace: 'nowrap' }}><span style={{ fontWeight: 700, color: '#22D3EE', letterSpacing: '-0.02em' }}>Pod</span><span style={{ fontWeight: 300, color: '#F1F5F9', letterSpacing: '-0.02em' }}>Motion</span></span>
+            </a>
+
+            {/* Tagline — both pillars, named up front */}
+            <span
+              className="pm-navbar-tagline"
+              style={{
+                fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                fontSize: '12px',
+                fontWeight: 400,
+                color: '#94A3B8',
+                whiteSpace: 'nowrap',
+                paddingLeft: '12px',
+                borderLeft: '1px solid #2A3550',
+              }}
+            >
+              Live migration + cross-platform portability, one engine
+            </span>
+          </div>
 
           {/* ── Brand co-mark: "a Corveth project" pill badge — PodMotion stays primary; ── */}
           {/* ── this reads as a distinct, unambiguous "powered by" mark, not nav text.  ── */}
@@ -491,6 +509,9 @@ export default function NavBar(): React.ReactElement {
 
       {/* Scoped styles for responsive show/hide */}
       <style>{`
+        @media (max-width: 1279px) {
+          .pm-navbar-tagline { display: none !important; }
+        }
         @media (max-width: 1023px) {
           .pm-desktop-nav { display: none !important; }
           .pm-hamburger { display: flex !important; align-items: center; justify-content: center; }

@@ -106,11 +106,12 @@ const crossPlatformRoadmapCard: FeatureCardProps = {
   title: 'Move containers across platforms',
   body: (
     <>
-      Live migration between Kubernetes nodes is the flagship goal we&apos;re
-      proving first. The same checkpoint/restore foundation is also meant to
-      make PodMotion a cornerstone for moving containers between different
-      hosting platforms and back &mdash; for example AWS ECS and EC2/Docker, or
-      EKS and EC2. This is an early roadmap goal, not available in v0.1.0-alpha.
+      PodMotion&apos;s checkpoint/restore engine is built toward two co-equal
+      goals: live migration between Kubernetes nodes, and moving containers
+      between different hosting platforms and back &mdash; for example AWS ECS
+      and EC2/Docker, or EKS and EC2. Live migration has real proof today;
+      cross-platform portability is architected but not yet implemented in
+      v0.1.0-alpha.
     </>
   ),
   deepLinkHref: 'https://github.com/podmotion-io/podmotion/milestones',
@@ -121,10 +122,9 @@ const backupRestoreRoadmapCard: FeatureCardProps = {
   title: 'Full pod backup, ready for restore',
   body: (
     <>
-      Beyond live migration, we&apos;re working toward full pod backup &mdash;
+      The same checkpoint/restore engine also targets full pod backup &mdash;
       a checkpoint you can hold onto and restore later, not just move
-      immediately to another node. This is a distinct capability from live
-      migration and is not available in v0.1.0-alpha.
+      immediately to another node. This is not yet available in v0.1.0-alpha.
     </>
   ),
   deepLinkHref: 'https://github.com/podmotion-io/podmotion/milestones',

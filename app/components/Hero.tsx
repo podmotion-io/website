@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
               margin: 0,
             }}
           >
-            Live pod migration for Kubernetes — and beyond · v0.1.0-alpha
+            Live migration + cross-platform portability for Kubernetes pods · v0.1.0-alpha
           </p>
 
           {/* H1 */}
@@ -171,8 +171,32 @@ const Hero: React.FC = () => {
           >
             Live-migrate running pods.{' '}
             <br />
-            Keep the TCP connection.
+            Move them across platforms entirely.
           </h1>
+
+          {/* Mission subhead — both pillars, co-equal */}
+          <p
+            style={{
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontSize: '18px',
+              fontWeight: 400,
+              lineHeight: 1.65,
+              letterSpacing: 0,
+              color: '#CBD5E1',
+              margin: 0,
+              maxWidth: '58ch',
+            }}
+          >
+            PodMotion runs on one checkpoint/restore engine built toward two co-equal goals. The
+            first: live-migrate a running pod between nodes with its TCP connections intact — the
+            vMotion moment for containers. The second: move containers between hosting platforms
+            and back — AWS ECS ↔ EC2/Docker, EKS ↔ EC2 — or restore a pod from a full backup, the
+            PlateSpin moment for containers. Only the first has real proof today: a single held
+            TCP connection survived a move byte-exact (seq_delta=0) on a real multi-node cluster
+            at Sprint 46; broader multi-flow coverage isn&apos;t proven yet. Cross-platform
+            portability and backup/restore share the same checkpoint/restore foundation but are
+            not yet implemented. This is v0.1.0-alpha, CRD-only.
+          </p>
 
           {/* Beginner context */}
           <p
@@ -196,26 +220,6 @@ const Hero: React.FC = () => {
             normal networking instead. Live TCP-connection survival is a separate result — first proven
             at Sprint 46 for a single held connection on a real multi-node cluster, with broader
             multi-flow coverage not yet proven. This is v0.1.0-alpha (CRD-only, no kubectl plugin).
-          </p>
-
-          {/* Mission scope */}
-          <p
-            style={{
-              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontSize: '16px',
-              fontWeight: 400,
-              lineHeight: 1.6,
-              letterSpacing: 0,
-              color: '#94A3B8',
-              margin: 0,
-              maxWidth: '58ch',
-            }}
-          >
-            Live migration between nodes is our flagship goal, and the one we&apos;re proving first.
-            The same checkpoint/restore foundation is also the basis for two things on our roadmap:
-            moving containers between different hosting platforms and back — for example AWS ECS and
-            EC2/Docker, or EKS and EC2 — and full pod backup that&apos;s ready for restore. Neither is
-            available yet in v0.1.0-alpha.
           </p>
 
           {/* Subhead */}
@@ -393,7 +397,7 @@ const Hero: React.FC = () => {
             Kubernetes Pods Made Immortal<sup style={{ fontSize: '0.5em', marginLeft: '2px' }}>&reg;</sup>
           </p>
           <p className="text-center text-pm-cyan-300 font-light tracking-[0.25em] uppercase text-sm mb-2 select-none">
-            Live migration, proven on our test substrate
+            Live migration + cross-platform portability, one engine
           </p>
           <p className="text-center text-pm-text-muted font-light tracking-[0.15em] uppercase text-xs mb-10 select-none">
             seq_delta=0 — first proven at Sprint 46 (single held connection); full multi-flow bar ahead

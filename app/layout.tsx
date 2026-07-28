@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PodMotion — Kubernetes Pods Made Immortal",
+  title: "PodMotion — Kubernetes Pods Made Immortal: Live Migration & Cross-Platform Portability",
   description:
-    "Live-migrate running Kubernetes pods with memory, open files, and active TCP connections intact. No application changes. Proven on live PostgreSQL — zero failed transactions observed across 10 proof runs.",
+    "PodMotion is one checkpoint/restore engine built for two goals: live-migrate a running Kubernetes pod between nodes with its TCP connections intact, and move containers between hosting platforms (AWS ECS ↔ EC2/Docker, EKS ↔ EC2) or restore from a full backup. Live migration is proven on a real multi-node cluster (single held connection, byte-exact seq_delta=0); cross-platform portability and backup/restore are architected but not yet implemented. v0.1.0-alpha, CRD-only.",
   icons: {
     icon: '/favicon.svg',
   },
