@@ -170,6 +170,52 @@ const About: FC = () => {
               </a>
             </div>
 
+            {/* Johnathan Knotts */}
+            <div className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.3)]">
+              <div className="mb-3 flex items-center gap-3">
+                <img
+                  src="/images/johnathan.jpeg"
+                  alt="Johnathan Knotts"
+                  style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                />
+                <div>
+                  <p className="text-sm font-semibold leading-tight text-pm-white">Johnathan Knotts</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">PodMotion Lead Architect</p>
+                  <p className="mt-0.5 text-xs text-pm-white-muted">AWS DevOps Engineer, ispace, inc.</p>
+                </div>
+              </div>
+              <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
+                AWS DevOps Engineer with a background in RAN/O-RAN network integrations at DISH Network and systems engineering at wi-fiber. BS in Electronic Systems and Engineering Technology, Texas A&amp;M University. Brings hands-on network engineering and customer-facing technical delivery experience to PodMotion's architecture.
+              </p>
+              <a href="https://www.linkedin.com/in/johnathan-knotts/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+                LinkedIn
+              </a>
+            </div>
+
+            {/* Alexander Einbinder */}
+            <div className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.3)]">
+              <div className="mb-3 flex items-center gap-3">
+                <img
+                  src="/images/alex.jpeg"
+                  alt="Alexander Einbinder"
+                  style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                />
+                <div>
+                  <p className="text-sm font-semibold leading-tight text-pm-white">Alexander Einbinder</p>
+                  <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-pm-cyan-300">Virtualization Lead Architect</p>
+                  <p className="mt-0.5 text-xs text-pm-white-muted">Senior Ground Operations Engineer, ispace, inc.</p>
+                </div>
+              </div>
+              <p className="mb-4 text-xs leading-relaxed text-pm-white-muted">
+                Two decades of IT infrastructure and mission-critical operations experience, currently steering ground control operations at ispace, inc. Deep proficiency in Linux-based platforms, vSphere/vSAN virtualization, and observability tooling (Grafana, InfluxDB, Yamcs). Brings redundant-systems and resilient-infrastructure design experience to PodMotion's architecture.
+              </p>
+              <a href="https://www.linkedin.com/in/alexander-einbinder-0284a130/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs text-pm-cyan-300 underline hover:text-pm-cyan-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+                LinkedIn
+              </a>
+            </div>
+
         </div>
         {/* Known Limitations */}
         <div className="mt-20">

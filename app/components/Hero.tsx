@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
               margin: 0,
             }}
           >
-            Live migration + cross-platform portability for Kubernetes pods · v0.1.0-alpha
+            Live migration + cross-platform portability · v0.1.0-alpha
           </p>
 
           {/* H1 */}
@@ -174,7 +174,7 @@ const Hero: React.FC = () => {
             Move them across platforms entirely.
           </h1>
 
-          {/* Mission subhead — both pillars, co-equal */}
+          {/* Mission subhead — both pillars, co-equal, condensed */}
           <p
             style={{
               fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
@@ -187,78 +187,12 @@ const Hero: React.FC = () => {
               maxWidth: '58ch',
             }}
           >
-            PodMotion runs on one checkpoint/restore engine built toward two co-equal goals. The
-            first: live-migrate a running pod between nodes with its TCP connections intact —
-            bringing live migration to containers. The second: move containers between hosting
-            platforms and back — AWS ECS ↔ EC2/Docker, EKS ↔ EC2 — or restore a pod from a full
-            backup, bringing cross-platform portability and disaster recovery to containers. Only
-            the first has real proof today: a single held TCP connection survived a move
-            byte-exact (seq_delta=0) on a real multi-node cluster at Sprint 46; broader multi-flow
-            coverage isn&apos;t proven yet. Cross-platform portability and backup/restore share the
-            same checkpoint/restore foundation but are not yet implemented. This is v0.1.0-alpha,
-            CRD-only.
-          </p>
-
-          {/* Beginner context */}
-          <p
-            style={{
-              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontSize: '16px',
-              fontWeight: 400,
-              lineHeight: 1.6,
-              letterSpacing: 0,
-              color: '#94A3B8',
-              margin: 0,
-              maxWidth: '58ch',
-            }}
-          >
-            When Kubernetes needs to move a running application to a different server, it normally kills
-            it and restarts it. PodMotion checkpoints the running pod, moves it to another node, and
-            restores it on standard upstream Kubernetes with PodMotion&apos;s node agent and CRIU
-            runtime installed. We are deliberately not focusing on preserving the pod&apos;s original IP
-            address right now: not every cloud provider or CNI can hand a restored pod an address from
-            another node&apos;s pod-IP block, so PodMotion restores onto the destination node&apos;s
-            normal networking instead. Live TCP-connection survival is a separate result — first proven
-            at Sprint 46 for a single held connection on a real multi-node cluster, with broader
-            multi-flow coverage not yet proven. This is v0.1.0-alpha (CRD-only, no kubectl plugin).
-          </p>
-
-          {/* Subhead */}
-          <p
-            style={{
-              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-              fontSize: '18px',
-              fontWeight: 400,
-              lineHeight: 1.65,
-              letterSpacing: 0,
-              color: '#CBD5E1',
-              margin: 0,
-              maxWidth: '58ch',
-            }}
-          >
-            PodMotion checkpoints a running, stateful pod, moves it to another node, and restores it —
-            with an in-memory counter restored intact across nodes.
-            Proven end-to-end on our two-node kind proof substrate (Kubernetes v1.32) in about 13 seconds in our cold-path proof run, with
-            the source pod never deleted until traffic is verified (ADR-0012).{' '}
-            Our next goal —{' '}
-            <code
-              style={{
-                fontFamily: "'JetBrains Mono', 'SF Mono', ui-monospace, Consolas, monospace",
-                fontSize: '15px',
-                color: '#22D3EE',
-                background: 'rgba(34,211,238,0.10)',
-                borderRadius: '6px',
-                padding: '1px 6px',
-              }}
-            >
-              seq_delta=0
-            </code>
-            , a live TCP connection surviving the move so containers and clients are both unaware the
-            pod moved — was first proven at Sprint 46, where a single held connection survived a
-            migration byte-exact (seq_delta 0/0, Strict mode) on a real multi-node cluster; the full
-            guarantee across many concurrent flows and declared CNIs is not yet proven. Cold-path
-            proof substrate (exact): amd64 / Linux 6.17 / containerd 1.7.24 / Kubernetes v1.32.0 /
-            kindnet (host-routed, no VXLAN overlay).
+            One checkpoint/restore engine, two goals: live-migrate a running pod between nodes
+            with its TCP connections intact, and move containers between hosting platforms —
+            AWS ECS ↔ EC2/Docker, EKS ↔ EC2 — or restore from a full backup. Live migration has
+            real proof today (a held connection survived byte-exact, seq_delta=0, at Sprint 46);
+            cross-platform portability and backup/restore are architected, not yet built.
+            v0.1.0-alpha, CRD-only.
           </p>
 
           {/* CTA row */}
