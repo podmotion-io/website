@@ -100,7 +100,36 @@ const availableFeatureCards: FeatureCardProps[] = [
   },
 ];
 
-// ── Roadmap feature card (NOT available in v0.1.0-alpha) ─────────────────────
+// ── Roadmap feature cards (NOT available in v0.1.0-alpha) ────────────────────
+
+const crossPlatformRoadmapCard: FeatureCardProps = {
+  title: 'Move containers across platforms',
+  body: (
+    <>
+      Live migration between Kubernetes nodes is the flagship goal we&apos;re
+      proving first. The same checkpoint/restore foundation is also meant to
+      make PodMotion a cornerstone for moving containers between different
+      hosting platforms and back &mdash; for example AWS ECS and EC2/Docker, or
+      EKS and EC2. This is an early roadmap goal, not available in v0.1.0-alpha.
+    </>
+  ),
+  deepLinkHref: 'https://github.com/podmotion-io/podmotion/milestones',
+  deepLinkLabel: 'See the roadmap  →',
+};
+
+const backupRestoreRoadmapCard: FeatureCardProps = {
+  title: 'Full pod backup, ready for restore',
+  body: (
+    <>
+      Beyond live migration, we&apos;re working toward full pod backup &mdash;
+      a checkpoint you can hold onto and restore later, not just move
+      immediately to another node. This is a distinct capability from live
+      migration and is not available in v0.1.0-alpha.
+    </>
+  ),
+  deepLinkHref: 'https://github.com/podmotion-io/podmotion/milestones',
+  deepLinkLabel: 'See the roadmap  →',
+};
 
 const roadmapFeatureCard: FeatureCardProps = {
   title: 'Volumes follow the pod',
@@ -234,6 +263,8 @@ export function Features() {
 
         <div className="features-grid">
           <FeatureCard {...roadmapFeatureCard} />
+          <FeatureCard {...crossPlatformRoadmapCard} />
+          <FeatureCard {...backupRestoreRoadmapCard} />
         </div>
       </div>
 

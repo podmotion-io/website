@@ -51,10 +51,17 @@ const About: FC = () => {
             changes required.
           </p>
           <p className="text-lg leading-relaxed text-pm-white-muted">
-            What started as a proof of concept is now a production path: a
-            12-phase migration state machine, five CRDs, a scheduler plugin, a CNI
-            plugin, and a growing open-source project. Built in the open.
-            Apache-2.0. Founded and built by a team with deep roots in Kubernetes, federal systems, and enterprise transformation.
+            What started as a proof of concept has grown into a real system in
+            progress: a 12-phase migration state machine, five CRDs, a scheduler
+            plugin, a CNI plugin, and a growing open-source project. Live
+            migration between nodes remains the flagship goal, and it&apos;s
+            also becoming the foundation for two more things we&apos;re working
+            toward — moving containers between different hosting platforms and
+            back (for example AWS ECS and EC2/Docker, or EKS and EC2), and full
+            pod backup that&apos;s ready for restore. Both are early roadmap
+            items, not available in v0.1.0-alpha. Built in the open. Apache-2.0.
+            Founded and built by a team with deep roots in Kubernetes, federal
+            systems, and enterprise transformation.
           </p>
         </div>
 

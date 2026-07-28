@@ -46,33 +46,28 @@ export default function HowItWasBuilt() {
             id="how-it-was-built-heading"
             className="mt-2 text-3xl font-bold tracking-tight text-pm-white sm:text-4xl"
           >
-            Two Breakthroughs, One Project
+            How We&rsquo;re Building It
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-pm-slate-300">
-            PodMotion made pods immortal — and the way it was built left a trail you can re-run.
+            PodMotion is an early-stage attempt at something the industry treats as very hard — and
+            we&rsquo;ve tried to leave a trail you can check for yourself.
           </p>
         </div>
 
         {/* 2 — Narrative paragraphs */}
         <div className="mx-auto mt-12 max-w-3xl space-y-6 text-base leading-relaxed text-pm-slate-300">
           <p>
-            PodMotion set out to do something the industry treats as impossible: move a running
-            container between nodes without dropping a single connection — zero TCP sequence delta,
-            live. Making pods immortal was only half of it. Work this unforgiving had to be built
-            differently — by one person directing a fleet of AI agents, held to a far higher bar than
-            AI-assisted work usually meets.
+            PodMotion set out to move a running container between nodes without dropping a single
+            connection — zero TCP sequence delta, live. We&rsquo;ve proven pieces of that goal on real
+            clusters, hit real failures along the way, and are still working through consistency
+            across substrates. It&rsquo;s being built by one person directing a fleet of AI agents,
+            with an unusually strict bar for what counts as evidence.
           </p>
           <p>
-            Most AI-assisted work lets agents write code and calls it done. PodMotion didn&rsquo;t.
-            Every architectural decision, every security claim, and every performance number had to
-            earn its place against evidence before it shipped. What that produced is fully public: an
-            unusually deep trail of decision records, reproducible proofs, and adversarial security
-            reviews — the kind of paper trail you expect from a mature, audited platform, not a young
-            project.
-          </p>
-          <p>
-            That trail isn&rsquo;t a polish pass. It&rsquo;s the exhaust of how the system was built —
-            rigor baked into the process, not bolted on after. Two firsts, built at once.
+            Every architectural decision, security claim, and performance number has had to earn its
+            place against evidence before it shipped. That&rsquo;s produced a public, growing trail of
+            decision records, reproducible proofs, and security reviews — not a finished audit, but an
+            honest record of what&rsquo;s been tried and what&rsquo;s been learned so far.
           </p>
         </div>
 

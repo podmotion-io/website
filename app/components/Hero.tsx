@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
               margin: 0,
             }}
           >
-            Live pod migration for Kubernetes · v0.1.0-alpha
+            Live pod migration for Kubernetes — and beyond · v0.1.0-alpha
           </p>
 
           {/* H1 */}
@@ -196,6 +196,26 @@ const Hero: React.FC = () => {
             normal networking instead. Live TCP-connection survival is a separate result — first proven
             at Sprint 46 for a single held connection on a real multi-node cluster, with broader
             multi-flow coverage not yet proven. This is v0.1.0-alpha (CRD-only, no kubectl plugin).
+          </p>
+
+          {/* Mission scope */}
+          <p
+            style={{
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontSize: '16px',
+              fontWeight: 400,
+              lineHeight: 1.6,
+              letterSpacing: 0,
+              color: '#94A3B8',
+              margin: 0,
+              maxWidth: '58ch',
+            }}
+          >
+            Live migration between nodes is our flagship goal, and the one we&apos;re proving first.
+            The same checkpoint/restore foundation is also the basis for two things on our roadmap:
+            moving containers between different hosting platforms and back — for example AWS ECS and
+            EC2/Docker, or EKS and EC2 — and full pod backup that&apos;s ready for restore. Neither is
+            available yet in v0.1.0-alpha.
           </p>
 
           {/* Subhead */}
@@ -358,8 +378,22 @@ const Hero: React.FC = () => {
             padding: '24px',
           }}
         >
+          <p
+            style={{
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontSize: 'clamp(1.125rem, 1.5vw + 0.75rem, 1.5rem)',
+              fontWeight: 700,
+              letterSpacing: '-0.01em',
+              color: '#F1F5F9',
+              margin: 0,
+              marginBottom: '14px',
+              textAlign: 'center',
+            }}
+          >
+            Kubernetes Pods Made Immortal<sup style={{ fontSize: '0.5em', marginLeft: '2px' }}>&reg;</sup>
+          </p>
           <p className="text-center text-pm-cyan-300 font-light tracking-[0.25em] uppercase text-sm mb-2 select-none">
-            Live migration, proven end-to-end
+            Live migration, proven on our test substrate
           </p>
           <p className="text-center text-pm-text-muted font-light tracking-[0.15em] uppercase text-xs mb-10 select-none">
             seq_delta=0 — first proven at Sprint 46 (single held connection); full multi-flow bar ahead
