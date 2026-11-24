@@ -7,6 +7,7 @@ import Economics from "./components/Economics";
 import GettingStarted from "./components/GettingStarted";
 import CLIShowcase from "./components/CLIShowcase";
 import Community from "./components/Community";
+import Vethyam from "./components/Vethyam";
 import About from './components/About';
 import Footer from "./components/Footer";
 
@@ -20,6 +21,7 @@ export default function Home() {
         <Features />
         <HowItWorks />
         <Economics />
+        <Vethyam />
         <GettingStarted />
         <CLIShowcase />
         <Community />

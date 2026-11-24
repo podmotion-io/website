@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "PodMotion — Kubernetes Pods Made Immortal: Live Migration & Cross-Platform Portability",
   description:
-    "PodMotion is one checkpoint/restore engine built for two goals: live-migrate a running Kubernetes pod between nodes with its TCP connections intact, and move containers between hosting platforms (AWS ECS ↔ EC2/Docker, EKS ↔ EC2) or restore from a full backup. Live migration is proven on a real multi-node cluster (single held connection, byte-exact seq_delta=0); cross-platform portability and backup/restore are architected but not yet implemented. v0.1.0-alpha, CRD-only.",
+    "PodMotion is an experimental open-source Kubernetes project built primarily by Claude and other large language models with human direction and review. Its alpha checkpoint/restore engine explores live pod migration and pod IP preservation; Vethyam is a new CNI under design to help facilitate pod IP preservation. Production guarantees are not claimed.",
   icons: {
     icon: '/favicon.svg',
   },

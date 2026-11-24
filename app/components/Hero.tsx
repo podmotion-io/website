@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
               margin: 0,
             }}
           >
-            Live migration + cross-platform portability · v0.1.0-alpha
+            Experimental Kubernetes project · entirely LLM-built · v0.1.0-alpha
           </p>
 
           {/* H1 */}
@@ -187,12 +187,11 @@ const Hero: React.FC = () => {
               maxWidth: '58ch',
             }}
           >
-            One checkpoint/restore engine, two goals: live-migrate a running pod between nodes
-            with its TCP connections intact, and move containers between hosting platforms —
-            AWS ECS ↔ EC2/Docker, EKS ↔ EC2 — or restore from a full backup. Live migration has
-            real proof today (a held connection survived byte-exact, seq_delta=0, at Sprint 46);
-            cross-platform portability and backup/restore are architected, not yet built.
-            v0.1.0-alpha, CRD-only.
+            This is an experimental open-source project built in the open, primarily by Claude
+            and other large language models with human direction and review. The codebase is
+            alpha-quality and evolving quickly: treat proof results as scoped evidence, not
+            production guarantees. PodMotion is currently exploring live migration and pod IP
+            preservation; Vethyam is a new CNI being designed to help complete that work.
           </p>
 
           {/* CTA row */}

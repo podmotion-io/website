@@ -167,13 +167,13 @@ export default function Footer() {
               project
             </p>
 
-            {/* Version pill + CNCF disclaimer */}
+            {/* Version pill */}
             <div className="flex flex-wrap items-center justify-center gap-3">
               <span className="inline-flex items-center rounded-full bg-pm-navy-800 px-2.5 py-0.5 text-xs font-medium text-pm-cyan-400 ring-1 ring-inset ring-pm-navy-700">
                 v0.1.0-alpha
               </span>
               <span className="text-xs text-pm-slate-600">
-                PodMotion is not affiliated with the CNCF
+                Experimental · LLM-assisted development
               </span>
             </div>
           </div>

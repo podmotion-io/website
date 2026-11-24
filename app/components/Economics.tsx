@@ -33,7 +33,7 @@ const metrics: MetricCardProps[] = [
     value: '70%',
     plain:
       'The root cause is structural, not a configuration problem. You cannot consolidate servers if moving an app requires restarting it.',
-    source: 'CNCF FinOps Microsurvey, Dec 2023',
+    source: 'Kubernetes FinOps industry microsurvey, Dec 2023',
   },
   {
     label: 'Average cost of a major infrastructure incident',
@@ -462,8 +462,8 @@ export default function Economics() {
           <p className="text-xs text-pm-slate-400 leading-relaxed">
             <span className="font-semibold text-pm-slate-300">Disclaimer.</span> All financial
             figures on this page are modeled projections for planning purposes only, derived from
-            publicly available industry research (CAST AI 2025–2026, CNCF FinOps Microsurvey
-            Dec 2023, PagerDuty State of Digital Operations 2024, Komodor 2025 Enterprise
+            publicly available industry research (CAST AI 2025–2026, Kubernetes FinOps
+            microsurvey Dec 2023, PagerDuty State of Digital Operations 2024, Komodor 2025 Enterprise
             Kubernetes Report, and published AWS/Datadog/Dynatrace/Sysdig/Oracle pricing as
             of June 2026). Actual savings depend on workload profile, cluster topology, instance
             mix, existing licensing agreements, and operational context.

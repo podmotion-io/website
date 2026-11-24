@@ -64,6 +64,14 @@ const About: FC = () => {
             Founded and built by a team with deep roots in Kubernetes, federal
             systems, and enterprise transformation.
           </p>
+          <p className="text-lg leading-relaxed text-pm-white-muted">
+            <strong className="text-pm-white">How this project is built:</strong> PodMotion is
+            an intentionally experimental project. Its source code, architecture, tests,
+            documentation, and website are being built primarily with Claude and other large
+            language models under human direction and review. That workflow is part of the
+            project&apos;s public identity, not a hidden implementation detail. Human judgment
+            must still question AI output; the alpha status and limited proof remain decisive.
+          </p>
         </div>
 
         {/* Team cards */}
@@ -227,8 +235,8 @@ const About: FC = () => {
           </h3>
           <p className="mb-8 text-base leading-relaxed text-pm-white-muted max-w-2xl">
             These are the honest boundaries of what v0.1.0-alpha does and does not do. Naming them precisely is
-            engineering discipline — CNCF TAG reviewers treat explicit scope boundaries as a credibility signal,
-            not a weakness.
+            engineering discipline: explicit scope boundaries help operators distinguish verified behavior
+            from experiment, roadmap, and intent.
           </p>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <li className="rounded-xl border border-pm-navy-600 bg-pm-navy-800 p-5">

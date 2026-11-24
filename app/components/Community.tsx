@@ -131,17 +131,8 @@ export default function Community() {
             Join the project
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-pm-slate-300">
-            Apache-2.0, vendor-neutral,{' '}
-            <span className="relative group inline-block">
-              <span className="cursor-default">CNCF-track</span>
-              <span
-                title="PodMotion is not a CNCF project. 'CNCF-track' describes our intended trajectory only — we are targeting CNCF sandbox submission, gated on ≥2 maintainers from ≥2 organizations. See GOVERNANCE.md."
-                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 bg-pm-navy-800 border border-pm-navy-600 text-pm-white-muted text-xs rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50"
-              >
-                PodMotion is not a CNCF project. &lsquo;CNCF-track&rsquo; describes our intended trajectory only &mdash; we are targeting CNCF sandbox submission, gated on &ge;2 maintainers from &ge;2 organizations. See GOVERNANCE.md.
-              </span>
-            </span>
-            . Built in the open.
+            Apache-2.0, vendor-neutral, and built in the open. An experimental Kubernetes
+            project shaped by transparent research, public proof, and community review.
           </p>
         </div>
 
@@ -150,10 +141,10 @@ export default function Community() {
           <span className="text-xs font-medium text-pm-slate-400">Current status:</span>
           {[
             'v0.1.0-alpha',
+            'experimental',
             'single-cluster',
             'amd64 validated (arm64 post-v1.0)',
-            'one maintainer',
-            'pre-CNCF-sandbox',
+            'community governed',
           ].map((badge) => (
             <span
               key={badge}
@@ -222,20 +213,9 @@ export default function Community() {
             <div>
               <p className="text-sm font-semibold text-amber-300">Governance commitment</p>
               <p className="mt-1 text-sm leading-relaxed text-amber-200/80">
-                We will not file for CNCF sandbox until there are ≥2 maintainers from ≥2 organizations.
-                PodMotion is a vendor-neutral project with a documented maintainer-diversity plan.
+                PodMotion will grow through documented ownership, transparent decisions,
+                independent maintainers, and a clear path toward durable multi-organization stewardship.
               </p>
-              <a
-                href={`${REPO_BASE}/blob/main/GOVERNANCE.md`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-amber-400 hover:text-amber-300"
-              >
-                Read GOVERNANCE.md 
-                <svg aria-hidden="true" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
             </div>
           </div>
         </div>
@@ -300,11 +280,6 @@ export default function Community() {
             ))}
           </div>
         </div>
-
-        {/* CNCF footnote */}
-        <p className="mx-auto mt-10 max-w-4xl text-xs leading-relaxed text-pm-slate-500">
-          * Not yet a CNCF project — CNCF sandbox submission planned (target Q3 2026 · M-GOV-3), gated on ≥2 maintainers from ≥2 organizations.
-        </p>
       </div>
     </section>
   );

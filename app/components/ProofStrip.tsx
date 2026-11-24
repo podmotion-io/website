@@ -180,21 +180,8 @@ export function ProofStrip() {
           <BadgeChip>Apache-2.0</BadgeChip>
           <BadgeChip>CRIU 4.2</BadgeChip>
           <BadgeChip>KEP-2008 aligned</BadgeChip>
-          <span className="relative group">
-            <BadgeChip>CNCF-track*</BadgeChip>
-            <span
-              title="PodMotion is not a CNCF project. 'CNCF-track' describes our intended trajectory only — we are targeting CNCF sandbox submission, gated on ≥2 maintainers from ≥2 organizations. See GOVERNANCE.md."
-              className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 bg-pm-navy-800 border border-pm-navy-600 text-pm-white-muted text-xs rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50"
-            >
-              PodMotion is not a CNCF project. &lsquo;CNCF-track&rsquo; describes our intended trajectory only &mdash; we are targeting CNCF sandbox submission, gated on &ge;2 maintainers from &ge;2 organizations. See GOVERNANCE.md.
-            </span>
-          </span>
+          <BadgeChip>Experimental project</BadgeChip>
         </div>
-
-        {/* CNCF footnote */}
-        <p className="text-pm-white-subtle text-xs text-center -mt-4">
-          * Not yet a CNCF project &mdash; CNCF sandbox submission planned (target Q3 2026 &middot; M29).
-        </p>
 
         {/* Caveat */}
         <p className="text-pm-white-subtle text-sm text-center max-w-xl">
